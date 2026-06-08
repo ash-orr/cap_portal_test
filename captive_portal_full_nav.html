@@ -362,6 +362,10 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
           <div class="fg"><label class="fl">Login card placement</label><select class="fin" id="st-card-placement"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
           <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="st-description" rows="2" placeholder="Please register to access the guest network."></textarea></div>
         </div>
+        <div class="cust-actions">
+          <button class="btn" type="button" id="st-delete-theme" style="color:var(--danger-txt);border-color:var(--danger-border)"><i class="ti ti-trash"></i>Delete theme</button>
+          <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center" id="st-delete-theme-note">Only GuestPass admins can delete user-created themes.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -412,7 +416,10 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 let isDark=false;
 let currentNet='conf';
 let currentThemeEditor='Corporate Blue';
+const currentUserRole='Net Admin';
+const defaultThemeName='Corporate Blue';
 const defaultThemeDescription='Please register to access the guest network.';
+const builtInThemes=new Set(['Corporate Blue','Minimal Light','Dark Mode','ABC']);
 
 const nets={
   lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-register',status:'Active',theme:'Corporate Blue'},
@@ -424,8 +431,12 @@ const themeConfigs={
   'Corporate Blue': { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription },
   'Minimal Light': { backgroundColor:'#f2f2ef', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#2f2f2c', primaryButton:'#00838F', secondaryButton:'#d7e5e7', cardPlacement:'center', description:defaultThemeDescription },
   'Dark Mode': { backgroundColor:'#1f2629', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#f1f6f6', primaryButton:'#1D9E75', secondaryButton:'#27444a', cardPlacement:'center', description:defaultThemeDescription },
-  'Custom': { backgroundColor:'#5c5a86', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#f2f1ff', secondaryButton:'#dbd9f5', cardPlacement:'center', description:defaultThemeDescription },
+  'ABC': { backgroundColor:'#5c5a86', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#f2f1ff', secondaryButton:'#dbd9f5', cardPlacement:'center', description:defaultThemeDescription },
 };
+
+function isGuestPassAdmin(){
+  return currentUserRole==='Net Admin';
+}
 
 function readableColor(hex){
   const clean=(hex||'').replace('#','');
@@ -514,6 +525,12 @@ function syncThemeEditorInputs(){
   document.getElementById('st-card-placement').value=theme.cardPlacement;
   document.getElementById('st-description').value=theme.description;
   document.querySelectorAll('.theme-item[data-theme]').forEach((item)=>item.classList.toggle('sel',item.dataset.theme===currentThemeEditor));
+
+  const deleteButton=document.getElementById('st-delete-theme');
+  const isBuiltIn=builtInThemes.has(currentThemeEditor);
+  const canDelete=isGuestPassAdmin() && !isBuiltIn;
+  deleteButton.disabled=!canDelete;
+  deleteButton.style.opacity=canDelete ? '1' : '.45';
 }
 
 function renderThemeList(){
@@ -544,6 +561,40 @@ function renderThemeList(){
   });
 }
 
+function deleteCurrentTheme(){
+  if(!isGuestPassAdmin()){
+    window.alert('Only GuestPass admins can delete themes.');
+    return;
+  }
+  if(builtInThemes.has(currentThemeEditor)){
+    window.alert('Built-in themes cannot be deleted.');
+    return;
+  }
+
+  const targetTheme=currentThemeEditor;
+  const impactedNetworks=Object.values(nets).filter((net)=>net.theme===targetTheme).map((net)=>net.name);
+  const messageParts=[
+    `Delete theme "${targetTheme}"?`,
+    'Networks currently using this theme will be switched to Corporate Blue.'
+  ];
+  if(impactedNetworks.length){
+    messageParts.push(`Impacted networks: ${impactedNetworks.join(', ')}`);
+  }
+  const confirmed=window.confirm(messageParts.join('\n\n'));
+  if(!confirmed) return;
+
+  Object.keys(nets).forEach((key)=>{
+    if(nets[key].theme===targetTheme){
+      nets[key].theme=defaultThemeName;
+    }
+  });
+
+  delete themeConfigs[targetTheme];
+  currentThemeEditor=defaultThemeName;
+  syncThemeSelects();
+  applyCustomizationPreview();
+}
+
 function syncThemeSelects(){
   const themeNames=Object.keys(themeConfigs);
   document.getElementById('st-theme-select').innerHTML=themeNames.map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
@@ -563,6 +614,7 @@ function bindThemeInputs(){
     currentThemeEditor=e.target.value;
     syncThemeEditorInputs();
   });
+  document.getElementById('st-delete-theme').addEventListener('click',deleteCurrentTheme);
 }
 
 function goToThemeSettings(){
