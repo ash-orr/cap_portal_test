@@ -261,21 +261,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
     </div>
     <div id="dtp-customization" class="dtp">
       <div class="cust-grid">
-        <div class="fg"><label class="fl">Theme</label><select class="fin" id="nd-theme" onchange="onThemeChange()"><option>Corporate Blue</option><option>Minimal Light</option><option>Dark Mode</option><option>Custom</option></select><div class="fh">Custom enables full style controls below.</div></div>
-      </div>
-      <div class="cust-box" id="nd-custom-controls" style="display:none;">
-        <h4>Custom Theme Controls</h4>
-        <div class="cust-grid">
-          <div class="fg"><label class="fl">Background color</label><input class="fin" type="color" id="nd-bg-color" value="#00838F"/></div>
-          <div class="fg"><label class="fl">Background image URL</label><input class="fin" type="text" id="nd-bg-url" placeholder="https://..."/></div>
-          <div class="fg"><label class="fl">Upload background</label><input class="fin" type="file" id="nd-bg-file" accept="image/*"/></div>
-          <div class="fg"><label class="fl">Font family</label><select class="fin" id="nd-font-family"><option value="Figtree, sans-serif">Figtree</option><option value="'Open Sans', sans-serif">Open Sans</option><option value="Georgia, serif">Georgia</option><option value="'Courier New', monospace">Courier New</option></select></div>
-          <div class="fg"><label class="fl">Font color</label><input class="fin" type="color" id="nd-font-color" value="#ffffff"/></div>
-          <div class="fg"><label class="fl">Primary button color</label><input class="fin" type="color" id="nd-btn-primary" value="#ffffff"/></div>
-          <div class="fg"><label class="fl">Secondary button color</label><input class="fin" type="color" id="nd-btn-secondary" value="#d6eef0"/></div>
-          <div class="fg"><label class="fl">Login card placement</label><select class="fin" id="nd-card-placement"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
-          <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="nd-description" rows="2" placeholder="Please register to access the guest network."></textarea></div>
-        </div>
+        <div class="fg"><label class="fl">Theme</label><select class="fin" id="nd-theme" onchange="onThemeChange()"></select><div class="fh">Select from existing themes. Manage styles in <span class="bcl" onclick="goToThemeSettings()">Settings > Themes</span>.</div></div>
       </div>
       <div class="pvbox" id="nd-pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin" id="nd-pvcard"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px" id="nd-pvdesc">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button id="nd-pvbtn-primary" style="background:#fff;color:#00838F;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button><button id="nd-pvbtn-secondary" style="background:#d6eef0;color:#005962;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:6px;border:none;cursor:pointer">Learn more</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
     </div>
@@ -363,10 +349,25 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
     <div id="stp-themes" class="stp">
       <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--txt1)">Landing page themes</div>
       <div class="theme-grid">
-        <div class="th-card sel"><div class="th-preview" style="background:#00838F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Corporate Blue</div></div>
-        <div class="th-card"><div class="th-preview" style="background:#f5f5f4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:#d0cfc8;border-radius:6px;width:80px;height:10px"></div><div style="background:#e2e0d8;border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Minimal Light</div></div>
-        <div class="th-card"><div class="th-preview" style="background:#1c1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.15);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.08);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Dark Mode</div></div>
-        <div class="th-card" style="display:flex;align-items:center;justify-content:center;border-style:dashed;cursor:pointer;min-height:90px"><div style="text-align:center;color:var(--txt3)"><i class="ti ti-plus" style="font-size:20px;display:block;margin-bottom:4px"></i><div style="font-size:12px">New theme</div></div></div>
+        <div class="th-card sel" data-theme="Corporate Blue"><div class="th-preview" style="background:#00838F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Corporate Blue</div></div>
+        <div class="th-card" data-theme="Minimal Light"><div class="th-preview" style="background:#f5f5f4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:#d0cfc8;border-radius:6px;width:80px;height:10px"></div><div style="background:#e2e0d8;border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Minimal Light</div></div>
+        <div class="th-card" data-theme="Dark Mode"><div class="th-preview" style="background:#1c1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.15);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.08);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Dark Mode</div></div>
+        <div class="th-card" data-theme="Custom"><div class="th-preview" style="background:#5c5a86;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Custom</div></div>
+      </div>
+      <div class="cust-box" style="margin-top:14px;">
+        <h4>Theme Editor</h4>
+        <div class="cust-grid">
+          <div class="fg"><label class="fl">Theme</label><select class="fin" id="st-theme-select"></select></div>
+          <div class="fg"><label class="fl">Background color</label><input class="fin" type="color" id="st-bg-color" value="#00838F"/></div>
+          <div class="fg"><label class="fl">Background image URL</label><input class="fin" type="text" id="st-bg-url" placeholder="https://..."/></div>
+          <div class="fg"><label class="fl">Upload background</label><input class="fin" type="file" id="st-bg-file" accept="image/*"/></div>
+          <div class="fg"><label class="fl">Font family</label><select class="fin" id="st-font-family"><option value="Figtree, sans-serif">Figtree</option><option value="'Open Sans', sans-serif">Open Sans</option><option value="Georgia, serif">Georgia</option><option value="'Courier New', monospace">Courier New</option></select></div>
+          <div class="fg"><label class="fl">Font color</label><input class="fin" type="color" id="st-font-color" value="#ffffff"/></div>
+          <div class="fg"><label class="fl">Primary button color</label><input class="fin" type="color" id="st-btn-primary" value="#ffffff"/></div>
+          <div class="fg"><label class="fl">Secondary button color</label><input class="fin" type="color" id="st-btn-secondary" value="#d6eef0"/></div>
+          <div class="fg"><label class="fl">Login card placement</label><select class="fin" id="st-card-placement"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
+          <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="st-description" rows="2" placeholder="Please register to access the guest network."></textarea></div>
+        </div>
       </div>
     </div>
   </div>
@@ -416,6 +417,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 <script>
 let isDark=false;
 let currentNet='conf';
+let currentThemeEditor='Corporate Blue';
 const defaultThemeDescription='Please register to access the guest network.';
 
 const nets={
@@ -424,33 +426,12 @@ const nets={
   cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue'},
   roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-register',status:'Inactive',theme:'Corporate Blue'}
 };
-
-function createDefaultCustomization(){
-  return {
-    backgroundColor:'#00838F',
-    backgroundImage:'',
-    fontFamily:'Figtree, sans-serif',
-    fontColor:'#ffffff',
-    primaryButton:'#ffffff',
-    secondaryButton:'#d6eef0',
-    cardPlacement:'center',
-    description:defaultThemeDescription,
-  };
-}
-
-Object.keys(nets).forEach((key)=>{
-  nets[key].customization=createDefaultCustomization();
-});
-
-function getThemePreset(themeName){
-  if(themeName==='Minimal Light'){
-    return { backgroundColor:'#f2f2ef', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#2f2f2c', primaryButton:'#00838F', secondaryButton:'#d7e5e7', cardPlacement:'center', description:defaultThemeDescription };
-  }
-  if(themeName==='Dark Mode'){
-    return { backgroundColor:'#1f2629', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#f1f6f6', primaryButton:'#1D9E75', secondaryButton:'#27444a', cardPlacement:'center', description:defaultThemeDescription };
-  }
-  return { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription };
-}
+const themeConfigs={
+  'Corporate Blue': { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription },
+  'Minimal Light': { backgroundColor:'#f2f2ef', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#2f2f2c', primaryButton:'#00838F', secondaryButton:'#d7e5e7', cardPlacement:'center', description:defaultThemeDescription },
+  'Dark Mode': { backgroundColor:'#1f2629', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#f1f6f6', primaryButton:'#1D9E75', secondaryButton:'#27444a', cardPlacement:'center', description:defaultThemeDescription },
+  'Custom': { backgroundColor:'#5c5a86', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#f2f1ff', secondaryButton:'#dbd9f5', cardPlacement:'center', description:defaultThemeDescription },
+};
 
 function readableColor(hex){
   const clean=(hex||'').replace('#','');
@@ -462,32 +443,22 @@ function readableColor(hex){
   return lum>0.62 ? '#0d3640' : '#ffffff';
 }
 
-function syncCustomizationInputs(){
-  const net=nets[currentNet];
-  const custom=net.customization;
-  document.getElementById('nd-theme').value=net.theme||'Corporate Blue';
-  document.getElementById('nd-bg-color').value=custom.backgroundColor;
-  document.getElementById('nd-bg-url').value=custom.backgroundImage||'';
-  document.getElementById('nd-font-family').value=custom.fontFamily;
-  document.getElementById('nd-font-color').value=custom.fontColor;
-  document.getElementById('nd-btn-primary').value=custom.primaryButton;
-  document.getElementById('nd-btn-secondary').value=custom.secondaryButton;
-  document.getElementById('nd-card-placement').value=custom.cardPlacement;
-  document.getElementById('nd-description').value=custom.description;
+function syncNetworkThemeSelect(){
+  const select=document.getElementById('nd-theme');
+  const selected=nets[currentNet].theme||'Corporate Blue';
+  select.innerHTML=Object.keys(themeConfigs).map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
+  select.value=selected;
 }
 
 function applyCustomizationPreview(){
   const net=nets[currentNet];
-  const isCustom=(net.theme||'Corporate Blue')==='Custom';
-  const cfg=isCustom ? net.customization : getThemePreset(net.theme||'Corporate Blue');
+  const cfg=themeConfigs[net.theme||'Corporate Blue']||themeConfigs['Corporate Blue'];
   const pvBox=document.getElementById('nd-pvbox');
   const pvCard=document.getElementById('nd-pvcard');
   const pvDesc=document.getElementById('nd-pvdesc');
   const pvPrimary=document.getElementById('nd-pvbtn-primary');
   const pvSecondary=document.getElementById('nd-pvbtn-secondary');
-  const controls=document.getElementById('nd-custom-controls');
 
-  controls.style.display=isCustom ? 'block' : 'none';
   pvBox.style.backgroundColor=cfg.backgroundColor;
   pvBox.style.backgroundImage=cfg.backgroundImage ? `linear-gradient(rgba(0,0,0,.16), rgba(0,0,0,.16)), url('${cfg.backgroundImage}')` : 'none';
   pvBox.style.backgroundSize=cfg.backgroundImage ? 'cover' : 'auto';
@@ -511,38 +482,76 @@ function onThemeChange(){
   applyCustomizationPreview();
 }
 
-function updateCustomFromInputs(){
-  const custom=nets[currentNet].customization;
-  custom.backgroundColor=document.getElementById('nd-bg-color').value;
-  custom.backgroundImage=document.getElementById('nd-bg-url').value.trim();
-  custom.fontFamily=document.getElementById('nd-font-family').value;
-  custom.fontColor=document.getElementById('nd-font-color').value;
-  custom.primaryButton=document.getElementById('nd-btn-primary').value;
-  custom.secondaryButton=document.getElementById('nd-btn-secondary').value;
-  custom.cardPlacement=document.getElementById('nd-card-placement').value;
-  custom.description=document.getElementById('nd-description').value;
+function updateThemeFromInputs(){
+  const theme=themeConfigs[currentThemeEditor];
+  theme.backgroundColor=document.getElementById('st-bg-color').value;
+  theme.backgroundImage=document.getElementById('st-bg-url').value.trim();
+  theme.fontFamily=document.getElementById('st-font-family').value;
+  theme.fontColor=document.getElementById('st-font-color').value;
+  theme.primaryButton=document.getElementById('st-btn-primary').value;
+  theme.secondaryButton=document.getElementById('st-btn-secondary').value;
+  theme.cardPlacement=document.getElementById('st-card-placement').value;
+  theme.description=document.getElementById('st-description').value;
   applyCustomizationPreview();
 }
 
-function onBackgroundFileChange(evt){
+function onSettingsBackgroundFileChange(evt){
   const file=evt.target.files && evt.target.files[0];
   if(!file) return;
   const reader=new FileReader();
   reader.onload=(e)=>{
-    nets[currentNet].customization.backgroundImage=String(e.target.result||'');
-    document.getElementById('nd-bg-url').value='';
+    themeConfigs[currentThemeEditor].backgroundImage=String(e.target.result||'');
+    document.getElementById('st-bg-url').value='';
     applyCustomizationPreview();
+    syncThemeEditorInputs();
   };
   reader.readAsDataURL(file);
 }
 
-function bindCustomizationInputs(){
-  ['nd-bg-color','nd-bg-url','nd-font-family','nd-font-color','nd-btn-primary','nd-btn-secondary','nd-card-placement','nd-description'].forEach((id)=>{
+function syncThemeEditorInputs(){
+  const theme=themeConfigs[currentThemeEditor];
+  document.getElementById('st-theme-select').value=currentThemeEditor;
+  document.getElementById('st-bg-color').value=theme.backgroundColor;
+  document.getElementById('st-bg-url').value=theme.backgroundImage||'';
+  document.getElementById('st-font-family').value=theme.fontFamily;
+  document.getElementById('st-font-color').value=theme.fontColor;
+  document.getElementById('st-btn-primary').value=theme.primaryButton;
+  document.getElementById('st-btn-secondary').value=theme.secondaryButton;
+  document.getElementById('st-card-placement').value=theme.cardPlacement;
+  document.getElementById('st-description').value=theme.description;
+  document.querySelectorAll('.th-card[data-theme]').forEach((card)=>card.classList.toggle('sel',card.dataset.theme===currentThemeEditor));
+}
+
+function syncThemeSelects(){
+  const themeNames=Object.keys(themeConfigs);
+  document.getElementById('st-theme-select').innerHTML=themeNames.map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
+  syncNetworkThemeSelect();
+  syncThemeEditorInputs();
+}
+
+function bindThemeInputs(){
+  ['st-bg-color','st-bg-url','st-font-family','st-font-color','st-btn-primary','st-btn-secondary','st-card-placement','st-description'].forEach((id)=>{
     const el=document.getElementById(id);
-    el.addEventListener('input',updateCustomFromInputs);
-    el.addEventListener('change',updateCustomFromInputs);
+    el.addEventListener('input',updateThemeFromInputs);
+    el.addEventListener('change',updateThemeFromInputs);
   });
-  document.getElementById('nd-bg-file').addEventListener('change',onBackgroundFileChange);
+  document.getElementById('st-bg-file').addEventListener('change',onSettingsBackgroundFileChange);
+  document.getElementById('st-theme-select').addEventListener('change',(e)=>{
+    currentThemeEditor=e.target.value;
+    syncThemeEditorInputs();
+  });
+  document.querySelectorAll('.th-card[data-theme]').forEach((card)=>{
+    card.addEventListener('click',()=>{
+      currentThemeEditor=card.dataset.theme;
+      syncThemeEditorInputs();
+    });
+  });
+}
+
+function goToThemeSettings(){
+  nav('settings',document.querySelectorAll('.ni')[4]);
+  const themeTab=document.querySelector('.stab[onclick*="themes"]');
+  if(themeTab) stab('themes',themeTab);
 }
 
 const gdata={
@@ -588,7 +597,7 @@ function openNetDetail(k){
   document.getElementById('nd-pvlbl').textContent='Preview — '+n.name;
   document.getElementById('nd-pvname').innerHTML='Welcome to<br>'+n.name;
   document.getElementById('nd-pvssid').textContent='Guests see this on connecting to '+n.ssid;
-  syncCustomizationInputs();
+  syncNetworkThemeSelect();
   applyCustomizationPreview();
   document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('on',i===0));
   document.querySelectorAll('.dtp').forEach((p,i)=>p.classList.toggle('on',i===0));
@@ -682,14 +691,8 @@ document.querySelectorAll('.ropt').forEach(opt=>{
   });
 });
 
-document.querySelectorAll('.th-card:not([style*="dashed"])').forEach(c=>{
-  c.addEventListener('click',function(){
-    document.querySelectorAll('.th-card').forEach(x=>x.classList.remove('sel'));
-    this.classList.add('sel');
-  });
-});
-
-bindCustomizationInputs();
+syncThemeSelects();
+bindThemeInputs();
 </script>
 </body>
 </html>
