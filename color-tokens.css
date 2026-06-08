@@ -1,0 +1,124 @@
+/* GuestPass color tokens exported from captive portal prototype */
+
+:root {
+  /* Brand */
+  --color-brand-500: #00838f;
+  --color-brand-600: #006e79;
+
+  /* Accent/status palette */
+  --color-amber-500: #ba7517;
+  --color-amber-700: #854f0b;
+  --color-green-700: #3b6d11;
+  --color-blue-700: #185fa5;
+  --color-purple-700: #534ab7;
+  --color-pink-700: #993556;
+  --color-danger-700: #a32d2d;
+  --color-danger-300: #f09595;
+
+  /* Light surfaces */
+  --color-light-bg-1: #ffffff;
+  --color-light-bg-2: #f5f5f4;
+  --color-light-bg-3: #ececea;
+  --color-light-text-1: #1a1a18;
+  --color-light-text-2: #5f5e5a;
+  --color-light-text-3: #9c9b96;
+  --color-light-border-1: #e0deda;
+  --color-light-border-2: #c8c6c0;
+
+  /* Dark surfaces */
+  --color-dark-bg-1: #1c1c1a;
+  --color-dark-bg-2: #252523;
+  --color-dark-bg-3: #2e2e2b;
+  --color-dark-text-1: #f0ede8;
+  --color-dark-text-2: #a09e99;
+  --color-dark-text-3: #6b6966;
+  --color-dark-border-1: rgba(255, 255, 255, 0.1);
+  --color-dark-border-2: rgba(255, 255, 255, 0.2);
+
+  /* Utility backgrounds */
+  --color-teal-bg-light: #e6f6f7;
+  --color-teal-text-light: #006e79;
+  --color-teal-bg-dark: #0a3035;
+  --color-teal-text-dark: #5dcaa5;
+
+  --color-amber-bg-light: #faeeda;
+  --color-amber-text-light: #854f0b;
+  --color-amber-bg-dark: #2e1f08;
+  --color-amber-text-dark: #ef9f27;
+
+  --color-green-bg-light: #eaf3de;
+  --color-green-bg-dark: #1a2910;
+  --color-green-text-dark: #97c459;
+
+  --color-blue-bg-light: #e6f1fb;
+  --color-blue-bg-dark: #0c2240;
+  --color-blue-text-dark: #85b7eb;
+
+  --color-purple-bg-light: #eeedfe;
+  --color-purple-bg-dark: #1e1b3a;
+  --color-purple-text-dark: #afa9ec;
+
+  --color-pink-bg-light: #fbeaf0;
+  --color-pink-bg-dark: #2a1120;
+  --color-pink-text-dark: #ed93b1;
+
+  --color-danger-bg-light: #fcebeb;
+  --color-danger-bg-dark: #2d1010;
+}
+
+/* Semantic token mapping for current prototype selectors */
+.cp.light {
+  --bg1: var(--color-light-bg-1);
+  --bg2: var(--color-light-bg-2);
+  --bg3: var(--color-light-bg-3);
+  --txt1: var(--color-light-text-1);
+  --txt2: var(--color-light-text-2);
+  --txt3: var(--color-light-text-3);
+  --border1: var(--color-light-border-1);
+  --border2: var(--color-light-border-2);
+  --teal-bg: var(--color-teal-bg-light);
+  --teal-txt: var(--color-teal-text-light);
+  --teal: var(--color-brand-500);
+  --amber-bg: var(--color-amber-bg-light);
+  --amber-txt: var(--color-amber-text-light);
+  --amber: var(--color-amber-500);
+  --green-bg: var(--color-green-bg-light);
+  --green-txt: var(--color-green-700);
+  --blue-bg: var(--color-blue-bg-light);
+  --blue-txt: var(--color-blue-700);
+  --pu-bg: var(--color-purple-bg-light);
+  --pu-txt: var(--color-purple-700);
+  --pink-bg: var(--color-pink-bg-light);
+  --pink-txt: var(--color-pink-700);
+  --danger-bg: var(--color-danger-bg-light);
+  --danger-txt: var(--color-danger-700);
+  --danger-border: var(--color-danger-300);
+}
+
+.cp.dark {
+  --bg1: var(--color-dark-bg-1);
+  --bg2: var(--color-dark-bg-2);
+  --bg3: var(--color-dark-bg-3);
+  --txt1: var(--color-dark-text-1);
+  --txt2: var(--color-dark-text-2);
+  --txt3: var(--color-dark-text-3);
+  --border1: var(--color-dark-border-1);
+  --border2: var(--color-dark-border-2);
+  --teal-bg: var(--color-teal-bg-dark);
+  --teal-txt: var(--color-teal-text-dark);
+  --teal: #1d9e75;
+  --amber-bg: var(--color-amber-bg-dark);
+  --amber-txt: var(--color-amber-text-dark);
+  --amber: var(--color-amber-500);
+  --green-bg: var(--color-green-bg-dark);
+  --green-txt: var(--color-green-text-dark);
+  --blue-bg: var(--color-blue-bg-dark);
+  --blue-txt: var(--color-blue-text-dark);
+  --pu-bg: var(--color-purple-bg-dark);
+  --pu-txt: var(--color-purple-text-dark);
+  --pink-bg: var(--color-pink-bg-dark);
+  --pink-txt: var(--color-pink-text-dark);
+  --danger-bg: var(--color-danger-bg-dark);
+  --danger-txt: var(--color-danger-300);
+  --danger-border: var(--color-danger-700);
+}
