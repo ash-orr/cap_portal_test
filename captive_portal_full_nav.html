@@ -103,6 +103,11 @@
 .pvbox{background:#00838F;border-radius:12px;padding:20px;color:#fff;text-align:center;}
 .pvin{background:rgba(255,255,255,.15);border-radius:10px;padding:16px;max-width:240px;margin:0 auto;}
 .pvf{background:rgba(255,255,255,.2);border-radius:6px;padding:7px 10px;font-size:12px;opacity:.9;margin-bottom:8px;text-align:left;}
+.cust-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.cust-grid .fg{margin-bottom:0;}
+.cust-box{background:var(--bg2);border:0.5px solid var(--border1);border-radius:10px;padding:12px;margin-bottom:14px;}
+.cust-box h4{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;}
+.cust-actions{display:flex;gap:8px;margin-top:8px;}
 
 .gl-tb{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
 .sw{flex:1;position:relative;}
@@ -238,11 +243,10 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
       <div class="sc"><div class="slbl">Session expiry</div><div class="sval" id="nd-exp"></div><div class="ssub" id="nd-acc"></div></div>
       <div class="sc"><div class="slbl">Status</div><div class="sval" id="nd-st"></div><div class="ssub" id="nd-ssid" style="font-size:11px;color:var(--txt3)"></div></div>
     </div>
-    <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('access',this)">Access method</div><div class="dtab" onclick="dtab('preview',this)">Landing page preview</div></div>
+    <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('access',this)">Access method</div><div class="dtab" onclick="dtab('customization',this)">Customization</div></div>
     <div id="dtp-settings" class="dtp on">
       <div class="fgrid">
         <div class="fg"><label class="fl">Nickname</label><input class="fin" type="text" id="nd-nick"/><div class="fh">Display name in the console.</div></div>
-        <div class="fg"><label class="fl">Theme</label><select class="fin"><option>Corporate Blue</option><option>Minimal Light</option><option>Dark Mode</option></select></div>
         <div class="fg"><label class="fl">Session expiry</label><select class="fin"><option>4 hours</option><option selected>8 hours</option><option>24 hours</option></select></div>
         <div class="fg"><label class="fl">Bandwidth limit</label><input class="fin" type="text" value="20 Mbps"/></div>
         <div class="fg"><label class="fl">VLAN / segment</label><input class="fin" type="text" value="VLAN 40"/></div>
@@ -255,8 +259,25 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
       <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-register — No verification</div><div class="rd">Guests tap "Connect" and are immediately granted access.</div></div></label>
       <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only — Username &amp; password</div><div class="rd">Admin creates credentials; guests cannot self-register.</div></div></label>
     </div>
-    <div id="dtp-preview" class="dtp">
-      <div class="pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button style="background:#fff;color:#00838F;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
+    <div id="dtp-customization" class="dtp">
+      <div class="cust-grid">
+        <div class="fg"><label class="fl">Theme</label><select class="fin" id="nd-theme" onchange="onThemeChange()"><option>Corporate Blue</option><option>Minimal Light</option><option>Dark Mode</option><option>Custom</option></select><div class="fh">Custom enables full style controls below.</div></div>
+      </div>
+      <div class="cust-box" id="nd-custom-controls" style="display:none;">
+        <h4>Custom Theme Controls</h4>
+        <div class="cust-grid">
+          <div class="fg"><label class="fl">Background color</label><input class="fin" type="color" id="nd-bg-color" value="#00838F"/></div>
+          <div class="fg"><label class="fl">Background image URL</label><input class="fin" type="text" id="nd-bg-url" placeholder="https://..."/></div>
+          <div class="fg"><label class="fl">Upload background</label><input class="fin" type="file" id="nd-bg-file" accept="image/*"/></div>
+          <div class="fg"><label class="fl">Font family</label><select class="fin" id="nd-font-family"><option value="Figtree, sans-serif">Figtree</option><option value="'Open Sans', sans-serif">Open Sans</option><option value="Georgia, serif">Georgia</option><option value="'Courier New', monospace">Courier New</option></select></div>
+          <div class="fg"><label class="fl">Font color</label><input class="fin" type="color" id="nd-font-color" value="#ffffff"/></div>
+          <div class="fg"><label class="fl">Primary button color</label><input class="fin" type="color" id="nd-btn-primary" value="#ffffff"/></div>
+          <div class="fg"><label class="fl">Secondary button color</label><input class="fin" type="color" id="nd-btn-secondary" value="#d6eef0"/></div>
+          <div class="fg"><label class="fl">Login card placement</label><select class="fin" id="nd-card-placement"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
+          <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="nd-description" rows="2" placeholder="Please register to access the guest network."></textarea></div>
+        </div>
+      </div>
+      <div class="pvbox" id="nd-pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin" id="nd-pvcard"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px" id="nd-pvdesc">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button id="nd-pvbtn-primary" style="background:#fff;color:#00838F;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button><button id="nd-pvbtn-secondary" style="background:#d6eef0;color:#005962;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:6px;border:none;cursor:pointer">Learn more</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
     </div>
   </div>
 </div>
@@ -395,13 +416,134 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 <script>
 let isDark=false;
 let currentNet='conf';
+const defaultThemeDescription='Please register to access the guest network.';
 
 const nets={
-  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-register',status:'Active'},
-  conf:{name:'Conference center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active'},
-  cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active'},
-  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-register',status:'Inactive'}
+  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-register',status:'Active',theme:'Corporate Blue'},
+  conf:{name:'Conference center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active',theme:'Corporate Blue'},
+  cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue'},
+  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-register',status:'Inactive',theme:'Corporate Blue'}
 };
+
+function createDefaultCustomization(){
+  return {
+    backgroundColor:'#00838F',
+    backgroundImage:'',
+    fontFamily:'Figtree, sans-serif',
+    fontColor:'#ffffff',
+    primaryButton:'#ffffff',
+    secondaryButton:'#d6eef0',
+    cardPlacement:'center',
+    description:defaultThemeDescription,
+  };
+}
+
+Object.keys(nets).forEach((key)=>{
+  nets[key].customization=createDefaultCustomization();
+});
+
+function getThemePreset(themeName){
+  if(themeName==='Minimal Light'){
+    return { backgroundColor:'#f2f2ef', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#2f2f2c', primaryButton:'#00838F', secondaryButton:'#d7e5e7', cardPlacement:'center', description:defaultThemeDescription };
+  }
+  if(themeName==='Dark Mode'){
+    return { backgroundColor:'#1f2629', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#f1f6f6', primaryButton:'#1D9E75', secondaryButton:'#27444a', cardPlacement:'center', description:defaultThemeDescription };
+  }
+  return { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription };
+}
+
+function readableColor(hex){
+  const clean=(hex||'').replace('#','');
+  if(clean.length!==6) return '#0d3640';
+  const r=parseInt(clean.slice(0,2),16);
+  const g=parseInt(clean.slice(2,4),16);
+  const b=parseInt(clean.slice(4,6),16);
+  const lum=(0.299*r+0.587*g+0.114*b)/255;
+  return lum>0.62 ? '#0d3640' : '#ffffff';
+}
+
+function syncCustomizationInputs(){
+  const net=nets[currentNet];
+  const custom=net.customization;
+  document.getElementById('nd-theme').value=net.theme||'Corporate Blue';
+  document.getElementById('nd-bg-color').value=custom.backgroundColor;
+  document.getElementById('nd-bg-url').value=custom.backgroundImage||'';
+  document.getElementById('nd-font-family').value=custom.fontFamily;
+  document.getElementById('nd-font-color').value=custom.fontColor;
+  document.getElementById('nd-btn-primary').value=custom.primaryButton;
+  document.getElementById('nd-btn-secondary').value=custom.secondaryButton;
+  document.getElementById('nd-card-placement').value=custom.cardPlacement;
+  document.getElementById('nd-description').value=custom.description;
+}
+
+function applyCustomizationPreview(){
+  const net=nets[currentNet];
+  const isCustom=(net.theme||'Corporate Blue')==='Custom';
+  const cfg=isCustom ? net.customization : getThemePreset(net.theme||'Corporate Blue');
+  const pvBox=document.getElementById('nd-pvbox');
+  const pvCard=document.getElementById('nd-pvcard');
+  const pvDesc=document.getElementById('nd-pvdesc');
+  const pvPrimary=document.getElementById('nd-pvbtn-primary');
+  const pvSecondary=document.getElementById('nd-pvbtn-secondary');
+  const controls=document.getElementById('nd-custom-controls');
+
+  controls.style.display=isCustom ? 'block' : 'none';
+  pvBox.style.backgroundColor=cfg.backgroundColor;
+  pvBox.style.backgroundImage=cfg.backgroundImage ? `linear-gradient(rgba(0,0,0,.16), rgba(0,0,0,.16)), url('${cfg.backgroundImage}')` : 'none';
+  pvBox.style.backgroundSize=cfg.backgroundImage ? 'cover' : 'auto';
+  pvBox.style.backgroundPosition=cfg.backgroundImage ? 'center' : 'initial';
+  pvCard.style.fontFamily=cfg.fontFamily;
+  pvCard.style.color=cfg.fontColor;
+  pvDesc.textContent=(cfg.description||'').trim() || defaultThemeDescription;
+
+  if(cfg.cardPlacement==='left') pvCard.style.margin='0 auto 0 0';
+  else if(cfg.cardPlacement==='right') pvCard.style.margin='0 0 0 auto';
+  else pvCard.style.margin='0 auto';
+
+  pvPrimary.style.backgroundColor=cfg.primaryButton;
+  pvPrimary.style.color=readableColor(cfg.primaryButton);
+  pvSecondary.style.backgroundColor=cfg.secondaryButton;
+  pvSecondary.style.color=readableColor(cfg.secondaryButton);
+}
+
+function onThemeChange(){
+  nets[currentNet].theme=document.getElementById('nd-theme').value;
+  applyCustomizationPreview();
+}
+
+function updateCustomFromInputs(){
+  const custom=nets[currentNet].customization;
+  custom.backgroundColor=document.getElementById('nd-bg-color').value;
+  custom.backgroundImage=document.getElementById('nd-bg-url').value.trim();
+  custom.fontFamily=document.getElementById('nd-font-family').value;
+  custom.fontColor=document.getElementById('nd-font-color').value;
+  custom.primaryButton=document.getElementById('nd-btn-primary').value;
+  custom.secondaryButton=document.getElementById('nd-btn-secondary').value;
+  custom.cardPlacement=document.getElementById('nd-card-placement').value;
+  custom.description=document.getElementById('nd-description').value;
+  applyCustomizationPreview();
+}
+
+function onBackgroundFileChange(evt){
+  const file=evt.target.files && evt.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=(e)=>{
+    nets[currentNet].customization.backgroundImage=String(e.target.result||'');
+    document.getElementById('nd-bg-url').value='';
+    applyCustomizationPreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+function bindCustomizationInputs(){
+  ['nd-bg-color','nd-bg-url','nd-font-family','nd-font-color','nd-btn-primary','nd-btn-secondary','nd-card-placement','nd-description'].forEach((id)=>{
+    const el=document.getElementById(id);
+    el.addEventListener('input',updateCustomFromInputs);
+    el.addEventListener('change',updateCustomFromInputs);
+  });
+  document.getElementById('nd-bg-file').addEventListener('change',onBackgroundFileChange);
+}
 
 const gdata={
   lobby:[
@@ -446,6 +588,8 @@ function openNetDetail(k){
   document.getElementById('nd-pvlbl').textContent='Preview — '+n.name;
   document.getElementById('nd-pvname').innerHTML='Welcome to<br>'+n.name;
   document.getElementById('nd-pvssid').textContent='Guests see this on connecting to '+n.ssid;
+  syncCustomizationInputs();
+  applyCustomizationPreview();
   document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('on',i===0));
   document.querySelectorAll('.dtp').forEach((p,i)=>p.classList.toggle('on',i===0));
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
@@ -544,6 +688,8 @@ document.querySelectorAll('.th-card:not([style*="dashed"])').forEach(c=>{
     this.classList.add('sel');
   });
 });
+
+bindCustomizationInputs();
 </script>
 </body>
 </html>
