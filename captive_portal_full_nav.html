@@ -148,12 +148,11 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 .tog-sm.on{background:#00838F;justify-content:flex-end;}
 .tog-sm.off{background:var(--bg3);justify-content:flex-start;}
 .tog-sm-th{width:16px;height:16px;border-radius:50%;background:#fff;}
-.theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px;}
-.th-card{border:0.5px solid var(--border1);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s;}
-.th-card:hover{border-color:#00838F;}
-.th-card.sel{border-color:#00838F;border-width:1.5px;}
-.th-preview{height:60px;display:flex;align-items:center;justify-content:center;}
-.th-label{font-size:12px;font-weight:500;color:var(--txt1);padding:8px 10px;background:var(--bg1);border-top:0.5px solid var(--border1);}
+.theme-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.theme-item{border:0.5px solid var(--border1);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:500;color:var(--txt2);background:var(--bg1);cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+.theme-item:hover{border-color:#00838F;color:#00838F;}
+.theme-item.sel{border-color:#00838F;background:var(--teal-bg);color:#00838F;}
+.theme-item.add{border-style:dashed;}
 .us-card{background:var(--bg2);border-radius:12px;padding:20px;margin-bottom:16px;}
 .us-av{width:56px;height:56px;border-radius:50%;background:var(--teal-bg);color:#00838F;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
 </style>
@@ -348,12 +347,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
     </div>
     <div id="stp-themes" class="stp">
       <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--txt1)">Landing page themes</div>
-      <div class="theme-grid">
-        <div class="th-card sel" data-theme="Corporate Blue"><div class="th-preview" style="background:#00838F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Corporate Blue</div></div>
-        <div class="th-card" data-theme="Minimal Light"><div class="th-preview" style="background:#f5f5f4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:#d0cfc8;border-radius:6px;width:80px;height:10px"></div><div style="background:#e2e0d8;border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Minimal Light</div></div>
-        <div class="th-card" data-theme="Dark Mode"><div class="th-preview" style="background:#1c1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.15);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.08);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Dark Mode</div></div>
-        <div class="th-card" data-theme="Custom"><div class="th-preview" style="background:#5c5a86;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Custom</div></div>
-      </div>
+      <div class="theme-list" id="st-theme-list"></div>
       <div class="cust-box" style="margin-top:14px;">
         <h4>Theme Editor</h4>
         <div class="cust-grid">
@@ -519,13 +513,42 @@ function syncThemeEditorInputs(){
   document.getElementById('st-btn-secondary').value=theme.secondaryButton;
   document.getElementById('st-card-placement').value=theme.cardPlacement;
   document.getElementById('st-description').value=theme.description;
-  document.querySelectorAll('.th-card[data-theme]').forEach((card)=>card.classList.toggle('sel',card.dataset.theme===currentThemeEditor));
+  document.querySelectorAll('.theme-item[data-theme]').forEach((item)=>item.classList.toggle('sel',item.dataset.theme===currentThemeEditor));
+}
+
+function renderThemeList(){
+  const list=document.getElementById('st-theme-list');
+  const items=Object.keys(themeConfigs).map((themeName)=>`<button type="button" class="theme-item${themeName===currentThemeEditor?' sel':''}" data-theme="${themeName}">${themeName}</button>`).join('');
+  const addItem='<button type="button" class="theme-item add" id="st-theme-add">+ New theme</button>';
+  list.innerHTML=items + addItem;
+
+  document.querySelectorAll('.theme-item[data-theme]').forEach((item)=>{
+    item.addEventListener('click',()=>{
+      currentThemeEditor=item.dataset.theme;
+      syncThemeEditorInputs();
+    });
+  });
+
+  document.getElementById('st-theme-add').addEventListener('click',()=>{
+    const requested=window.prompt('Enter a name for the new theme:');
+    if(!requested) return;
+    const name=requested.trim();
+    if(!name) return;
+    if(themeConfigs[name]){
+      window.alert('A theme with that name already exists.');
+      return;
+    }
+    themeConfigs[name]={...themeConfigs[currentThemeEditor]};
+    currentThemeEditor=name;
+    syncThemeSelects();
+  });
 }
 
 function syncThemeSelects(){
   const themeNames=Object.keys(themeConfigs);
   document.getElementById('st-theme-select').innerHTML=themeNames.map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
   syncNetworkThemeSelect();
+  renderThemeList();
   syncThemeEditorInputs();
 }
 
@@ -539,12 +562,6 @@ function bindThemeInputs(){
   document.getElementById('st-theme-select').addEventListener('change',(e)=>{
     currentThemeEditor=e.target.value;
     syncThemeEditorInputs();
-  });
-  document.querySelectorAll('.th-card[data-theme]').forEach((card)=>{
-    card.addEventListener('click',()=>{
-      currentThemeEditor=card.dataset.theme;
-      syncThemeEditorInputs();
-    });
   });
 }
 
