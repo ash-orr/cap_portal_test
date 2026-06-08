@@ -64,6 +64,33 @@
 
   --color-danger-bg-light: #fcebeb;
   --color-danger-bg-dark: #2d1010;
+
+  /* Button palette (from provided spec direction) */
+  --color-btn-primary-default: #0d1230;
+  --color-btn-primary-hover: #245f73;
+  --color-btn-primary-disabled: #d7d7d7;
+
+  --color-btn-primary-destructive-default: #e54a4a;
+  --color-btn-primary-destructive-hover: #f06a6a;
+  --color-btn-primary-destructive-disabled: #d7d7d7;
+
+  --color-btn-secondary-bg: #ffffff;
+  --color-btn-secondary-hover: #eef2f6;
+  --color-btn-secondary-border: #1f2432;
+  --color-btn-secondary-text: #0f1420;
+
+  --color-btn-secondary-destructive-bg: #ffffff;
+  --color-btn-secondary-destructive-hover: #fff1f1;
+  --color-btn-secondary-destructive-border: #e54a4a;
+  --color-btn-secondary-destructive-text: #e54a4a;
+
+  --color-btn-tertiary-text: #0f1420;
+  --color-btn-tertiary-hover-bg: #edf2f6;
+  --color-btn-tertiary-destructive-text: #e54a4a;
+  --color-btn-tertiary-destructive-hover-bg: #fff1f1;
+
+  --color-btn-disabled-text: #a8acb1;
+  --color-btn-disabled-border: #d1d4d8;
 }
 
 /* Semantic token mapping for current prototype selectors */

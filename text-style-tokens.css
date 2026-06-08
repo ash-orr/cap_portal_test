@@ -43,6 +43,11 @@
 
   --text-button-size: var(--text-size-13);
   --text-button-weight: var(--text-weight-medium);
+  --text-button-line-height: 1.2;
+
+  --text-button-disabled-size: var(--text-size-13);
+  --text-button-disabled-weight: var(--text-weight-regular);
+  --text-button-disabled-line-height: 1.2;
 
   --text-card-label-size: var(--text-size-11);
   --text-card-label-weight: var(--text-weight-medium);

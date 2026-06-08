@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Captive Portal Full Navigation Prototype</title>
-  <link rel="stylesheet" href="/color-tokens.css" />
-  <link rel="stylesheet" href="/text-style-tokens.css" />
+  <link rel="stylesheet" href="./color-tokens.css" />
+  <link rel="stylesheet" href="./text-style-tokens.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.1/dist/tabler-icons.min.css" />
 </head>
 <body style="margin:0;padding:24px;background:#f2f3f5;">
@@ -39,12 +39,43 @@
 .tbtl{font-size:16px;font-weight:600;color:var(--txt1);}
 .tbsub{font-size:12px;color:var(--txt3);margin-top:2px;}
 .tba{display:flex;gap:8px;align-items:center;}
-.btn{padding:7px 14px;border-radius:8px;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt1);font-size:13px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .12s;}
-.btn:hover{background:var(--bg2);}
-.btnp{background:#00838F;color:#fff;border-color:#00838F;}
-.btnp:hover{background:#006e79;}
-.btno{border-color:#00838F;color:#00838F;}
-.btno:hover{background:var(--teal-bg);}
+.btn{padding:6px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,13px);line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,500);cursor:pointer;display:inline-flex;align-items:flex-start;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
+
+/* Primary */
+.btn{background:var(--color-btn-primary-default,#0d1230);border-color:var(--color-btn-primary-default,#0d1230);color:#fff;}
+.btn:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);}
+
+/* Secondary */
+.btn-secondary{background:var(--color-btn-secondary-bg,#fff);border-color:var(--color-btn-secondary-border,#1f2432);color:var(--color-btn-secondary-text,#0f1420);}
+.btn-secondary:hover{background:var(--color-btn-secondary-hover,#eef2f6);}
+
+/* Tertiary */
+.btn-tertiary{background:transparent;border-color:transparent;color:var(--color-btn-tertiary-text,#0f1420);}
+.btn-tertiary:hover{background:var(--color-btn-tertiary-hover-bg,#edf2f6);}
+
+/* Destructive modifiers */
+.btn-destructive{background:var(--color-btn-primary-destructive-default,#e54a4a);border-color:var(--color-btn-primary-destructive-default,#e54a4a);color:#fff;}
+.btn-destructive:hover{background:var(--color-btn-primary-destructive-hover,#f06a6a);border-color:var(--color-btn-primary-destructive-hover,#f06a6a);}
+.btn-secondary.btn-destructive{background:var(--color-btn-secondary-destructive-bg,#fff);border-color:var(--color-btn-secondary-destructive-border,#e54a4a);color:var(--color-btn-secondary-destructive-text,#e54a4a);}
+.btn-secondary.btn-destructive:hover{background:var(--color-btn-secondary-destructive-hover,#fff1f1);}
+.btn-tertiary.btn-destructive{color:var(--color-btn-tertiary-destructive-text,#e54a4a);}
+.btn-tertiary.btn-destructive:hover{background:var(--color-btn-tertiary-destructive-hover-bg,#fff1f1);}
+
+/* Disabled state */
+.btn:disabled,
+.btn.btn-disabled{background:var(--color-btn-primary-disabled,#d7d7d7);border-color:var(--color-btn-disabled-border,#d1d4d8);color:var(--color-btn-disabled-text,#a8acb1);cursor:not-allowed;pointer-events:none;font-weight:var(--text-button-disabled-weight,400);font-size:var(--text-button-disabled-size,13px);line-height:var(--text-button-disabled-line-height,1.2);}
+.btn-secondary:disabled,
+.btn-secondary.btn-disabled,
+.btn-tertiary:disabled,
+.btn-tertiary.btn-disabled,
+.btn.btn-secondary.btn-destructive:disabled,
+.btn.btn-tertiary.btn-destructive:disabled{background:transparent;border-color:var(--color-btn-disabled-border,#d1d4d8);color:var(--color-btn-disabled-text,#a8acb1);}
+
+/* Legacy aliases used by existing markup */
+.btnp{background:var(--color-btn-primary-default,#0d1230);border-color:var(--color-btn-primary-default,#0d1230);color:#fff;}
+.btnp:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);}
+.btno{background:var(--color-btn-secondary-bg,#fff);border-color:var(--color-btn-secondary-border,#1f2432);color:var(--color-btn-secondary-text,#0f1420);}
+.btno:hover{background:var(--color-btn-secondary-hover,#eef2f6);}
 .content{padding:20px 24px;flex:1;}
 .pg{display:none;}
 .pg.on{display:block;}
