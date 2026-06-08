@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Captive Portal Full Navigation Prototype</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.1/dist/tabler-icons.min.css" />
+</head>
+<body style="margin:0;padding:24px;background:#f2f3f5;">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.cp{font-family:'Figtree',sans-serif;font-size:14px;display:flex;height:680px;border:0.5px solid var(--border1,#e0deda);border-radius:12px;overflow:hidden;}
+.cp.light{--bg1:#fff;--bg2:#f5f5f4;--bg3:#ececea;--txt1:#1a1a18;--txt2:#5f5e5a;--txt3:#9c9b96;--border1:#e0deda;--border2:#c8c6c0;--teal-bg:#E6F6F7;--teal-txt:#006e79;--teal:#00838F;--amber-bg:#FAEEDA;--amber-txt:#854F0B;--amber:#BA7517;--green-bg:#EAF3DE;--green-txt:#3B6D11;--blue-bg:#E6F1FB;--blue-txt:#185FA5;--pu-bg:#EEEDFE;--pu-txt:#534AB7;--pink-bg:#FBEAF0;--pink-txt:#993556;--danger-bg:#FCEBEB;--danger-txt:#A32D2D;--danger-border:#F09595;background:var(--bg1);color:var(--txt1);}
+.cp.dark{--bg1:#1c1c1a;--bg2:#252523;--bg3:#2e2e2b;--txt1:#f0ede8;--txt2:#a09e99;--txt3:#6b6966;--border1:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);--teal-bg:#0a3035;--teal-txt:#5dcaa5;--teal:#1D9E75;--amber-bg:#2e1f08;--amber-txt:#EF9F27;--amber:#BA7517;--green-bg:#1a2910;--green-txt:#97C459;--blue-bg:#0c2240;--blue-txt:#85B7EB;--pu-bg:#1e1b3a;--pu-txt:#AFA9EC;--pink-bg:#2a1120;--pink-txt:#ED93B1;--danger-bg:#2d1010;--danger-txt:#F09595;--danger-border:#A32D2D;background:var(--bg1);color:var(--txt1);}
+.sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;}
+.logo{padding:0 16px 20px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#00838F;margin-bottom:8px;}
+.logo-ic{width:28px;height:28px;background:#00838F;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
+.nl{font-size:10px;font-weight:600;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px 4px;}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;position:relative;transition:background .12s;user-select:none;}
+.ni:hover{background:var(--bg3);color:var(--txt1);}
+.ni.on{background:var(--teal-bg);color:var(--teal);font-weight:500;}
+.ni.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#00838F;border-radius:0 2px 2px 0;}
+.bdg{margin-left:auto;background:#00838F;color:#fff;font-size:10px;font-weight:600;border-radius:10px;padding:1px 6px;}
+.bdg-w{background:#BA7517;}
+.nb{margin-top:auto;border-top:0.5px solid var(--border1);padding-top:8px;}
+.tog-row{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;}
+.tog-tr{margin-left:auto;width:28px;height:16px;border-radius:8px;display:flex;align-items:center;padding:2px;transition:background .2s;flex-shrink:0;}
+.tog-tr.on{background:#00838F;justify-content:flex-end;}
+.tog-tr.off{background:var(--bg3);justify-content:flex-start;}
+.tog-th{width:12px;height:12px;border-radius:50%;background:#fff;}
+.avr{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;}
+.av{width:28px;height:28px;border-radius:50%;background:var(--teal-bg);color:var(--teal-txt);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0;background:var(--bg1);}
+.topbar{border-bottom:0.5px solid var(--border1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--bg1);position:sticky;top:0;z-index:5;}
+.tbtl{font-size:16px;font-weight:600;color:var(--txt1);}
+.tbsub{font-size:12px;color:var(--txt3);margin-top:2px;}
+.tba{display:flex;gap:8px;align-items:center;}
+.btn{padding:7px 14px;border-radius:8px;border:0.5px solid var(--border2);background:var(--bg1);color:var(--txt1);font-size:13px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .12s;}
+.btn:hover{background:var(--bg2);}
+.btnp{background:#00838F;color:#fff;border-color:#00838F;}
+.btnp:hover{background:#006e79;}
+.btno{border-color:#00838F;color:#00838F;}
+.btno:hover{background:var(--teal-bg);}
+.content{padding:20px 24px;flex:1;}
+.pg{display:none;}
+.pg.on{display:block;}
+
+.sgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px;}
+.sc{background:var(--bg2);border-radius:8px;padding:14px;}
+.slbl{font-size:11px;color:var(--txt3);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
+.sval{font-size:24px;font-weight:600;color:var(--txt1);line-height:1;}
+.ssub{font-size:11px;color:var(--txt2);margin-top:5px;}
+.odot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px;}
+.adot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#BA7517;margin-right:4px;}
+
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.stl{font-size:14px;font-weight:600;color:var(--txt1);}
+.nlist{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.nc{background:var(--bg1);border:0.5px solid var(--border1);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;transition:border-color .15s;}
+.nc:hover{border-color:#00838F;}
+.nic{width:34px;height:34px;border-radius:8px;background:var(--teal-bg);color:#00838F;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.pill{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;}
+.pill-a{background:var(--teal-bg);color:var(--teal-txt);}
+.pill-off{background:var(--bg2);color:var(--txt3);}
+.pill-p{background:var(--amber-bg);color:var(--amber-txt);}
+.feed{border:0.5px solid var(--border1);border-radius:10px;overflow:hidden;}
+.frow{display:grid;grid-template-columns:1fr auto;padding:10px 14px;border-bottom:0.5px solid var(--border1);font-size:13px;align-items:center;}
+.frow:last-child{border-bottom:none;}
+.frow:nth-child(even){background:var(--bg2);}
+
+.ngrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s;}
+.ncard:hover{border-color:#00838F;background:var(--teal-bg);}
+.ncfoot{border-top:0.5px solid var(--border1);padding-top:10px;display:flex;gap:8px;}
+.cab{flex:1;padding:6px 8px;border-radius:8px;border:0.5px solid var(--border1);background:none;color:var(--txt2);font-size:12px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s;}
+.cab:hover{background:var(--bg2);color:var(--txt1);}
+.cab.pa{border-color:#00838F;color:#00838F;}
+.cab.pa:hover{background:var(--teal-bg);}
+
+.bcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt3);}
+.bcl{color:#00838F;cursor:pointer;font-weight:500;}
+.bcl:hover{text-decoration:underline;}
+.dtabs{display:flex;border-bottom:0.5px solid var(--border1);margin-bottom:20px;}
+.dtab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.dtab:hover{color:var(--txt1);}
+.dtab.on{color:#00838F;border-bottom-color:#00838F;}
+.dtp{display:none;}
+.dtp.on{display:block;}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fl{font-size:12px;font-weight:600;color:var(--txt2);}
+.fh{font-size:11px;color:var(--txt3);}
+.fin{padding:7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
+.ropt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:0.5px solid var(--border1);border-radius:8px;cursor:pointer;margin-bottom:6px;background:var(--bg1);}
+.ropt:hover{border-color:#00838F;background:var(--teal-bg);}
+.ropt.sel{border-color:#00838F;background:var(--teal-bg);}
+.ropt input{margin-top:2px;accent-color:#00838F;}
+.rt{font-size:13px;font-weight:500;color:var(--txt1);}
+.rd{font-size:11px;color:var(--txt3);}
+.pvbox{background:#00838F;border-radius:12px;padding:20px;color:#fff;text-align:center;}
+.pvin{background:rgba(255,255,255,.15);border-radius:10px;padding:16px;max-width:240px;margin:0 auto;}
+.pvf{background:rgba(255,255,255,.2);border-radius:6px;padding:7px 10px;font-size:12px;opacity:.9;margin-bottom:8px;text-align:left;}
+
+.gl-tb{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
+.sw{flex:1;position:relative;}
+.sw i{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:16px;}
+.sw input{width:100%;padding:7px 10px 7px 32px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
+.sf{padding:7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
+.fchip{display:flex;align-items:center;gap:5px;background:var(--teal-bg);color:var(--teal-txt);font-size:12px;font-weight:500;padding:3px 10px;border-radius:10px;border:0.5px solid #00838F;}
+.pbanner{display:none;background:var(--amber-bg);border:0.5px solid var(--amber);border-radius:8px;padding:10px 16px;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--amber-txt);}
+table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
+.gt th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--border1);}
+.gt td{padding:9px 10px;font-size:13px;border-bottom:0.5px solid var(--border1);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt1);}
+.gt tr:hover td{background:var(--bg2);}
+.gav{width:26px;height:26px;border-radius:50%;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;}
+.ib{background:none;border:0.5px solid var(--border1);border-radius:6px;padding:4px 6px;font-size:14px;color:var(--txt2);cursor:pointer;display:flex;align-items:center;}
+.ib:hover{background:var(--bg2);}
+.ib.dng:hover{background:var(--danger-bg);color:var(--danger-txt);border-color:var(--danger-border);}
+.ib.apr{border-color:#0F6E56;color:#0F6E56;}
+.ib.apr:hover{background:var(--green-bg);}
+
+.atbl{width:100%;border-collapse:collapse;table-layout:fixed;}
+.atbl th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 12px;border-bottom:0.5px solid var(--border1);}
+.atbl td{padding:10px 12px;font-size:13px;border-bottom:0.5px solid var(--border1);color:var(--txt1);vertical-align:middle;}
+.atbl tr:hover td{background:var(--bg2);}
+.role-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;}
+.rb-net{background:var(--teal-bg);color:var(--teal-txt);}
+.rb-sec{background:var(--blue-bg);color:var(--blue-txt);}
+.rb-sup{background:var(--pu-bg);color:var(--pu-txt);}
+
+.stabs{display:flex;border-bottom:0.5px solid var(--border1);margin-bottom:20px;}
+.stab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.stab:hover{color:var(--txt1);}
+.stab.on{color:#00838F;border-bottom-color:#00838F;}
+.stp{display:none;}
+.stp.on{display:block;}
+.int-card{background:var(--bg1);border:0.5px solid var(--border1);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.int-ic{width:36px;height:36px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--txt2);flex-shrink:0;}
+.tog-sm{width:36px;height:20px;border-radius:10px;display:flex;align-items:center;padding:2px;cursor:pointer;transition:background .2s;flex-shrink:0;}
+.tog-sm.on{background:#00838F;justify-content:flex-end;}
+.tog-sm.off{background:var(--bg3);justify-content:flex-start;}
+.tog-sm-th{width:16px;height:16px;border-radius:50%;background:#fff;}
+.theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px;}
+.th-card{border:0.5px solid var(--border1);border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.th-card:hover{border-color:#00838F;}
+.th-card.sel{border-color:#00838F;border-width:1.5px;}
+.th-preview{height:60px;display:flex;align-items:center;justify-content:center;}
+.th-label{font-size:12px;font-weight:500;color:var(--txt1);padding:8px 10px;background:var(--bg1);border-top:0.5px solid var(--border1);}
+.us-card{background:var(--bg2);border-radius:12px;padding:20px;margin-bottom:16px;}
+.us-av{width:56px;height:56px;border-radius:50%;background:var(--teal-bg);color:#00838F;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+</style>
+
+<div class="cp light" id="cpRoot">
+<h2 style="position:absolute;left:-9999px">Captive Portal Admin Console — full navigation prototype</h2>
+
+<nav class="sb">
+  <div class="logo"><div class="logo-ic"><i class="ti ti-wifi"></i></div>GuestPass</div>
+  <div class="nl">Main</div>
+  <div class="ni on" onclick="nav('dashboard',this)" tabindex="0"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+  <div class="ni" onclick="nav('guestnet',this)" tabindex="0"><i class="ti ti-wifi"></i>Guest networks</div>
+  <div class="ni" onclick="nav('guestlist',this)" tabindex="0"><i class="ti ti-users"></i>Guest list<span class="bdg bdg-w">3</span></div>
+  <div class="nl">Manage</div>
+  <div class="ni" onclick="nav('admins',this)" tabindex="0"><i class="ti ti-shield"></i>Administrators</div>
+  <div class="ni" onclick="nav('settings',this)" tabindex="0"><i class="ti ti-settings"></i>Settings</div>
+  <div class="nb">
+    <div class="tog-row" onclick="toggleDark()" tabindex="0" id="dmBtn"><i class="ti ti-moon"></i>Dark mode<div class="tog-tr off" id="ttr"><div class="tog-th"></div></div></div>
+    <div class="ni" onclick="nav('usersettings',this)" tabindex="0"><i class="ti ti-user-circle"></i>User settings</div>
+    <div class="avr"><div class="av">JM</div><div><div style="font-size:13px;font-weight:500;color:var(--txt1)">Jordan M.</div><div style="font-size:11px;color:var(--txt3)">Net Admin</div></div><i class="ti ti-dots-vertical" style="margin-left:auto;color:var(--txt3);font-size:15px;"></i></div>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="pg-dashboard" class="pg on">
+  <div class="topbar"><div><div class="tbtl">Dashboard</div><div class="tbsub">Friday, June 5, 2026 · All networks</div></div><div class="tba"><button class="btn"><i class="ti ti-refresh"></i>Refresh</button><button class="btn btnp" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="content">
+    <div class="sgrid">
+      <div class="sc"><div class="slbl">Active guests</div><div class="sval">47</div><div class="ssub"><span class="odot"></span>Connected now</div></div>
+      <div class="sc"><div class="slbl">Active networks</div><div class="sval">4</div><div class="ssub"><span class="odot"></span>All operational</div></div>
+      <div class="sc"><div class="slbl">Pending approval</div><div class="sval" style="color:#BA7517">3</div><div class="ssub"><span class="adot"></span>Need review</div></div>
+      <div class="sc"><div class="slbl">Today's logins</div><div class="sval">118</div><div class="ssub" style="color:var(--txt3)">+12 from yesterday</div></div>
+    </div>
+    <div class="sh"><div class="stl">Active guest networks</div><button class="btn" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">View all</button></div>
+    <div class="nlist">
+      <div class="nc"><div class="nic"><i class="ti ti-building"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-Lobby</div></div><span class="pill pill-a">Active</span><span style="font-size:12px;color:var(--txt2);margin-left:8px;display:flex;align-items:center;gap:3px;"><i class="ti ti-users" style="font-size:12px"></i>23</span></div>
+      <div class="nc"><div class="nic"><i class="ti ti-briefcase"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-ConfCtr</div></div><span class="pill pill-a">Active</span><span style="font-size:12px;color:var(--txt2);margin-left:8px;display:flex;align-items:center;gap:3px;"><i class="ti ti-users" style="font-size:12px"></i>14</span></div>
+      <div class="nc"><div class="nic"><i class="ti ti-coffee"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Café area</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-Cafe</div></div><span class="pill pill-a">Active</span><span style="font-size:12px;color:var(--txt2);margin-left:8px;display:flex;align-items:center;gap:3px;"><i class="ti ti-users" style="font-size:12px"></i>10</span></div>
+      <div class="nc" style="opacity:.6"><div class="nic" style="background:var(--bg3);color:var(--txt3)"><i class="ti ti-map-pin"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Rooftop terrace</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-Roof</div></div><span class="pill pill-off">Inactive</span></div>
+    </div>
+    <div class="sh" style="margin-top:4px"><div class="stl">Recent activity</div></div>
+    <div class="feed">
+      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#00838F;margin-right:6px;vertical-align:middle"></span><strong>Priya Sharma</strong> connected to <em>Lobby guest</em></div><div style="font-size:11px;color:var(--txt3)">2 min ago</div></div>
+      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#BA7517;margin-right:6px;vertical-align:middle"></span><strong>Daniel Wu</strong> <span style="color:var(--amber-txt);font-weight:500">requesting access</span> — <em>Conference center</em></div><div style="font-size:11px;color:var(--txt3)">5 min ago</div></div>
+      <div class="frow" style="border:none"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--border2);margin-right:6px;vertical-align:middle"></span><strong>Lisa Park</strong> disconnected from <em>Café area</em></div><div style="font-size:11px;color:var(--txt3)">18 min ago</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GUEST NETWORKS INDEX -->
+<div id="pg-guestnet" class="pg">
+  <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="content">
+    <div class="ngrid">
+      <div class="ncard" onclick="openNetDetail('lobby')">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-building"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Lobby</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>23 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>8h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Self-register</span></div>
+        <div class="ncfoot"><button class="cab pa" onclick="event.stopPropagation();openNetDetail('lobby')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('lobby')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+      </div>
+      <div class="ncard" onclick="openNetDetail('conf')">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-briefcase"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-ConfCtr</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>14 connected</span><span style="font-size:12px;color:var(--amber-txt);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#BA7517"></span>3 pending</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Sponsor</span></div>
+        <div class="ncfoot"><button class="cab pa" onclick="event.stopPropagation();openNetDetail('conf')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('conf')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+      </div>
+      <div class="ncard" onclick="openNetDetail('cafe')">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-coffee"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Café area</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Cafe</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>10 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>4h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-door-enter" style="font-size:12px"></i>Open access</span></div>
+        <div class="ncfoot"><button class="cab pa" onclick="event.stopPropagation();openNetDetail('cafe')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('cafe')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+      </div>
+      <div class="ncard" onclick="openNetDetail('roof')" style="opacity:.65">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px;background:var(--bg3);color:var(--txt3)"><i class="ti ti-map-pin"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Rooftop terrace</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Roof</div></div><span class="pill pill-off">Inactive</span></div>
+        <div style="display:flex;gap:8px"><span style="font-size:12px;color:var(--txt3);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>0 connected</span></div>
+        <div class="ncfoot"><button class="cab pa" onclick="event.stopPropagation();openNetDetail('roof')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('roof')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NETWORK DETAIL -->
+<div id="pg-netdetail" class="pg">
+  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="nd-bc" style="color:var(--txt1);font-weight:500"></span></div><div class="tbtl" id="nd-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btno" onclick="openNetGuests(currentNet)"><i class="ti ti-users"></i>View guests</button><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="content">
+    <div class="igrid">
+      <div class="sc"><div class="slbl">Connected guests</div><div class="sval" id="nd-guests"></div><div class="ssub" id="nd-pend"></div></div>
+      <div class="sc"><div class="slbl">Session expiry</div><div class="sval" id="nd-exp"></div><div class="ssub" id="nd-acc"></div></div>
+      <div class="sc"><div class="slbl">Status</div><div class="sval" id="nd-st"></div><div class="ssub" id="nd-ssid" style="font-size:11px;color:var(--txt3)"></div></div>
+    </div>
+    <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('access',this)">Access method</div><div class="dtab" onclick="dtab('preview',this)">Landing page preview</div></div>
+    <div id="dtp-settings" class="dtp on">
+      <div class="fgrid">
+        <div class="fg"><label class="fl">Nickname</label><input class="fin" type="text" id="nd-nick"/><div class="fh">Display name in the console.</div></div>
+        <div class="fg"><label class="fl">Theme</label><select class="fin"><option>Corporate Blue</option><option>Minimal Light</option><option>Dark Mode</option></select></div>
+        <div class="fg"><label class="fl">Session expiry</label><select class="fin"><option>4 hours</option><option selected>8 hours</option><option>24 hours</option></select></div>
+        <div class="fg"><label class="fl">Bandwidth limit</label><input class="fin" type="text" value="20 Mbps"/></div>
+        <div class="fg"><label class="fl">VLAN / segment</label><input class="fin" type="text" value="VLAN 40"/></div>
+        <div class="fg"><label class="fl">Network status</label><select class="fin"><option>Active</option><option>Inactive</option></select></div>
+      </div>
+    </div>
+    <div id="dtp-access" class="dtp">
+      <div style="margin-bottom:10px"><label class="fl">How do guests get access?</label></div>
+      <label class="ropt sel"><input type="radio" name="acc" checked/><div><div class="rt">Self-register — Sponsor approval</div><div class="rd">Guests register; an admin must approve before they connect.</div></div></label>
+      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-register — No verification</div><div class="rd">Guests tap "Connect" and are immediately granted access.</div></div></label>
+      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only — Username &amp; password</div><div class="rd">Admin creates credentials; guests cannot self-register.</div></div></label>
+    </div>
+    <div id="dtp-preview" class="dtp">
+      <div class="pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button style="background:#fff;color:#00838F;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GUEST LIST (global) -->
+<div id="pg-guestlist" class="pg">
+  <div class="topbar"><div><div class="tbtl">Guest list</div><div class="tbsub">47 connected · 3 pending approval</div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
+  <div class="content">
+    <div style="background:var(--amber-bg);border:0.5px solid var(--amber);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--amber-txt)">
+      <i class="ti ti-clock" style="font-size:18px"></i><div><strong>3 guests</strong> are waiting for sponsor approval</div>
+      <button style="margin-left:auto;background:#BA7517;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;cursor:pointer">Review</button>
+    </div>
+    <div class="gl-tb">
+      <div class="sw"><i class="ti ti-search"></i><input type="text" placeholder="Search guests…"/></div>
+      <select class="sf"><option>All networks</option><option>Lobby guest</option><option>Conference center</option><option>Café area</option></select>
+      <select class="sf"><option>All statuses</option><option>Connected</option><option>Pending</option><option>Disconnected</option></select>
+    </div>
+    <table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:75px">Actions</th></tr></thead>
+    <tbody>
+      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#E6F6F7;color:#006e79">PS</div><div><div style="font-weight:500;font-size:13px">Priya Sharma</div><div style="font-size:11px;color:var(--txt3)">priya@acme.co</div></div></div></td><td style="color:var(--txt2)">Lobby guest</td><td><span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span></td><td style="color:var(--txt2)">2m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Self-reg</span></td><td style="color:var(--txt3);font-size:12px">7h 58m</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div></td></tr>
+      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#FAEEDA;color:#854F0B">DW</div><div><div style="font-weight:500;font-size:13px">Daniel Wu</div><div style="font-size:11px;color:var(--txt3)">d.wu@partner.io</div></div></div></td><td style="color:var(--txt2)">Conference</td><td><span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#BA7517;display:inline-block"></span>Pending</span></td><td style="color:var(--txt3)">—</td><td><span style="font-size:11px;background:var(--amber-bg);color:var(--amber-txt);padding:2px 7px;border-radius:8px">Sponsor req.</span></td><td style="color:var(--txt3);font-size:12px">—</td><td><div style="display:flex;gap:4px"><button class="ib apr"><i class="ti ti-check"></i></button><button class="ib dng"><i class="ti ti-x"></i></button></div></td></tr>
+      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#E6F1FB;color:#185FA5">SR</div><div><div style="font-weight:500;font-size:13px">Sofia Reyes</div><div style="font-size:11px;color:var(--txt3)">sofia@vendor.com</div></div></div></td><td style="color:var(--txt2)">Lobby guest</td><td><span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span></td><td style="color:var(--txt2)">1h 22m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Jordan M.</span></td><td style="color:var(--txt3);font-size:12px">6h 38m</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div></td></tr>
+      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#EEEDFE;color:#534AB7">MB</div><div><div style="font-weight:500;font-size:13px">Marcus Bell</div><div style="font-size:11px;color:var(--txt3)">m.bell@consult.net</div></div></div></td><td style="color:var(--txt2)">Café area</td><td><span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--bg2);color:var(--txt3)">Offline</span></td><td style="color:var(--txt3)">42m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Self-reg</span></td><td style="color:var(--txt3);font-size:12px">Expired</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
+    </tbody></table>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span>Showing 4 of 47 guests</span><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-chevron-left"></i></button><button class="ib" style="background:var(--bg2)">1</button><button class="ib">2</button><button class="ib">3</button><button class="ib"><i class="ti ti-chevron-right"></i></button></div></div>
+  </div>
+</div>
+
+<!-- NET GUEST LIST (filtered) -->
+<div id="pg-netguests" class="pg">
+  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="ng-bc" class="bcl" onclick="openNetDetail(currentNet)"></span><i class="ti ti-chevron-right" style="font-size:11px"></i><span style="color:var(--txt1);font-weight:500">Guests</span></div><div class="tbtl" id="ng-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
+  <div class="content">
+    <div class="gl-tb">
+      <div class="sw"><i class="ti ti-search"></i><input type="text" placeholder="Search guests on this network…"/></div>
+      <div class="fchip"><i class="ti ti-wifi"></i><span id="ng-chip"></span><i class="ti ti-x" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])" style="cursor:pointer"></i></div>
+      <select class="sf"><option>All statuses</option><option>Connected</option><option>Pending</option></select>
+    </div>
+    <div class="pbanner" id="ng-banner"><i class="ti ti-clock" style="font-size:18px"></i><div id="ng-btext"></div><button style="margin-left:auto;background:#BA7517;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;cursor:pointer">Review</button></div>
+    <div id="ng-empty" style="display:none;text-align:center;padding:48px 0;color:var(--txt3)"><i class="ti ti-users-off" style="font-size:32px;display:block;margin-bottom:10px"></i><div style="font-size:14px;font-weight:500;color:var(--txt2);margin-bottom:4px">No guests on this network</div><div style="font-size:12px">Network is inactive or has no recorded guests.</div></div>
+    <div id="ng-wrap"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:165px">Guest</th><th style="width:85px">Status</th><th style="width:75px">Duration</th><th style="width:110px">Verified by</th><th style="width:80px">Expires</th><th style="width:75px">Actions</th></tr></thead><tbody id="ng-tbody"></tbody></table><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="ng-count"></span></div></div>
+  </div>
+</div>
+
+<!-- ADMINISTRATORS -->
+<div id="pg-admins" class="pg">
+  <div class="topbar"><div><div class="tbtl">Administrators</div><div class="tbsub">5 users across 4 networks</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-user-plus"></i>Add administrator</button></div></div>
+  <div class="content">
+    <div style="margin-bottom:16px;padding:12px 16px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--txt2);display:flex;gap:8px;align-items:flex-start"><i class="ti ti-info-circle" style="font-size:16px;flex-shrink:0;margin-top:1px;color:var(--txt3)"></i><div>Primary admins manage all networks. Secondary users (e.g. receptionists) can only view or manage guests on their assigned networks.</div></div>
+    <table class="atbl">
+      <thead><tr><th style="width:200px">Name</th><th style="width:170px">Email</th><th style="width:100px">Role</th><th>Networks</th><th style="width:80px">Actions</th></tr></thead>
+      <tbody>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px">JM</div><div><div style="font-weight:500;font-size:13px">Jordan M.</div><div style="font-size:11px;color:var(--txt3)">You</div></div></div></td><td style="font-size:12px;color:var(--txt2)">jordan@corp.com</td><td><span class="role-badge rb-net">Net Admin</span></td><td style="font-size:12px;color:var(--txt2)">All networks</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button></div></td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--blue-bg);color:var(--blue-txt)">SC</div><div style="font-size:13px;font-weight:500">Sarah C.</div></div></td><td style="font-size:12px;color:var(--txt2)">sarah@corp.com</td><td><span class="role-badge rb-net">Net Admin</span></td><td style="font-size:12px;color:var(--txt2)">All networks</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--pu-bg);color:var(--pu-txt)">RL</div><div style="font-size:13px;font-weight:500">Robin L.</div></div></td><td style="font-size:12px;color:var(--txt2)">robin@corp.com</td><td><span class="role-badge rb-sec">Guest Mgr</span></td><td style="font-size:12px;color:var(--txt2)">Lobby guest, Café area</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--pink-bg);color:var(--pink-txt)">AM</div><div style="font-size:13px;font-weight:500">Alex M.</div></div></td><td style="font-size:12px;color:var(--txt2)">alex@corp.com</td><td><span class="role-badge rb-sec">Guest Mgr</span></td><td style="font-size:12px;color:var(--txt2)">Conference center</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
+        <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--green-bg);color:var(--green-txt)">TN</div><div style="font-size:13px;font-weight:500">Taylor N.</div></div></td><td style="font-size:12px;color:var(--txt2)">taylor@corp.com</td><td><span class="role-badge rb-sup">Read-only</span></td><td style="font-size:12px;color:var(--txt2)">All networks</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="pg-settings" class="pg">
+  <div class="topbar"><div><div class="tbtl">Settings</div><div class="tbsub">Integrations, RADIUS, themes</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="content">
+    <div class="stabs"><div class="stab on" onclick="stab('integrations',this)">Integrations</div><div class="stab" onclick="stab('radius',this)">RADIUS</div><div class="stab" onclick="stab('themes',this)">Themes</div></div>
+    <div id="stp-integrations" class="stp on">
+      <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--txt1)">Guest portal services</div>
+      <div class="int-card"><div class="int-ic"><i class="ti ti-mood-smile"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">HappyGuest</div><div style="font-size:11px;color:var(--txt3)">Guest portal SSO and branding</div></div><div class="tog-sm on" onclick="this.classList.toggle('on');this.classList.toggle('off')"><div class="tog-sm-th"></div></div></div>
+      <div class="int-card"><div class="int-ic"><i class="ti ti-key"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Single Sign-On (SSO)</div><div style="font-size:11px;color:var(--txt3)">SAML / OAuth2 identity provider</div></div><div class="tog-sm off" onclick="this.classList.toggle('on');this.classList.toggle('off')"><div class="tog-sm-th"></div></div></div>
+      <div class="int-card"><div class="int-ic"><i class="ti ti-mail"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Email notifications</div><div style="font-size:11px;color:var(--txt3)">SMTP for guest invitations and alerts</div></div><div class="tog-sm on" onclick="this.classList.toggle('on');this.classList.toggle('off')"><div class="tog-sm-th"></div></div></div>
+    </div>
+    <div id="stp-radius" class="stp">
+      <div class="fgrid">
+        <div class="fg"><label class="fl">Primary RADIUS server</label><input class="fin" type="text" value="192.168.1.50"/></div>
+        <div class="fg"><label class="fl">Port</label><input class="fin" type="text" value="1812"/></div>
+        <div class="fg"><label class="fl">Shared secret</label><input class="fin" type="password" value="••••••••••"/></div>
+        <div class="fg"><label class="fl">Timeout (seconds)</label><input class="fin" type="text" value="5"/></div>
+        <div class="fg"><label class="fl">Accounting port</label><input class="fin" type="text" value="1813"/></div>
+        <div class="fg"><label class="fl">Auth protocol</label><select class="fin"><option selected>PAP</option><option>CHAP</option><option>MS-CHAPv2</option></select></div>
+      </div>
+    </div>
+    <div id="stp-themes" class="stp">
+      <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--txt1)">Landing page themes</div>
+      <div class="theme-grid">
+        <div class="th-card sel"><div class="th-preview" style="background:#00838F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.2);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.15);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Corporate Blue</div></div>
+        <div class="th-card"><div class="th-preview" style="background:#f5f5f4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:#d0cfc8;border-radius:6px;width:80px;height:10px"></div><div style="background:#e2e0d8;border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Minimal Light</div></div>
+        <div class="th-card"><div class="th-preview" style="background:#1c1c1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div style="background:rgba(255,255,255,.15);border-radius:6px;width:80px;height:10px"></div><div style="background:rgba(255,255,255,.08);border-radius:4px;width:60px;height:8px"></div></div><div class="th-label">Dark Mode</div></div>
+        <div class="th-card" style="display:flex;align-items:center;justify-content:center;border-style:dashed;cursor:pointer;min-height:90px"><div style="text-align:center;color:var(--txt3)"><i class="ti ti-plus" style="font-size:20px;display:block;margin-bottom:4px"></i><div style="font-size:12px">New theme</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USER SETTINGS -->
+<div id="pg-usersettings" class="pg">
+  <div class="topbar"><div><div class="tbtl">User settings</div><div class="tbsub">Profile, preferences</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="content">
+    <div class="us-card">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+        <div class="us-av">JM</div>
+        <div><div style="font-size:16px;font-weight:600;color:var(--txt1)">Jordan M.</div><div style="font-size:13px;color:var(--txt3)">Network Administrator</div></div>
+        <button class="btn" style="margin-left:auto"><i class="ti ti-camera"></i>Change photo</button>
+      </div>
+      <div class="fgrid">
+        <div class="fg"><label class="fl">First name</label><input class="fin" type="text" value="Jordan"/></div>
+        <div class="fg"><label class="fl">Last name</label><input class="fin" type="text" value="Monroe"/></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">Email</label><input class="fin" type="text" value="jordan@corp.com"/></div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border-radius:12px;padding:16px 20px">
+      <div style="font-size:13px;font-weight:600;color:var(--txt1);margin-bottom:14px">Preferences</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid var(--border1)">
+        <div><div style="font-size:13px;font-weight:500;color:var(--txt1)">Dark mode</div><div style="font-size:11px;color:var(--txt3)">Switch the console to a dark color scheme</div></div>
+        <div class="tog-sm" id="us-dm" onclick="toggleDarkFromUser(this)" style="flex-shrink:0"><div class="tog-sm-th"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid var(--border1)">
+        <div><div style="font-size:13px;font-weight:500;color:var(--txt1)">Email alerts for pending approvals</div><div style="font-size:11px;color:var(--txt3)">Get notified when guests request access</div></div>
+        <div class="tog-sm on" onclick="this.classList.toggle('on');this.classList.toggle('off')" style="flex-shrink:0"><div class="tog-sm-th"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+        <div><div style="font-size:13px;font-weight:500;color:var(--txt1)">Compact table view</div><div style="font-size:11px;color:var(--txt3)">Reduce row padding in guest list tables</div></div>
+        <div class="tog-sm off" onclick="this.classList.toggle('on');this.classList.toggle('off')" style="flex-shrink:0"><div class="tog-sm-th"></div></div>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button class="btn" style="color:var(--danger-txt);border-color:var(--danger-border)"><i class="ti ti-lock"></i>Change password</button>
+      <button class="btn" style="color:var(--danger-txt);border-color:var(--danger-border);margin-left:auto"><i class="ti ti-logout"></i>Sign out</button>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+let isDark=false;
+let currentNet='conf';
+
+const nets={
+  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-register',status:'Active'},
+  conf:{name:'Conference center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active'},
+  cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active'},
+  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-register',status:'Inactive'}
+};
+
+const gdata={
+  lobby:[
+    {i:'PS',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Priya Sharma',email:'priya@acme.co',status:'online',dur:'2m',ver:'Self-reg',exp:'7h 58m'},
+    {i:'SR',bg:'#E6F1FB',fg:'#185FA5',dBg:'#0c2240',dFg:'#85B7EB',name:'Sofia Reyes',email:'sofia@vendor.com',status:'online',dur:'1h 22m',ver:'Jordan M.',exp:'6h 38m'},
+    {i:'TK',bg:'#EEEDFE',fg:'#534AB7',dBg:'#1e1b3a',dFg:'#AFA9EC',name:'Tom Keller',email:'t.keller@guest.org',status:'online',dur:'3h 5m',ver:'Self-reg',exp:'4h 55m'},
+  ],
+  conf:[
+    {i:'DW',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Daniel Wu',email:'d.wu@partner.io',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
+    {i:'AL',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Anna Lee',email:'a.lee@partner.io',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
+    {i:'RG',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Raj Gupta',email:'raj@vendor.in',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
+    {i:'MB',bg:'#EAF3DE',fg:'#3B6D11',dBg:'#1a2910',dFg:'#97C459',name:'Mike Barnes',email:'m.barnes@corp.com',status:'online',dur:'55m',ver:'Jordan M.',exp:'7h 5m'},
+  ],
+  cafe:[
+    {i:'LP',bg:'#FBEAF0',fg:'#993556',dBg:'#2a1120',dFg:'#ED93B1',name:'Lisa Park',email:'lisa@startup.io',status:'online',dur:'18m',ver:'Self-reg',exp:'3h 42m'},
+    {i:'CJ',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Chris Jordan',email:'c.j@design.co',status:'online',dur:'1h 10m',ver:'Self-reg',exp:'2h 50m'},
+  ],
+  roof:[]
+};
+
+function nav(pageId, el) {
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-'+pageId).classList.add('on');
+  if(el) el.classList.add('on');
+}
+
+function openNetDetail(k){
+  currentNet=k;
+  const n=nets[k];
+  document.getElementById('nd-bc').textContent=n.name;
+  document.getElementById('nd-title').textContent=n.name;
+  document.getElementById('nd-nick').value=n.name;
+  document.getElementById('nd-guests').textContent=n.guests;
+  document.getElementById('nd-pend').innerHTML=n.pending>0?`<span style="color:#BA7517">${n.pending} pending</span>`:'No pending';
+  document.getElementById('nd-exp').textContent=n.expiry;
+  document.getElementById('nd-acc').textContent=n.access;
+  const sv=document.getElementById('nd-st');
+  sv.textContent=n.status;
+  sv.style.color=n.status==='Active'?'#00838F':'var(--txt3)';
+  document.getElementById('nd-ssid').textContent=n.ssid;
+  document.getElementById('nd-pvlbl').textContent='Preview — '+n.name;
+  document.getElementById('nd-pvname').innerHTML='Welcome to<br>'+n.name;
+  document.getElementById('nd-pvssid').textContent='Guests see this on connecting to '+n.ssid;
+  document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('on',i===0));
+  document.querySelectorAll('.dtp').forEach((p,i)=>p.classList.toggle('on',i===0));
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-netdetail').classList.add('on');
+  document.querySelectorAll('.ni')[1].classList.add('on');
+}
+
+function openNetGuests(k){
+  currentNet=k;
+  const n=nets[k];
+  document.getElementById('ng-bc').textContent=n.name;
+  document.getElementById('ng-title').textContent=n.name+' — guests';
+  document.getElementById('ng-chip').textContent=n.name;
+  renderNetGuests(k);
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-netguests').classList.add('on');
+  document.querySelectorAll('.ni')[1].classList.add('on');
+}
+
+function renderNetGuests(k){
+  const guests=gdata[k]||[];
+  const pending=guests.filter(g=>g.status==='pending');
+  const banner=document.getElementById('ng-banner');
+  if(pending.length>0){banner.style.display='flex';document.getElementById('ng-btext').innerHTML=`<strong>${pending.length} guest${pending.length!==1?'s':''}</strong> waiting for approval`;}
+  else{banner.style.display='none';}
+  const empty=document.getElementById('ng-empty');
+  const wrap=document.getElementById('ng-wrap');
+  if(!guests.length){empty.style.display='block';wrap.style.display='none';return;}
+  empty.style.display='none';wrap.style.display='block';
+  document.getElementById('ng-count').textContent=`Showing ${guests.length} guest${guests.length!==1?'s':''} on ${nets[k].name}`;
+  document.getElementById('ng-tbody').innerHTML=guests.map(g=>{
+    const avBg=isDark?g.dBg:g.bg, avFg=isDark?g.dFg:g.fg;
+    const sp=g.status==='online'
+      ?`<span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span>`
+      :`<span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#BA7517;display:inline-block"></span>Pending</span>`;
+    const vBg=g.ver==='Sponsor req.'?'var(--amber-bg)':'var(--bg2)';
+    const vC=g.ver==='Sponsor req.'?'var(--amber-txt)':'var(--txt2)';
+    const acts=g.status==='pending'
+      ?`<div style="display:flex;gap:4px"><button class="ib apr"><i class="ti ti-check"></i></button><button class="ib dng"><i class="ti ti-x"></i></button></div>`
+      :`<div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div>`;
+    return`<tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${g.i}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${g.name}</div><div style="font-size:11px;color:var(--txt3)">${g.email}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${g.dur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${g.ver}</span></td><td style="color:var(--txt3);font-size:12px">${g.exp}</td><td>${acts}</td></tr>`;
+  }).join('');
+}
+
+function dtab(id,el){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.dtp').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('dtp-'+id).classList.add('on');
+}
+
+function stab(id,el){
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.stp').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('stp-'+id).classList.add('on');
+}
+
+function toggleDark(){
+  isDark=!isDark;
+  applyDark();
+}
+
+function toggleDarkFromUser(el){
+  isDark=!isDark;
+  applyDark();
+}
+
+function applyDark(){
+  const root=document.getElementById('cpRoot');
+  root.classList.toggle('light',!isDark);
+  root.classList.toggle('dark',isDark);
+  const tr=document.getElementById('ttr');
+  tr.classList.toggle('on',isDark);
+  tr.classList.toggle('off',!isDark);
+  document.getElementById('dmBtn').setAttribute('aria-pressed',String(isDark));
+  const usDm=document.getElementById('us-dm');
+  usDm.classList.toggle('on',isDark);
+  usDm.classList.toggle('off',!isDark);
+  const curPg=document.querySelector('.pg.on');
+  if(curPg&&curPg.id==='pg-netguests') renderNetGuests(currentNet);
+}
+
+document.querySelectorAll('.ropt').forEach(opt=>{
+  opt.addEventListener('click',function(){
+    this.closest('.dtp').querySelectorAll('.ropt').forEach(o=>o.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+
+document.querySelectorAll('.th-card:not([style*="dashed"])').forEach(c=>{
+  c.addEventListener('click',function(){
+    document.querySelectorAll('.th-card').forEach(x=>x.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+</script>
+</body>
+</html>
