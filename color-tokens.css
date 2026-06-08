@@ -26,12 +26,12 @@
   --color-light-border-2: #c8c6c0;
 
   /* Dark surfaces */
-  --color-dark-bg-1: #1c1c1a;
-  --color-dark-bg-2: #252523;
-  --color-dark-bg-3: #2e2e2b;
-  --color-dark-text-1: #f0ede8;
-  --color-dark-text-2: #a09e99;
-  --color-dark-text-3: #6b6966;
+  --color-dark-bg-1: #0d0d1a;
+  --color-dark-bg-2: #1a1a2e;
+  --color-dark-bg-3: #2a2a3e;
+  --color-dark-text-1: #ffffff;
+  --color-dark-text-2: #e0e0e8;
+  --color-dark-text-3: #6b6b7b;
   --color-dark-border-1: rgba(255, 255, 255, 0.1);
   --color-dark-border-2: rgba(255, 255, 255, 0.2);
 
@@ -148,4 +148,30 @@
   --danger-bg: var(--color-danger-bg-dark);
   --danger-txt: var(--color-danger-300);
   --danger-border: var(--color-danger-700);
+
+  /* Dark mode button tokens */
+  --color-btn-primary-default: #0c5157;
+  --color-btn-primary-hover: #197078;
+  --color-btn-primary-disabled: #2a2a3e;
+
+  --color-btn-primary-destructive-default: #ff6b6b;
+  --color-btn-primary-destructive-hover: #cc5a59;
+  --color-btn-primary-destructive-disabled: #2a2a3e;
+
+  --color-btn-secondary-bg: #1a1a2e;
+  --color-btn-secondary-hover: #1f2d3a;
+  --color-btn-secondary-border: #4a4a5e;
+  --color-btn-secondary-text: #e0e0e8;
+  --color-btn-secondary-destructive-bg: #1a1a2e;
+  --color-btn-secondary-destructive-hover: #2a1a1f;
+  --color-btn-secondary-destructive-border: #ff6b6b;
+  --color-btn-secondary-destructive-text: #ff6b6b;
+
+  --color-btn-tertiary-text: #e0e0e8;
+  --color-btn-tertiary-hover-bg: #1a1a2e;
+  --color-btn-tertiary-destructive-text: #ff6b6b;
+  --color-btn-tertiary-destructive-hover-bg: #2a1a1f;
+
+  --color-btn-disabled-text: #6b6b7b;
+  --color-btn-disabled-border: #2a2a3e;
 }
