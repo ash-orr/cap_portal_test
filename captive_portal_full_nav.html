@@ -56,6 +56,9 @@
 .tbtl{font-size:16px;font-weight:600;color:var(--txt1);}
 .tbsub{font-size:12px;color:var(--txt3);margin-top:2px;}
 .tba{display:flex;gap:8px;align-items:center;}
+.view-toggle{display:inline-flex;align-items:center;gap:4px;padding:3px;border:0.5px solid var(--border1);border-radius:10px;background:var(--bg2);}
+.view-toggle .btn{padding:5px 8px;font-size:12px;line-height:1.1;border-radius:7px;}
+.view-toggle .btn.on{background:var(--bg1);border-color:var(--border1);color:var(--txt1);}
 .btn{padding:6px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,13px);line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,500);cursor:pointer;display:inline-flex;align-items:flex-start;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
 
 /* Default button style: Tertiary */
@@ -121,8 +124,14 @@
 .frow:nth-child(even){background:var(--bg2);}
 
 .ngrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.ngrid.list-mode{grid-template-columns:1fr;}
 .ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s;}
 .ncard:hover{border-color:#00838F;background:var(--teal-bg);}
+.ngrid.list-mode .ncard{display:grid;grid-template-columns:minmax(220px,1.2fr) minmax(240px,1fr) minmax(320px,1.3fr);align-items:center;gap:12px;}
+.ngrid.list-mode .ncard .ncfoot{border-top:none;padding-top:0;justify-content:flex-end;}
+.ngrid.list-mode .ncard .cab{flex:0 0 auto;min-width:94px;}
+.ngrid.list-mode .ncard .cab:last-child{min-width:52px;}
+@media (max-width:1280px){.ngrid.list-mode .ncard{grid-template-columns:1fr;}}
 .ncfoot{border-top:0.5px solid var(--border1);padding-top:10px;display:flex;gap:8px;}
 .cab{flex:1;padding:6px 8px;border-radius:8px;border:0.5px solid var(--color-btn-secondary-border,#1f2432);background:var(--color-btn-secondary-bg,#fff);color:var(--color-btn-secondary-text,#0f1420);font-size:12px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s;}
 .cab:hover{background:var(--color-btn-secondary-hover,#eef2f6);color:var(--txt1);}
@@ -259,9 +268,9 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 
 <!-- GUEST NETWORKS INDEX -->
 <div id="pg-guestnet" class="pg">
-  <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><div class="view-toggle" role="group" aria-label="Network view mode"><button class="btn on" id="gn-view-card" type="button" onclick="setGuestNetView('card')" aria-pressed="true"><i class="ti ti-layout-grid"></i>Card</button><button class="btn" id="gn-view-list" type="button" onclick="setGuestNetView('list')" aria-pressed="false"><i class="ti ti-list"></i>List</button></div><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
   <div class="content">
-    <div class="ngrid">
+    <div class="ngrid" id="guestnet-grid">
       <div class="ncard" onclick="openNetDetail('lobby')">
         <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-building"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Lobby</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>23 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>8h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Self-register</span></div>
@@ -468,6 +477,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 <script>
 let isDark=false;
 let currentNet='conf';
+let guestNetView='card';
 let currentThemeEditor='Corporate Blue';
 const currentUserRole='Net Admin';
 const defaultThemeName='Corporate Blue';
@@ -702,6 +712,20 @@ function nav(pageId, el) {
   if(el) el.classList.add('on');
 }
 
+function setGuestNetView(mode){
+  guestNetView=mode==='list' ? 'list' : 'card';
+  const grid=document.getElementById('guestnet-grid');
+  const cardBtn=document.getElementById('gn-view-card');
+  const listBtn=document.getElementById('gn-view-list');
+  if(!grid || !cardBtn || !listBtn) return;
+
+  grid.classList.toggle('list-mode',guestNetView==='list');
+  cardBtn.classList.toggle('on',guestNetView==='card');
+  listBtn.classList.toggle('on',guestNetView==='list');
+  cardBtn.setAttribute('aria-pressed',String(guestNetView==='card'));
+  listBtn.setAttribute('aria-pressed',String(guestNetView==='list'));
+}
+
 function openNetDetail(k){
   currentNet=k;
   const n=nets[k];
@@ -827,6 +851,7 @@ document.querySelectorAll('.ropt').forEach(opt=>{
 
 syncThemeSelects();
 bindThemeInputs();
+setGuestNetView(guestNetView);
 </script>
 </body>
 </html>
