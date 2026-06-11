@@ -17,13 +17,13 @@
 
   /* Light surfaces */
   --color-light-bg-1: #ffffff;
-  --color-light-bg-2: #f5f5f4;
-  --color-light-bg-3: #ececea;
-  --color-light-text-1: #1a1a18;
-  --color-light-text-2: #5f5e5a;
-  --color-light-text-3: #9c9b96;
-  --color-light-border-1: #e0deda;
-  --color-light-border-2: #c8c6c0;
+  --color-light-bg-2: #f3f6fa;
+  --color-light-bg-3: #e8edf3;
+  --color-light-text-1: #171d26;
+  --color-light-text-2: #566273;
+  --color-light-text-3: #8c98a8;
+  --color-light-border-1: #d8e0ea;
+  --color-light-border-2: #b9c5d3;
 
   /* Dark surfaces */
   --color-dark-bg-1: #0d0d1a;
@@ -68,11 +68,11 @@
   /* Button palette (from provided spec direction) */
   --color-btn-primary-default: #0d1230;
   --color-btn-primary-hover: #173e48;
-  --color-btn-primary-disabled: #d7d7d7;
+  --color-btn-primary-disabled: #c8d2de;
 
   --color-btn-primary-destructive-default: #e54a4a;
   --color-btn-primary-destructive-hover: #f06a6a;
-  --color-btn-primary-destructive-disabled: #d7d7d7;
+  --color-btn-primary-destructive-disabled: #c8d2de;
 
   --color-btn-secondary-bg: #ffffff;
   --color-btn-secondary-hover: #eef2f6;
@@ -89,8 +89,8 @@
   --color-btn-tertiary-destructive-text: #e54a4a;
   --color-btn-tertiary-destructive-hover-bg: #fff1f1;
 
-  --color-btn-disabled-text: #a8acb1;
-  --color-btn-disabled-border: #d1d4d8;
+  --color-btn-disabled-text: #9aa7b7;
+  --color-btn-disabled-border: #c7d1dd;
 }
 
 /* Semantic token mapping for current prototype selectors */
