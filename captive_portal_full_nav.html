@@ -16,9 +16,12 @@
 .cp{font-family:'Figtree',sans-serif;font-size:14px;display:flex;height:680px;border:0.5px solid var(--border1,#e0deda);border-radius:12px;overflow:hidden;}
 .cp.light{background:var(--bg1);color:var(--txt1);}
 .cp.dark{background:var(--bg1);color:var(--txt1);}
-.sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;}
-.logo{padding:0 16px 20px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#00838F;margin-bottom:8px;}
+.sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;transition:width .18s,min-width .18s;}
+.sb-head{display:flex;align-items:center;justify-content:space-between;padding:0 12px 16px;gap:8px;}
+.logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#00838F;margin-bottom:0;white-space:nowrap;overflow:hidden;}
 .logo-ic{width:28px;height:28px;background:#00838F;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
+.nav-collapse-btn{width:28px;height:28px;border:0.5px solid var(--border1);border-radius:8px;background:var(--bg1);color:var(--txt2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .12s,color .12s,border-color .12s;}
+.nav-collapse-btn:hover{background:var(--bg3);color:var(--txt1);border-color:var(--border2);}
 .nl{font-size:10px;font-weight:600;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px 4px;}
 .ni{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;position:relative;transition:background .12s;user-select:none;}
 .ni:hover{background:var(--bg3);color:var(--txt1);}
@@ -34,6 +37,20 @@
 .tog-th{width:12px;height:12px;border-radius:50%;background:#fff;}
 .avr{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;}
 .av{width:28px;height:28px;border-radius:50%;background:var(--teal-bg);color:var(--teal-txt);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cp.nav-collapsed .sb{width:68px;min-width:68px;}
+.cp.nav-collapsed .sb-head{padding:0 8px 16px;justify-content:center;}
+.cp.nav-collapsed .logo{font-size:0;padding:0;justify-content:center;}
+.cp.nav-collapsed .nav-collapse-btn{position:absolute;top:20px;left:50%;transform:translateX(-50%);}
+.cp.nav-collapsed .nl,
+.cp.nav-collapsed .bdg,
+.cp.nav-collapsed .tog-row .tog-tr,
+.cp.nav-collapsed .avr > div:nth-child(2),
+.cp.nav-collapsed .avr > i{display:none;}
+.cp.nav-collapsed .ni,
+.cp.nav-collapsed .tog-row,
+.cp.nav-collapsed .avr{justify-content:center;padding-left:0;padding-right:0;gap:0;font-size:0;}
+.cp.nav-collapsed .ni i,
+.cp.nav-collapsed .tog-row i{font-size:18px;margin:0;}
 .main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0;background:var(--bg1);}
 .topbar{border-bottom:0.5px solid var(--border1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--bg1);position:sticky;top:0;z-index:5;}
 .tbtl{font-size:16px;font-weight:600;color:var(--txt1);}
@@ -107,10 +124,10 @@
 .ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s;}
 .ncard:hover{border-color:#00838F;background:var(--teal-bg);}
 .ncfoot{border-top:0.5px solid var(--border1);padding-top:10px;display:flex;gap:8px;}
-.cab{flex:1;padding:6px 8px;border-radius:8px;border:0.5px solid var(--border1);background:none;color:var(--txt2);font-size:12px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s;}
-.cab:hover{background:var(--bg2);color:var(--txt1);}
-.cab.pa{border-color:#00838F;color:#00838F;}
-.cab.pa:hover{background:var(--teal-bg);}
+.cab{flex:1;padding:6px 8px;border-radius:8px;border:0.5px solid var(--color-btn-secondary-border,#1f2432);background:var(--color-btn-secondary-bg,#fff);color:var(--color-btn-secondary-text,#0f1420);font-size:12px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s;}
+.cab:hover{background:var(--color-btn-secondary-hover,#eef2f6);color:var(--txt1);}
+.cab.pa{border-color:var(--color-btn-primary-default,#0d1230);background:transparent;color:var(--color-btn-primary-default,#0d1230);}
+.cab.pa:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);color:#fff;}
 
 .bcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt3);}
 .bcl{color:#00838F;cursor:pointer;font-weight:500;}
@@ -194,7 +211,10 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 <h2 style="position:absolute;left:-9999px">Captive Portal Admin Console — full navigation prototype</h2>
 
 <nav class="sb">
-  <div class="logo"><div class="logo-ic"><i class="ti ti-wifi"></i></div>GuestPass</div>
+  <div class="sb-head">
+    <div class="logo"><div class="logo-ic"><i class="ti ti-wifi"></i></div>GuestPass</div>
+    <button class="nav-collapse-btn" id="navCollapseBtn" type="button" onclick="toggleNavCollapse()" aria-label="Collapse navigation" aria-pressed="false"><i class="ti ti-chevrons-left" id="navCollapseIcon"></i></button>
+  </div>
   <div class="nl">Main</div>
   <div class="ni on" onclick="nav('dashboard',this)" tabindex="0"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
   <div class="ni" onclick="nav('guestnet',this)" tabindex="0"><i class="ti ti-wifi"></i>Guest networks</div>
@@ -784,6 +804,18 @@ function applyDark(){
   usDm.classList.toggle('off',!isDark);
   const curPg=document.querySelector('.pg.on');
   if(curPg&&curPg.id==='pg-netguests') renderNetGuests(currentNet);
+}
+
+function toggleNavCollapse(){
+  const root=document.getElementById('cpRoot');
+  const btn=document.getElementById('navCollapseBtn');
+  const icon=document.getElementById('navCollapseIcon');
+  const collapsed=!root.classList.contains('nav-collapsed');
+
+  root.classList.toggle('nav-collapsed',collapsed);
+  btn.setAttribute('aria-pressed',String(collapsed));
+  btn.setAttribute('aria-label',collapsed?'Expand navigation':'Collapse navigation');
+  icon.className=collapsed?'ti ti-chevrons-right':'ti ti-chevrons-left';
 }
 
 document.querySelectorAll('.ropt').forEach(opt=>{
