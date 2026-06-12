@@ -174,4 +174,17 @@
 
   --color-btn-disabled-text: #6b6b7b;
   --color-btn-disabled-border: #2a2a3e;
+
+  /* Semantic state tokens — dark overrides */
+  --ui-accent-bg: var(--color-teal-bg-dark);      /* #0a3035 */
+  --ui-accent-ink: var(--color-teal-text-dark);    /* #5dcaa5 */
+  --ui-success-bg: var(--color-green-bg-dark);     /* #1a2910 */
+  --ui-success: var(--color-green-text-dark);      /* #97c459 */
+  --ui-warn-bg: var(--color-amber-bg-dark);        /* #2e1f08 */
+  --ui-warn: var(--color-amber-text-dark);         /* #ef9f27 */
+  --ui-warn-ink: var(--color-amber-text-dark);
+  --ui-danger-bg: var(--color-danger-bg-dark);     /* #2d1010 */
+  --ui-danger: var(--color-danger-300);            /* #f09595 */
+  --ui-info-bg: var(--color-blue-bg-dark);         /* #0c2240 */
+  --ui-info: var(--color-blue-text-dark);          /* #85b7eb */
 }

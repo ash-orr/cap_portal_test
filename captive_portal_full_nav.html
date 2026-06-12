@@ -46,21 +46,23 @@ body{background:var(--ui-canvas);}
 .cp.dark{background:var(--bg1);color:var(--txt1);}
 .sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;}
 .sb-head{display:flex;align-items:center;justify-content:space-between;padding:0 12px 16px;gap:8px;}
-.logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ui-accent-ink);margin-bottom:0;white-space:nowrap;overflow:hidden;}
+.logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ui-accent);margin-bottom:0;white-space:nowrap;overflow:hidden;}
 .logo-ic{width:28px;height:28px;background:var(--ui-accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--ui-on-accent);font-size:15px;}
 .nav-collapse-btn{width:28px;height:28px;border:0.5px solid var(--border1);border-radius:8px;background:var(--bg1);color:var(--txt2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .12s,color .12s,border-color .12s;}
 .nav-collapse-btn:hover{background:var(--bg3);color:var(--txt1);border-color:var(--border2);}
 .nl{font-size:10px;font-weight:600;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px 4px;}
-.ni{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;position:relative;transition:background .12s;user-select:none;}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;position:relative;transition:background .12s;user-select:none;background:none;border:none;text-align:left;width:100%;font-family:inherit;}
 .ni:hover{background:var(--bg3);color:var(--txt1);}
-.ni.on{background:var(--ui-accent-bg);color:var(--ui-accent-ink);font-weight:500;}
+.ni.on{background:var(--ui-accent-bg);color:var(--ui-accent);font-weight:500;}
 .ni.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ui-accent);border-radius:0 2px 2px 0;}
 .bdg{margin-left:auto;background:var(--ui-accent);color:var(--ui-on-accent);font-size:10px;font-weight:600;border-radius:10px;padding:1px 6px;}
 .bdg-w{background:var(--ui-warn);}
+.cp.dark .bdg-w{background:var(--ui-warn-bg);color:var(--ui-warn);}
 .nb{margin-top:auto;border-top:0.5px solid var(--border1);padding-top:8px;}
-.tog-row{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;}
+.tog-row{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;background:none;border:none;width:100%;font-family:inherit;}
 .tog-tr{margin-left:auto;width:28px;height:16px;border-radius:8px;display:flex;align-items:center;padding:2px;transition:background .2s;flex-shrink:0;}
 .tog-tr.on{background:var(--ui-accent);justify-content:flex-end;}
+.cp.dark .tog-tr.on{background:var(--color-btn-primary-default);}
 .tog-tr.off{background:var(--bg3);justify-content:flex-start;}
 .tog-th{width:12px;height:12px;border-radius:50%;background:#fff;}
 .avr{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;}
@@ -88,7 +90,7 @@ body{background:var(--ui-canvas);}
 .view-toggle .btn{padding:5px 8px;font-size:12px;line-height:1.1;border-radius:7px;}
 .view-toggle .btn.on{background:var(--bg1);border-color:var(--border1);color:var(--txt1);}
 .gn-controls{display:none;}
-.btn{padding:6px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,13px);line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,500);cursor:pointer;display:inline-flex;align-items:flex-start;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
+.btn{padding:6px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,13px);line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,500);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
 
 /* Default button style: Tertiary */
 .btn{background:transparent;border-color:transparent;color:var(--color-btn-tertiary-text,#0f1420);}
@@ -121,8 +123,10 @@ body{background:var(--ui-canvas);}
 .btn.btn-tertiary.btn-destructive:disabled{background:transparent;border-color:var(--color-btn-disabled-border,#d1d4d8);color:var(--color-btn-disabled-text,#a8acb1);}
 
 /* Legacy aliases used by existing markup */
-.btnp{background:var(--ui-accent-strong);border-color:var(--ui-accent-strong);color:var(--ui-on-accent);}
-.btnp:hover{background:var(--ui-accent);border-color:var(--ui-accent);}
+.btnp{background:#0f1420;border-color:#0f1420;color:#fff;}
+.btnp:hover{background:#2a3148;border-color:#2a3148;}
+.cp.dark .btnp{background:var(--color-btn-primary-default);border-color:var(--color-btn-primary-default);}
+.cp.dark .btnp:hover{background:var(--color-btn-primary-hover);border-color:var(--color-btn-primary-hover);}
 .btno{background:transparent;border-color:transparent;color:var(--color-btn-tertiary-text,#0f1420);}
 .btno:hover{background:var(--color-btn-tertiary-hover-bg,#edf2f6);}
 .content{padding:20px 24px;flex:1;min-width:0;}
@@ -202,10 +206,19 @@ body{background:var(--ui-canvas);}
 .sw{flex:1;position:relative;}
 .sw i{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:16px;}
 .sw input{width:100%;padding:7px 10px 7px 32px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
-.sf{padding:7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
+.sf{padding:7px 28px 7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23566273' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;appearance:none;-webkit-appearance:none;cursor:pointer;}
+.cp.dark .sf{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa4b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");}
+.sw input:focus,.sf:focus,.review-note textarea:focus{outline:2px solid var(--txt1);outline-offset:1px;border-color:var(--txt1);}
+.ib:focus-visible,.btn:focus-visible{outline:2px solid var(--txt1);outline-offset:2px;}
 .fchip{display:flex;align-items:center;gap:5px;background:var(--ui-info-bg);color:var(--ui-info);font-size:12px;font-weight:500;padding:3px 10px;border-radius:10px;border:0.5px solid color-mix(in oklab, var(--ui-info) 60%, white);}
 .pbanner{display:none;background:var(--ui-warn-bg);border:0.5px solid color-mix(in oklab, var(--ui-warn) 68%, white);border-radius:8px;padding:10px 16px;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:color-mix(in oklab, var(--ui-warn) 68%, black);}
 .pbanner-actions{margin-left:auto;display:flex;gap:6px;}
+.gt th.sortable{cursor:pointer;user-select:none;white-space:nowrap;}
+.gt th.sortable:hover{color:var(--txt1);}
+.gt th.sort-active{color:var(--txt1);}
+.gt th .sort-icon{display:inline-block;margin-left:4px;opacity:.4;font-size:10px;vertical-align:middle;transition:opacity .12s;}
+.gt th.sort-active .sort-icon{opacity:1;}
+.gt th.sortable:hover .sort-icon{opacity:.7;}
 .review-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:110;align-items:center;justify-content:center;padding:16px;}
 .review-overlay.open{display:flex;}
 .review-modal{width:min(640px,100%);max-height:90dvh;overflow:auto;background:var(--bg1);border-radius:12px;border:0.5px solid var(--border1);padding:20px;box-shadow:0 24px 36px rgba(0,0,0,.18);}
@@ -220,24 +233,50 @@ body{background:var(--ui-canvas);}
 .review-req-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:0.5px solid var(--border1);border-radius:8px;padding:8px 10px;background:var(--bg1);}
 .review-req-name{font-size:12px;color:var(--txt1);font-weight:500;}
 .review-req-value{font-size:12px;color:var(--txt2);}
-.review-actions{display:flex;justify-content:flex-end;gap:8px;}
+.review-blocked{background:color-mix(in oklab,var(--ui-danger-bg) 80%,var(--bg1));border:0.5px solid color-mix(in oklab,var(--ui-danger) 40%,white);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--ui-danger);display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;}
+.review-blocked i{flex-shrink:0;font-size:14px;margin-top:1px;}
+.review-note{margin-bottom:14px;}
+.review-note-label{font-size:11px;font-weight:600;color:var(--txt2);letter-spacing:.03em;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.review-note-label .opt{font-weight:400;color:var(--txt3);}
+.review-note textarea{width:100%;border:0.5px solid var(--border2);border-radius:8px;padding:8px 10px;font-size:12px;font-family:'Figtree',sans-serif;color:var(--txt1);background:var(--bg1);resize:vertical;min-height:64px;line-height:1.4;}
+.review-note textarea:focus{outline:2px solid var(--txt1);outline-offset:1px;border-color:var(--txt1);}
+.review-note-sent{font-size:11px;color:var(--ui-success);display:flex;align-items:center;gap:4px;margin-top:4px;}
+.review-actions{display:flex;justify-content:flex-end;gap:8px;align-items:center;}
+.review-actions-send{margin-right:auto;}
+.gl-bulk-bar{display:none;background:var(--bg2);border:0.5px solid var(--border2);border-radius:8px;padding:7px 12px;align-items:center;gap:10px;font-size:13px;color:var(--txt1);margin-bottom:8px;}
+.gl-bulk-bar.visible{display:flex;}
+.gl-bulk-count{font-weight:500;}
+.gl-bulk-actions{margin-left:auto;display:flex;gap:6px;}
+.note-icon{color:var(--ui-info);font-size:13px;margin-left:4px;vertical-align:middle;}
 table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;}
-.gt th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--border1);}
+.gt th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--border1);position:sticky;top:0;background:var(--bg1);z-index:2;}
 .gt td{padding:9px 10px;font-size:13px;border-bottom:0.5px solid var(--border1);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt1);}
+.gt tr:nth-child(even) td{background:color-mix(in oklab, var(--bg2) 55%, transparent);}
 .gt tr:hover td{background:var(--bg2);}
+.gt tr.status-pending td{background:color-mix(in oklab, var(--ui-warn-bg) 58%, var(--bg1));}
+.gt tr.status-denied td{background:color-mix(in oklab, var(--ui-danger-bg) 42%, var(--bg1));}
 .gav{width:26px;height:26px;border-radius:50%;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;}
-.ib{background:none;border:0.5px solid var(--border1);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;min-height:32px;}
+.ib{background:none;border:0.5px solid var(--border1);border-radius:8px;padding:6px;font-size:13px;color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;}
 .ib:hover{background:var(--bg2);border-color:var(--border2);}
-.ib:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.ib:focus-visible{outline:2px solid var(--txt1);outline-offset:2px;}
+.btn:focus-visible{outline:2px solid var(--txt1);outline-offset:2px;}
 .ib:disabled,.ib[aria-disabled="true"]{opacity:.5;cursor:not-allowed;pointer-events:none;}
 .ib.ib-primary{background:var(--ui-success-bg);border-color:var(--ui-success);color:color-mix(in oklab, var(--ui-success) 62%, black);font-weight:500;}
 .ib.ib-primary:hover{background:color-mix(in oklab, var(--ui-success-bg) 35%, var(--ui-success));border-color:var(--ui-success);}
+.cp.dark .ib.ib-primary{color:var(--ui-success);}
 .ib.ib-secondary{background:transparent;border:1px solid var(--border2);color:var(--txt2);}
 .ib.ib-secondary:hover{background:var(--bg2);border-color:var(--border2);}
 .ib.dng{border-color:color-mix(in oklab, var(--ui-danger) 45%, white);color:var(--ui-danger);}
 .ib.dng:hover{background:var(--ui-danger-bg);border-color:var(--ui-danger);}
 .ib.apr{border-color:var(--ui-success);color:color-mix(in oklab, var(--ui-success) 62%, black);background:var(--ui-success-bg);font-weight:500;}
 .ib.apr:hover{background:color-mix(in oklab, var(--ui-success-bg) 35%, var(--ui-success));border-color:var(--ui-success);}
+.cp.dark .ib.apr{color:var(--ui-success);}
+.cp.dark .ib:hover{background:var(--bg3);border-color:var(--border2);}
+.cp.dark .ib.ib-secondary:hover{background:var(--bg3);border-color:var(--border2);}
+.cp.dark .ib.dng:hover{background:color-mix(in oklab, var(--ui-danger) 26%, var(--bg2));border-color:var(--ui-danger);}
+.cp.dark .ib.apr:hover{background:color-mix(in oklab, var(--ui-success) 34%, var(--bg2));border-color:var(--ui-success);color:var(--ui-success);}
+.cp.dark .gt input[type="checkbox"]{accent-color:var(--ui-accent-ink);}
+.cp.dark .gt input[type="checkbox"]:disabled{accent-color:var(--txt3);opacity:1;filter:saturate(.45) brightness(.85);}
 .ib[data-loading="true"]::before{content:'';display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-radius:50%;border-top-color:currentColor;animation:spin .6s linear infinite;margin-right:4px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
@@ -258,7 +297,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
 .modal h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--txt1);}
 .modal p{font-size:14px;color:var(--txt2);margin-bottom:20px;line-height:1.5;}
 .modal-actions{display:flex;gap:12px;justify-content:flex-end;}
-.modal-actions button{padding:8px 16px;border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:500;cursor:pointer;transition:all .12s;}
+.modal-actions button{border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:500;cursor:pointer;transition:all .12s;font-family:inherit;}
 .modal-actions .btn-cancel{background:var(--bg2);color:var(--txt1);border-color:var(--border1);}
 .modal-actions .btn-cancel:hover{background:var(--bg3);border-color:var(--border2);}
 .modal-actions .btn-confirm{background:var(--danger-bg);color:var(--danger-txt);border-color:var(--danger-border);}
@@ -338,31 +377,34 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
   .av{margin:0;}
   .topbar{padding:10px 12px;gap:8px;}
   .tba{width:100%;justify-content:flex-start;}
-  .btn{height:32px;padding:0 10px;font-size:12px;}
+  .btn{padding:6px;font-size:12px;}
   .content{padding:12px;}
   .gl-tb{gap:6px;}
   .gl-tb > .sf{min-width:0;flex:1;}
+  .pbanner{align-items:flex-start;flex-wrap:wrap;}
+  .pbanner-actions{margin-left:0;width:100%;}
+  .pbanner-actions .ib{flex:1;justify-content:center;}
 }
 </style>
 
 <div class="cp light" id="cpRoot">
 <h2 style="position:absolute;left:-9999px">Captive Portal Admin Console: full navigation prototype</h2>
 
-<nav class="sb">
+<nav class="sb" aria-label="Main navigation">
   <div class="sb-head">
     <div class="logo"><div class="logo-ic"><i class="ti ti-wifi"></i></div>GuestPass</div>
     <button class="nav-collapse-btn" id="navCollapseBtn" type="button" onclick="toggleNavCollapse()" aria-label="Collapse navigation" aria-pressed="false"><i class="ti ti-chevrons-left" id="navCollapseIcon"></i></button>
   </div>
   <div class="nl">Main</div>
-  <div class="ni on" onclick="nav('dashboard',this)" tabindex="0"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
-  <div class="ni" onclick="nav('guestnet',this)" tabindex="0"><i class="ti ti-wifi"></i>Guest networks</div>
-  <div class="ni" onclick="nav('guestlist',this)" tabindex="0"><i class="ti ti-users"></i>Guest list<span class="bdg bdg-w" id="nav-pending-badge">3</span></div>
+  <button class="ni on" type="button" onclick="nav('dashboard',this)" aria-current="page"><i class="ti ti-layout-dashboard"></i>Dashboard</button>
+  <button class="ni" type="button" onclick="nav('guestnet',this)"><i class="ti ti-wifi"></i>Guest networks</button>
+  <button class="ni" type="button" onclick="nav('guestlist',this)"><i class="ti ti-users"></i>Guest list<span class="bdg bdg-w" id="nav-pending-badge">3</span></button>
   <div class="nl">Manage</div>
-  <div class="ni" onclick="nav('admins',this)" tabindex="0"><i class="ti ti-shield"></i>Administrators</div>
-  <div class="ni" onclick="nav('settings',this)" tabindex="0"><i class="ti ti-settings"></i>Settings</div>
+  <button class="ni" type="button" onclick="nav('admins',this)"><i class="ti ti-shield"></i>Administrators</button>
+  <button class="ni" type="button" onclick="nav('settings',this)"><i class="ti ti-settings"></i>Settings</button>
   <div class="nb">
-    <div class="tog-row" onclick="toggleDark()" tabindex="0" id="dmBtn"><i class="ti ti-moon"></i>Dark mode<div class="tog-tr off" id="ttr"><div class="tog-th"></div></div></div>
-    <div class="ni" onclick="nav('usersettings',this)" tabindex="0"><i class="ti ti-user-circle"></i>User settings</div>
+    <button class="tog-row" type="button" onclick="toggleDark()" id="dmBtn" aria-pressed="false"><i class="ti ti-moon"></i>Dark mode<div class="tog-tr off" id="ttr"><div class="tog-th"></div></div></button>
+    <button class="ni" type="button" onclick="nav('usersettings',this)"><i class="ti ti-user-circle"></i>User settings</button>
     <div class="avr"><div class="av">JM</div><div><div style="font-size:13px;font-weight:500;color:var(--txt1)">Jordan M.</div><div style="font-size:11px;color:var(--txt3)">Net Admin</div></div><i class="ti ti-dots-vertical" style="margin-left:auto;color:var(--txt3);font-size:15px;"></i></div>
   </div>
 </nav>
@@ -371,7 +413,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
 
 <!-- DASHBOARD -->
 <div id="pg-dashboard" class="pg on">
-  <div class="topbar"><div><div class="tbtl">Dashboard</div><div class="tbsub">Friday, June 5, 2026 · All networks</div></div><div class="tba"><button class="btn"><i class="ti ti-refresh"></i>Refresh</button><button class="btn btnp" onclick="nav('guestnet',getNavItem(1))"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Dashboard</div><div class="tbsub">Friday, June 5, 2026 · All networks</div></div><div class="tba"><button class="btn"><i class="ti ti-refresh"></i>Refresh</button><button class="btn" onclick="nav('guestnet',getNavItem(1))"><i class="ti ti-plus"></i>Add network</button><button class="btn btnp" onclick="nav('guestlist',getNavItem(2))"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
   <div class="content">
     <div class="sgrid">
       <div class="sc"><div class="slbl">Active guests</div><div class="sval">47</div><div class="ssub"><span class="odot"></span>Connected now</div></div>
@@ -475,7 +517,15 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
       <select id="gl-network-filter" class="sf"><option value="all">All networks</option><option value="lobby">Lobby guest</option><option value="conf">Conference center</option><option value="cafe">Café area</option></select>
       <select id="gl-status-filter" class="sf"><option value="all">All statuses</option><option value="online">Connected</option><option value="pending">Pending</option><option value="offline">Offline</option><option value="denied">Denied</option></select>
     </div>
-    <div class="table-scroll"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead>
+    <div class="gl-bulk-bar" id="gl-bulk-bar">
+      <span class="gl-bulk-count" id="gl-bulk-count">0 selected</span>
+      <div class="gl-bulk-actions">
+        <button class="ib ib-primary" type="button" id="gl-bulk-approve" onclick="bulkApproveSelected()"><i class="ti ti-check"></i>Approve selected</button>
+        <button class="ib dng" type="button" id="gl-bulk-deny" onclick="bulkDenySelected()"><i class="ti ti-x"></i>Deny selected</button>
+        <button class="ib" type="button" onclick="clearBulkSelection()"><i class="ti ti-x"></i>Clear</button>
+      </div>
+    </div>
+    <div class="table-scroll"><table class="gt" id="gl-table"><thead id="gl-thead"><tr></tr></thead>
     <tbody id="gl-tbody"></tbody></table></div>
     <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="gl-count"></span></div>
   </div>
@@ -525,7 +575,17 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
     </div>
     <div class="review-grid" id="review-grid"></div>
     <div class="review-req" id="review-req"></div>
+    <div class="review-blocked" id="review-blocked" style="display:none">
+      <i class="ti ti-lock"></i>
+      <div id="review-blocked-text">This guest cannot be approved because one or more requirements are not met.</div>
+    </div>
+    <div class="review-note" id="review-note" style="display:none">
+      <div class="review-note-label">Send a note to the guest <span class="opt">(optional)</span></div>
+      <textarea id="review-note-text" placeholder="e.g. Your email address could not be validated. Please contact the front desk to resubmit."></textarea>
+      <div class="review-note-sent" id="review-note-sent" style="display:none"><i class="ti ti-check"></i>Note sent</div>
+    </div>
     <div class="review-actions">
+      <button class="ib review-actions-send" id="review-send-note" type="button" style="display:none"><i class="ti ti-send"></i>Send note</button>
       <button class="btn" type="button" onclick="closeGuestReview()">Close</button>
       <button class="btn" id="review-deny" type="button"><i class="ti ti-x"></i>Deny</button>
       <button class="btn btnp" id="review-approve" type="button"><i class="ti ti-check"></i>Approve</button>
@@ -1026,6 +1086,18 @@ const domRefs={
 
 const guestRowsCache=new Map();
 const guestFilters={search:'',network:'all',status:'all'};
+const guestSort={col:'status',dir:'asc'};
+const selectedGuestIds=new Set();
+const guestCols=[
+  {key:null,label:null,width:'32px',fixed:true},
+  {key:'name',label:'Guest',width:'160px'},
+  {key:'network',label:'Network',width:'110px'},
+  {key:'status',label:'Status',width:'80px'},
+  {key:'dur',label:'Duration',width:'75px'},
+  {key:'ver',label:'Verified by',width:'105px'},
+  {key:'exp',label:'Expires',width:'80px'},
+  {key:null,label:'Actions',width:'160px',fixed:true}
+];
 let currentReviewGuest=null;
 
 function initDomRefs(){
@@ -1138,7 +1210,8 @@ function renderGuestSummary(){
   }
   if(domRefs.glPendingBanner && domRefs.glPendingCopy){
     domRefs.glPendingBanner.style.display=pending>0?'flex':'none';
-    domRefs.glPendingCopy.innerHTML=`<strong>${pending} guest${pending!==1?'s':''}</strong> are waiting for approval`;
+    const verb=pending===1?'is':'are';
+    domRefs.glPendingCopy.innerHTML=`<strong>${pending} guest${pending!==1?'s':''}</strong> ${verb} waiting for approval`;
   }
 }
 
@@ -1153,20 +1226,69 @@ function getFilteredGlobalRecords(){
     return haystack.includes(searchTerm);
   });
 
+  const dir=guestSort.dir==='asc'?1:-1;
   return filtered.sort((a,b)=>{
-    const aRank=statusOrder[a.guest.status] ?? 99;
-    const bRank=statusOrder[b.guest.status] ?? 99;
-    if(aRank!==bRank) return aRank-bRank;
+    let cmp=0;
+    switch(guestSort.col){
+      case 'status':{
+        const aR=statusOrder[a.guest.status]??99;
+        const bR=statusOrder[b.guest.status]??99;
+        cmp=aR-bR;
+        break;
+      }
+      case 'name': cmp=a.guest.name.localeCompare(b.guest.name); break;
+      case 'network': cmp=(a.network.name||'').localeCompare(b.network.name||''); break;
+      case 'dur': cmp=(a.guest.dur||'').localeCompare(b.guest.dur||''); break;
+      case 'ver': cmp=(a.guest.ver||'').localeCompare(b.guest.ver||''); break;
+      case 'exp': cmp=(a.guest.exp||'').localeCompare(b.guest.exp||''); break;
+      default: cmp=a.guest.name.localeCompare(b.guest.name);
+    }
+    if(cmp!==0) return cmp*dir;
     return a.guest.name.localeCompare(b.guest.name);
+  });
+}
+
+function renderGlobalGuestHeader(){
+  const thead=document.getElementById('gl-thead');
+  if(!thead) return;
+  const row=thead.querySelector('tr');
+  if(!row) return;
+  row.innerHTML=guestCols.map((col)=>{
+    if(col.fixed||!col.key){
+      const inner=col.key===null && col.label===null
+        ? `<input type="checkbox" aria-label="Select all guests in table"/>`
+        : escapeHtml(col.label||'');
+      return `<th style="width:${col.width}">${inner}</th>`;
+    }
+    const isActive=guestSort.col===col.key;
+    const ariaSort=isActive?(guestSort.dir==='asc'?'ascending':'descending'):'none';
+    const iconClass=isActive?(guestSort.dir==='asc'?'ti-sort-ascending':'ti-sort-descending'):'ti-arrows-sort';
+    return `<th class="sortable${isActive?' sort-active':''}" style="width:${col.width}" aria-sort="${ariaSort}" data-sort-col="${col.key}">${escapeHtml(col.label)}<i class="ti ${iconClass} sort-icon" aria-hidden="true"></i></th>`;
+  }).join('');
+
+  row.querySelectorAll('th[data-sort-col]').forEach((th)=>{
+    th.addEventListener('click',()=>{
+      const key=th.dataset.sortCol;
+      if(guestSort.col===key){
+        guestSort.dir=guestSort.dir==='asc'?'desc':'asc';
+      }else{
+        guestSort.col=key;
+        guestSort.dir='asc';
+      }
+      renderGlobalGuestHeader();
+      renderGlobalGuestTable();
+    });
   });
 }
 
 function renderGlobalGuestTable(){
   if(!domRefs.glTbody || !domRefs.glCount) return;
+  renderGlobalGuestHeader();
   const records=getFilteredGlobalRecords();
   if(!records.length){
     domRefs.glTbody.innerHTML='<tr><td colspan="8" style="padding:20px;color:var(--txt3);text-align:center">No guests match this filter.</td></tr>';
     domRefs.glCount.textContent='Showing 0 guests';
+    updateBulkBar();
     return;
   }
 
@@ -1174,10 +1296,21 @@ function renderGlobalGuestTable(){
     const verifiedBg=guest.ver==='Sponsor approval'?'var(--ui-warn-bg)':'var(--bg2)';
     const verifiedColor=guest.ver==='Sponsor approval'?'var(--ui-warn-ink)':'var(--txt2)';
     const statusBadge=getStatusBadge(guest.status);
-    return `<tr data-network="${networkKey}" data-guest-id="${guest.id}"><td><input type="checkbox" aria-label="Select ${escapeHtml(guest.name)}"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${isDark?guest.dBg:guest.bg};color:${isDark?guest.dFg:guest.fg}">${escapeHtml(guest.i)}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escapeHtml(guest.name)}</div><div style="font-size:11px;color:var(--txt3)">${escapeHtml(guest.email)}</div></div></div></td><td style="color:var(--txt2)">${escapeHtml(network.name)}</td><td>${statusBadge}</td><td style="color:var(--txt2)">${escapeHtml(guest.dur)}</td><td><span style="font-size:11px;background:${verifiedBg};color:${verifiedColor};padding:2px 7px;border-radius:8px">${escapeHtml(guest.ver)}</span></td><td style="color:var(--txt3);font-size:12px">${escapeHtml(guest.exp)}</td><td>${getGuestActions(networkKey,guest)}</td></tr>`;
+    const rowClass=guest.status==='pending'?'status-pending':(guest.status==='denied'?'status-denied':'');
+    const noteIconHtml=guest.noteSent?`<i class="ti ti-message-check note-icon" title="Note sent to guest"></i>`:'';
+    const checked=selectedGuestIds.has(guest.id)?'checked':'';
+    const checkDisabled=guest.status!=='pending'?'disabled':'';
+    return `<tr class="${rowClass}" data-network="${networkKey}" data-guest-id="${guest.id}"><td><input type="checkbox" aria-label="Select ${escapeHtml(guest.name)}" ${checked} ${checkDisabled}/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${isDark?guest.dBg:guest.bg};color:${isDark?guest.dFg:guest.fg}">${escapeHtml(guest.i)}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escapeHtml(guest.name)}${noteIconHtml}</div><div style="font-size:11px;color:var(--txt3)">${escapeHtml(guest.email)}</div></div></div></td><td style="color:var(--txt2)">${escapeHtml(network.name)}</td><td>${statusBadge}</td><td style="color:var(--txt2)">${escapeHtml(guest.dur)}</td><td><span style="font-size:11px;background:${verifiedBg};color:${verifiedColor};padding:2px 7px;border-radius:8px">${escapeHtml(guest.ver)}</span></td><td style="color:var(--txt3);font-size:12px">${escapeHtml(guest.exp)}</td><td>${getGuestActions(networkKey,guest)}</td></tr>`;
   }).join('');
 
+  // Sync header checkbox state
+  const allPending=records.filter(r=>r.guest.status==='pending');
+  const allChecked=allPending.length>0 && allPending.every(r=>selectedGuestIds.has(r.guest.id));
+  const headerCb=document.querySelector('#gl-thead input[type="checkbox"]');
+  if(headerCb){ headerCb.checked=allChecked; headerCb.indeterminate=!allChecked && selectedGuestIds.size>0; }
+
   domRefs.glCount.textContent=`Showing ${records.length} guest${records.length!==1?'s':''}`;
+  updateBulkBar();
 }
 
 function refreshGuestViews(){
@@ -1199,9 +1332,9 @@ function nav(pageId, el) {
   const pages=domRefs.pages.length ? domRefs.pages : [...document.querySelectorAll('.pg')];
   const navItems=domRefs.navItems.length ? domRefs.navItems : [...document.querySelectorAll('.ni')];
   pages.forEach((page)=>page.classList.remove('on'));
-  navItems.forEach((item)=>item.classList.remove('on'));
+  navItems.forEach((item)=>{ item.classList.remove('on'); item.removeAttribute('aria-current'); });
   targetPage.classList.add('on');
-  if(el) el.classList.add('on');
+  if(el){ el.classList.add('on'); el.setAttribute('aria-current','page'); }
 }
 
 function setGuestNetView(mode){
@@ -1325,6 +1458,8 @@ function applyDark(){
   const tr=document.getElementById('ttr');
   tr.classList.toggle('on',isDark);
   tr.classList.toggle('off',!isDark);
+  const dmBtn=document.getElementById('dmBtn');
+  if(dmBtn) dmBtn.setAttribute('aria-pressed',String(isDark));
   document.getElementById('dmBtn').setAttribute('aria-checked',String(isDark));
   const usDm=document.getElementById('us-dm');
   usDm.classList.toggle('on',isDark);
@@ -1359,11 +1494,101 @@ hardenInteractiveControls();
 bindToggleAriaSync();
 syncToggleAria();
 bindGuestFilters();
+renderGlobalGuestHeader();
 refreshGuestViews();
+
+// Bulk selection
+function updateBulkBar(){
+  const bar=document.getElementById('gl-bulk-bar');
+  const countEl=document.getElementById('gl-bulk-count');
+  const approveBtn=document.getElementById('gl-bulk-approve');
+  const denyBtn=document.getElementById('gl-bulk-deny');
+  if(!bar) return;
+  const n=selectedGuestIds.size;
+  bar.classList.toggle('visible',n>0);
+  if(countEl) countEl.textContent=`${n} guest${n!==1?'s':''} selected`;
+  // Only pending guests are selectable; approve btn always enabled when any selected
+  if(approveBtn) approveBtn.disabled=n===0;
+  if(denyBtn) denyBtn.disabled=n===0;
+}
+
+function clearBulkSelection(){
+  selectedGuestIds.clear();
+  renderGlobalGuestTable();
+}
+
+function bulkApproveSelected(){
+  const ids=[...selectedGuestIds];
+  ids.forEach((id)=>{
+    getGuestRecords().forEach(({networkKey,guest})=>{
+      if(guest.id===id && guest.status==='pending') applyGuestState(guest,networkKey,'online');
+    });
+  });
+  selectedGuestIds.clear();
+  refreshGuestViews();
+}
+
+function bulkDenySelected(){
+  const n=selectedGuestIds.size;
+  showConfirmation(
+    `Deny ${n} guest${n!==1?'s':''}?`,
+    `${n} guest${n!==1?'s':''} will be denied access and must resubmit a request.`,
+    'This action cannot be undone.',
+    ()=>{
+      const ids=[...selectedGuestIds];
+      ids.forEach((id)=>{
+        getGuestRecords().forEach(({networkKey,guest})=>{
+          if(guest.id===id && guest.status==='pending') applyGuestState(guest,networkKey,'denied');
+        });
+      });
+      selectedGuestIds.clear();
+      refreshGuestViews();
+    }
+  );
+}
+
+// Table checkbox delegation
+document.getElementById('gl-tbody')?.addEventListener('change',(e)=>{
+  const cb=e.target.closest('input[type="checkbox"]');
+  if(!cb) return;
+  const row=cb.closest('tr');
+  const id=row?.dataset.guestId;
+  if(!id) return;
+  if(cb.checked) selectedGuestIds.add(id);
+  else selectedGuestIds.delete(id);
+  // Update header checkbox
+  const records=getFilteredGlobalRecords();
+  const allPending=records.filter(r=>r.guest.status==='pending');
+  const allChecked=allPending.length>0 && allPending.every(r=>selectedGuestIds.has(r.guest.id));
+  const headerCb=document.querySelector('#gl-thead input[type="checkbox"]');
+  if(headerCb){ headerCb.checked=allChecked; headerCb.indeterminate=!allChecked && selectedGuestIds.size>0; }
+  updateBulkBar();
+});
+
+// Header checkbox (select all pending) via event delegation on thead
+document.getElementById('gl-thead')?.addEventListener('change',(e)=>{
+  const cb=e.target.closest('input[type="checkbox"]');
+  if(!cb) return;
+  const records=getFilteredGlobalRecords();
+  records.filter(r=>r.guest.status==='pending').forEach(r=>{
+    if(cb.checked) selectedGuestIds.add(r.guest.id);
+    else selectedGuestIds.delete(r.guest.id);
+  });
+  renderGlobalGuestTable();
+});
 
 // Confirmation modal system
 let pendingAction = null;
 let lastFocusedElement = null;
+let reviewLastFocused = null;
+
+function trapFocus(containerEl, e) {
+  const focusable = [...containerEl.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')];
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+}
 const confirmModal = document.createElement('div');
 confirmModal.className = 'modal-overlay';
 confirmModal.id = 'confirm-modal';
@@ -1376,8 +1601,8 @@ confirmModal.innerHTML = `
     <h3 id="modal-title"></h3>
     <p id="modal-message"></p>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeConfirmModal()">Cancel</button>
-      <button class="btn-confirm" id="confirm-btn" onclick="executeConfirmedAction()">Confirm</button>
+      <button class="btn-cancel" type="button" onclick="closeConfirmModal()">Cancel</button>
+      <button class="btn-confirm" type="button" id="confirm-btn" onclick="executeConfirmedAction()">Confirm</button>
     </div>
   </div>
 `;
@@ -1418,6 +1643,10 @@ function executeConfirmedAction() {
 
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    if (confirmModal.classList.contains('open')) { trapFocus(confirmModal.querySelector('.modal'), e); }
+    else if (document.getElementById('review-modal')?.classList.contains('open')) { trapFocus(document.getElementById('review-modal').querySelector('.review-modal'), e); }
+  }
   if (e.key === 'Escape' && confirmModal.classList.contains('open')) {
     closeConfirmModal();
   }
@@ -1485,6 +1714,8 @@ function closeGuestReview(){
   modal.classList.remove('open');
   currentReviewGuest=null;
   document.body.style.overflow='';
+  if(reviewLastFocused && typeof reviewLastFocused.focus==='function') reviewLastFocused.focus();
+  reviewLastFocused=null;
 }
 
 function openGuestReview(networkKey,guestId){
@@ -1499,6 +1730,11 @@ function openGuestReview(networkKey,guestId){
   const reviewReq=document.getElementById('review-req');
   const approveBtn=document.getElementById('review-approve');
   const denyBtn=document.getElementById('review-deny');
+  const blockedEl=document.getElementById('review-blocked');
+  const noteEl=document.getElementById('review-note');
+  const noteText=document.getElementById('review-note-text');
+  const noteSent=document.getElementById('review-note-sent');
+  const sendNoteBtn=document.getElementById('review-send-note');
   if(!reviewSub || !reviewGrid || !reviewReq || !approveBtn || !denyBtn) return;
 
   reviewSub.textContent=`${nets[networkKey]?.name || 'Network'} · requested ${guest.requestedAt || 'recently'}`;
@@ -1512,7 +1748,33 @@ function openGuestReview(networkKey,guestId){
   reviewReq.innerHTML=reqRows.map((row)=>`<div class="review-req-item"><div class="review-req-name">${escapeHtml(row.label)}</div><div class="review-req-value">${escapeHtml(row.reviewValue)}</div></div>`).join('');
 
   const pending=guest.status==='pending';
-  approveBtn.disabled=!pending;
+  const hasFailed=reqRows.some((r)=>r.cls==='warn');
+  const canApprove=pending && !hasFailed;
+
+  // Blocked banner
+  if(blockedEl){
+    blockedEl.style.display=(pending && hasFailed)?'flex':'none';
+  }
+
+  // Note section — visible for all pending guests
+  if(noteEl && noteText && noteSent && sendNoteBtn){
+    noteEl.style.display=pending?'block':'none';
+    noteText.value=guest.note||'';
+    noteSent.style.display=guest.noteSent?'flex':'none';
+    sendNoteBtn.style.display=pending?'inline-flex':'none';
+    sendNoteBtn.onclick=()=>{
+      const txt=noteText.value.trim();
+      guest.note=txt;
+      guest.noteSent=true;
+      noteSent.style.display='flex';
+      sendNoteBtn.disabled=true;
+      sendNoteBtn.textContent='Sent';
+      refreshGuestViews();
+    };
+  }
+
+  approveBtn.disabled=!canApprove;
+  approveBtn.title=(!pending)?'':'';
   denyBtn.disabled=!pending;
 
   approveBtn.onclick=()=>{
@@ -1533,6 +1795,11 @@ function openGuestReview(networkKey,guestId){
 
   modal.classList.add('open');
   document.body.style.overflow='hidden';
+  reviewLastFocused=document.activeElement;
+  requestAnimationFrame(()=>{
+    const first=modal.querySelector('.review-modal button:not([disabled])');
+    if(first) first.focus();
+  });
 }
 
 document.getElementById('review-modal')?.addEventListener('click',(event)=>{
