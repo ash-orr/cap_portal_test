@@ -79,6 +79,22 @@ body{background:var(--ui-canvas);}
 .cp.nav-collapsed .ni,
 .cp.nav-collapsed .tog-row,
 .cp.nav-collapsed .avr{justify-content:center;padding-left:0;padding-right:0;gap:0;font-size:0;}
+.cp.nav-collapsed .ni .bdg{
+  display:flex;
+  position:absolute;
+  top:4px;
+  right:10px;
+  margin-left:0;
+  min-width:16px;
+  height:16px;
+  padding:0 5px;
+  font-size:10px;
+  line-height:1;
+  border-radius:999px;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 0 2px var(--bg2);
+}
 .cp.nav-collapsed .ni i,
 .cp.nav-collapsed .tog-row i{font-size:18px;margin:0;}
 .main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0;background:var(--bg1);}
@@ -159,8 +175,9 @@ body{background:var(--ui-canvas);}
 
 .ngrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
 .ngrid.list-mode{grid-template-columns:1fr;}
-.ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s;}
-.ncard:hover{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
+.ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,background-color .15s,box-shadow .15s;}
+.ncard:hover{border-color:var(--border2);background:var(--bg2);box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--border2) 70%, transparent);}
+.cp.dark .ncard:hover{background:color-mix(in oklab, var(--bg2) 92%, white 8%);box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--border2) 60%, transparent);}
 .ngrid.list-mode .ncard{display:grid;grid-template-columns:minmax(220px,1.2fr) minmax(240px,1fr) minmax(320px,1.3fr);align-items:center;gap:12px;}
 .ngrid.list-mode .ncard .ncfoot{border-top:none;padding-top:0;justify-content:flex-end;}
 .ngrid.list-mode .ncard .cab{flex:0 0 auto;min-width:94px;}
@@ -367,7 +384,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
   .nl{display:none;}
   .sb > .ni{margin:2px 6px;min-height:36px;justify-content:center;padding:0 8px;font-size:0;border-radius:10px;}
   .sb > .ni i{font-size:16px;margin:0;}
-  .sb > .ni .bdg{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 5px;font-size:10px;}
+  .sb > .ni .bdg{position:absolute;top:1px;right:1px;min-width:16px;height:16px;padding:0 5px;font-size:10px;box-shadow:0 0 0 2px var(--bg2);}
   .nb{margin-top:6px;padding:10px 6px 0;gap:6px;}
   .tog-row,.nb .ni{margin:0;min-height:34px;justify-content:center;padding:0 6px;font-size:0;border-radius:10px;}
   .tog-row i,.nb .ni i{font-size:16px;margin:0;}
@@ -450,7 +467,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
       </div>
       <div class="ncard" onclick="openNetDetail('conf')">
         <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-briefcase"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-ConfCtr</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>14 connected</span><span style="font-size:12px;color:color-mix(in oklab, var(--ui-warn) 68%, black);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-warn)"></span>3 pending</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Sponsor</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>14 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-warn)"></span><span style="color:var(--ui-warn-ink)">3 pending</span></span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Sponsor</span></div>
         <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('conf')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('conf')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
       <div class="ncard" onclick="openNetDetail('cafe')">
@@ -1256,7 +1273,7 @@ function renderGlobalGuestHeader(){
   row.innerHTML=guestCols.map((col)=>{
     if(col.fixed||!col.key){
       const inner=col.key===null && col.label===null
-        ? `<input type="checkbox" aria-label="Select all guests in table"/>`
+        ? `<input type="checkbox" aria-label="Select all pending guests in table"/>`
         : escapeHtml(col.label||'');
       return `<th style="width:${col.width}">${inner}</th>`;
     }
@@ -1283,7 +1300,6 @@ function renderGlobalGuestHeader(){
 
 function renderGlobalGuestTable(){
   if(!domRefs.glTbody || !domRefs.glCount) return;
-  renderGlobalGuestHeader();
   const records=getFilteredGlobalRecords();
   if(!records.length){
     domRefs.glTbody.innerHTML='<tr><td colspan="8" style="padding:20px;color:var(--txt3);text-align:center">No guests match this filter.</td></tr>';
@@ -1300,7 +1316,7 @@ function renderGlobalGuestTable(){
     const noteIconHtml=guest.noteSent?`<i class="ti ti-message-check note-icon" title="Note sent to guest"></i>`:'';
     const checked=selectedGuestIds.has(guest.id)?'checked':'';
     const checkDisabled=guest.status!=='pending'?'disabled':'';
-    return `<tr class="${rowClass}" data-network="${networkKey}" data-guest-id="${guest.id}"><td><input type="checkbox" aria-label="Select ${escapeHtml(guest.name)}" ${checked} ${checkDisabled}/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${isDark?guest.dBg:guest.bg};color:${isDark?guest.dFg:guest.fg}">${escapeHtml(guest.i)}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escapeHtml(guest.name)}${noteIconHtml}</div><div style="font-size:11px;color:var(--txt3)">${escapeHtml(guest.email)}</div></div></div></td><td style="color:var(--txt2)">${escapeHtml(network.name)}</td><td>${statusBadge}</td><td style="color:var(--txt2)">${escapeHtml(guest.dur)}</td><td><span style="font-size:11px;background:${verifiedBg};color:${verifiedColor};padding:2px 7px;border-radius:8px">${escapeHtml(guest.ver)}</span></td><td style="color:var(--txt3);font-size:12px">${escapeHtml(guest.exp)}</td><td>${getGuestActions(networkKey,guest)}</td></tr>`;
+    return `<tr class="${rowClass}" data-network="${networkKey}" data-guest-id="${guest.id}"><td><input type="checkbox" aria-label="Select ${escapeHtml(guest.name)}" ${checked} ${checkDisabled}/></td><td><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escapeHtml(guest.name)}${noteIconHtml}</div><div style="font-size:11px;color:var(--txt3)">${escapeHtml(guest.email)}</div></div></td><td style="color:var(--txt2)">${escapeHtml(network.name)}</td><td>${statusBadge}</td><td style="color:var(--txt2)">${escapeHtml(guest.dur)}</td><td><span style="font-size:11px;background:${verifiedBg};color:${verifiedColor};padding:2px 7px;border-radius:8px">${escapeHtml(guest.ver)}</span></td><td style="color:var(--txt3);font-size:12px">${escapeHtml(guest.exp)}</td><td>${getGuestActions(networkKey,guest)}</td></tr>`;
   }).join('');
 
   // Sync header checkbox state
@@ -1419,7 +1435,7 @@ function renderNetGuests(k){
     const escDur=escapeHtml(g.dur);
     const escVer=escapeHtml(g.ver);
     const escExp=escapeHtml(g.exp);
-    return`<tr data-network="${k}" data-guest-id="${g.id}"><td><input type="checkbox" aria-label="Select ${escName}"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${escInitial}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escName}</div><div style="font-size:11px;color:var(--txt3)">${escEmail}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${escDur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${escVer}</span></td><td style="color:var(--txt3);font-size:12px">${escExp}</td><td>${acts}</td></tr>`;
+    return`<tr data-network="${k}" data-guest-id="${g.id}"><td><input type="checkbox" aria-label="Select ${escName}"/></td><td><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escName}</div><div style="font-size:11px;color:var(--txt3)">${escEmail}</div></div></td><td>${sp}</td><td style="color:var(--txt2)">${escDur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${escVer}</span></td><td style="color:var(--txt3);font-size:12px">${escExp}</td><td>${acts}</td></tr>`;
     }).join('');
     guestRowsCache.set(cacheKey,rowsHtml);
   }
