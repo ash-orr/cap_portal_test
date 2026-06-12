@@ -9,31 +9,58 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.1/dist/tabler-icons.min.css" />
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 </head>
-<body style="margin:0;padding:24px;background:#f2f3f5;">
+<body style="margin:0;padding:clamp(10px,2vw,24px);background:var(--ui-canvas);">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap');
+:root{
+  --ui-canvas: oklch(0.95 0.005 224);
+  --ui-accent: oklch(0.62 0.11 210);
+  --ui-accent-strong: oklch(0.56 0.12 210);
+  --ui-accent-ink: oklch(0.45 0.09 210);
+  --ui-accent-bg: oklch(0.95 0.03 210);
+  --ui-on-accent: #fff;
+  --ui-preview-bg: var(--ui-accent);
+  --ui-info: oklch(0.58 0.11 248);
+  --ui-info-bg: oklch(0.95 0.03 248);
+  --ui-success: oklch(0.63 0.12 155);
+  --ui-success-bg: oklch(0.95 0.04 155);
+  --ui-warn: oklch(0.73 0.14 72);
+  --ui-warn-bg: oklch(0.95 0.04 72);
+  --ui-warn-ink: color-mix(in oklab, var(--ui-warn) 68%, black);
+  --ui-danger: oklch(0.63 0.17 24);
+  --ui-danger-bg: oklch(0.96 0.03 24);
+  --ui-avatar-teal-bg: #E6F6F7;
+  --ui-avatar-teal-fg: #006e79;
+  --ui-avatar-amber-bg: #FAEEDA;
+  --ui-avatar-amber-fg: #854F0B;
+  --ui-avatar-blue-bg: #E6F1FB;
+  --ui-avatar-blue-fg: #185FA5;
+  --ui-avatar-violet-bg: #EEEDFE;
+  --ui-avatar-violet-fg: #534AB7;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-.cp{font-family:'Figtree',sans-serif;font-size:14px;display:flex;height:680px;border:0.5px solid var(--border1,#e0deda);border-radius:12px;overflow:hidden;}
+body{background:var(--ui-canvas);}
+.cp{font-family:'Figtree',sans-serif;font-size:14px;display:flex;min-height:clamp(620px,78vh,860px);max-height:calc(100dvh - clamp(20px,4vw,56px));border:0.5px solid var(--border1,#e0deda);border-radius:12px;overflow:hidden;}
 .cp.light{background:var(--bg1);color:var(--txt1);}
 .cp.dark{background:var(--bg1);color:var(--txt1);}
 .sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;}
 .sb-head{display:flex;align-items:center;justify-content:space-between;padding:0 12px 16px;gap:8px;}
-.logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#00838F;margin-bottom:0;white-space:nowrap;overflow:hidden;}
-.logo-ic{width:28px;height:28px;background:#00838F;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
+.logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:var(--ui-accent-ink);margin-bottom:0;white-space:nowrap;overflow:hidden;}
+.logo-ic{width:28px;height:28px;background:var(--ui-accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--ui-on-accent);font-size:15px;}
 .nav-collapse-btn{width:28px;height:28px;border:0.5px solid var(--border1);border-radius:8px;background:var(--bg1);color:var(--txt2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .12s,color .12s,border-color .12s;}
 .nav-collapse-btn:hover{background:var(--bg3);color:var(--txt1);border-color:var(--border2);}
 .nl{font-size:10px;font-weight:600;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px 4px;}
 .ni{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;position:relative;transition:background .12s;user-select:none;}
 .ni:hover{background:var(--bg3);color:var(--txt1);}
-.ni.on{background:var(--teal-bg);color:var(--teal);font-weight:500;}
-.ni.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#00838F;border-radius:0 2px 2px 0;}
-.bdg{margin-left:auto;background:#00838F;color:#fff;font-size:10px;font-weight:600;border-radius:10px;padding:1px 6px;}
-.bdg-w{background:#BA7517;}
+.ni.on{background:var(--ui-accent-bg);color:var(--ui-accent-ink);font-weight:500;}
+.ni.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ui-accent);border-radius:0 2px 2px 0;}
+.bdg{margin-left:auto;background:var(--ui-accent);color:var(--ui-on-accent);font-size:10px;font-weight:600;border-radius:10px;padding:1px 6px;}
+.bdg-w{background:var(--ui-warn);}
 .nb{margin-top:auto;border-top:0.5px solid var(--border1);padding-top:8px;}
 .tog-row{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;color:var(--txt2);font-size:13px;}
 .tog-tr{margin-left:auto;width:28px;height:16px;border-radius:8px;display:flex;align-items:center;padding:2px;transition:background .2s;flex-shrink:0;}
-.tog-tr.on{background:#00838F;justify-content:flex-end;}
+.tog-tr.on{background:var(--ui-accent);justify-content:flex-end;}
 .tog-tr.off{background:var(--bg3);justify-content:flex-start;}
 .tog-th{width:12px;height:12px;border-radius:50%;background:#fff;}
 .avr{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;}
@@ -53,14 +80,14 @@
 .cp.nav-collapsed .ni i,
 .cp.nav-collapsed .tog-row i{font-size:18px;margin:0;}
 .main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0;background:var(--bg1);}
-.topbar{border-bottom:0.5px solid var(--border1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--bg1);position:sticky;top:0;z-index:5;}
+.topbar{border-bottom:0.5px solid var(--border1);padding:14px 24px;display:flex;align-items:flex-start;justify-content:space-between;background:var(--bg1);position:sticky;top:0;z-index:5;gap:12px;flex-wrap:wrap;}
 .tbtl{font-size:16px;font-weight:600;color:var(--txt1);}
 .tbsub{font-size:12px;color:var(--txt3);margin-top:2px;}
-.tba{display:flex;gap:8px;align-items:center;}
+.tba{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
 .view-toggle{display:inline-flex;align-items:center;gap:4px;padding:3px;border:0.5px solid var(--border1);border-radius:10px;background:var(--bg2);}
 .view-toggle .btn{padding:5px 8px;font-size:12px;line-height:1.1;border-radius:7px;}
 .view-toggle .btn.on{background:var(--bg1);border-color:var(--border1);color:var(--txt1);}
-.gn-controls{display:flex;justify-content:flex-end;margin:0 0 14px;}
+.gn-controls{display:none;}
 .btn{padding:6px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,13px);line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,500);cursor:pointer;display:inline-flex;align-items:flex-start;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
 
 /* Default button style: Tertiary */
@@ -94,11 +121,11 @@
 .btn.btn-tertiary.btn-destructive:disabled{background:transparent;border-color:var(--color-btn-disabled-border,#d1d4d8);color:var(--color-btn-disabled-text,#a8acb1);}
 
 /* Legacy aliases used by existing markup */
-.btnp{background:var(--color-btn-primary-default,#0d1230);border-color:var(--color-btn-primary-default,#0d1230);color:#fff;}
-.btnp:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);}
+.btnp{background:var(--ui-accent-strong);border-color:var(--ui-accent-strong);color:var(--ui-on-accent);}
+.btnp:hover{background:var(--ui-accent);border-color:var(--ui-accent);}
 .btno{background:transparent;border-color:transparent;color:var(--color-btn-tertiary-text,#0f1420);}
 .btno:hover{background:var(--color-btn-tertiary-hover-bg,#edf2f6);}
-.content{padding:20px 24px;flex:1;}
+.content{padding:20px 24px;flex:1;min-width:0;}
 .pg{display:none;}
 .pg.on{display:block;}
 
@@ -107,15 +134,16 @@
 .slbl{font-size:11px;color:var(--txt3);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
 .sval{font-size:24px;font-weight:600;color:var(--txt1);line-height:1;}
 .ssub{font-size:11px;color:var(--txt2);margin-top:5px;}
-.odot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px;}
-.adot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#BA7517;margin-right:4px;}
+.odot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px;}
+.adot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-warn);margin-right:4px;}
+.sgrid .sc{border:0.5px solid var(--border1);background:var(--bg2);}
 
 .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .stl{font-size:14px;font-weight:600;color:var(--txt1);}
 .nlist{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
 .nc{background:var(--bg1);border:0.5px solid var(--border1);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;transition:border-color .15s;}
-.nc:hover{border-color:#00838F;}
-.nic{width:34px;height:34px;border-radius:8px;background:var(--teal-bg);color:#00838F;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.nc:hover{border-color:var(--ui-accent);}
+.nic{width:34px;height:34px;border-radius:8px;background:var(--ui-accent-bg);color:var(--ui-accent);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
 .pill{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;}
 .pill-a{background:var(--teal-bg);color:var(--teal-txt);}
 .pill-off{background:var(--bg2);color:var(--txt3);}
@@ -125,10 +153,10 @@
 .frow:last-child{border-bottom:none;}
 .frow:nth-child(even){background:var(--bg2);}
 
-.ngrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.ngrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
 .ngrid.list-mode{grid-template-columns:1fr;}
 .ncard{background:var(--bg1);border:0.5px solid var(--border1);border-radius:12px;padding:16px;cursor:pointer;display:flex;flex-direction:column;gap:12px;transition:border-color .15s;}
-.ncard:hover{border-color:#00838F;background:var(--teal-bg);}
+.ncard:hover{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
 .ngrid.list-mode .ncard{display:grid;grid-template-columns:minmax(220px,1.2fr) minmax(240px,1fr) minmax(320px,1.3fr);align-items:center;gap:12px;}
 .ngrid.list-mode .ncard .ncfoot{border-top:none;padding-top:0;justify-content:flex-end;}
 .ngrid.list-mode .ncard .cab{flex:0 0 auto;min-width:94px;}
@@ -138,46 +166,62 @@
 .cab{flex:1;padding:6px 8px;border-radius:8px;border:0.5px solid var(--color-btn-secondary-border,#1f2432);background:var(--color-btn-secondary-bg,#fff);color:var(--color-btn-secondary-text,#0f1420);font-size:12px;font-family:'Figtree',sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s;}
 .cab:hover{background:var(--color-btn-secondary-hover,#eef2f6);color:var(--txt1);}
 .cab.pa{border-color:var(--color-btn-primary-default,#0d1230);background:transparent;color:var(--color-btn-primary-default,#0d1230);}
-.cab.pa:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);color:#fff;}
+.cab.pa:hover{background:var(--color-btn-primary-hover,#245f73);border-color:var(--color-btn-primary-hover,#245f73);color:var(--ui-on-accent);}
 
 .bcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt3);}
-.bcl{color:#00838F;cursor:pointer;font-weight:500;}
+.bcl{color:var(--ui-info);cursor:pointer;font-weight:500;}
 .bcl:hover{text-decoration:underline;}
 .dtabs{display:flex;border-bottom:0.5px solid var(--border1);margin-bottom:20px;}
 .dtab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .dtab:hover{color:var(--txt1);}
-.dtab.on{color:#00838F;border-bottom-color:#00838F;}
+.dtab.on{color:var(--ui-accent-ink);border-bottom-color:var(--ui-accent);}
 .dtp{display:none;}
 .dtp.on{display:block;}
 .igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px;}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
 .fg{display:flex;flex-direction:column;gap:5px;}
 .fl{font-size:12px;font-weight:600;color:var(--txt2);}
 .fh{font-size:11px;color:var(--txt3);}
 .fin{padding:7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
 .ropt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:0.5px solid var(--border1);border-radius:8px;cursor:pointer;margin-bottom:6px;background:var(--bg1);}
-.ropt:hover{border-color:#00838F;background:var(--teal-bg);}
-.ropt.sel{border-color:#00838F;background:var(--teal-bg);}
-.ropt input{margin-top:2px;accent-color:#00838F;}
-.rt{font-size:13px;font-weight:500;color:var(--txt1);}
+.ropt:hover{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
+.ropt.sel{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
+.ropt input{margin-top:2px;accent-color:var(--ui-accent);}
+.rt{font-size:13px;font-weight:500;color:var(--ui-accent-ink);}
 .rd{font-size:11px;color:var(--txt3);}
-.pvbox{background:#00838F;border-radius:12px;padding:20px;color:#fff;text-align:center;}
-.pvin{background:rgba(255,255,255,.15);border-radius:10px;padding:16px;max-width:240px;margin:0 auto;}
-.pvf{background:rgba(255,255,255,.2);border-radius:6px;padding:7px 10px;font-size:12px;opacity:.9;margin-bottom:8px;text-align:left;}
+.pvbox{background:var(--ui-preview-bg);border-radius:12px;padding:20px;color:var(--ui-on-accent);text-align:center;}
+.pvin{background:color-mix(in oklab, var(--ui-on-accent) 15%, transparent);border-radius:10px;padding:16px;max-width:240px;margin:0 auto;}
+.pvf{background:color-mix(in oklab, var(--ui-on-accent) 20%, transparent);border-radius:6px;padding:7px 10px;font-size:12px;opacity:.9;margin-bottom:8px;text-align:left;}
 .cust-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 .cust-grid .fg{margin-bottom:0;}
 .cust-box{background:var(--bg2);border:0.5px solid var(--border1);border-radius:10px;padding:12px;margin-bottom:14px;}
 .cust-box h3,.cust-box h4{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;}
 .cust-actions{display:flex;gap:8px;margin-top:8px;}
 
-.gl-tb{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
+.gl-tb{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;}
 .sw{flex:1;position:relative;}
 .sw i{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:16px;}
 .sw input{width:100%;padding:7px 10px 7px 32px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
 .sf{padding:7px 10px;border:0.5px solid var(--border2);border-radius:8px;background:var(--bg1);color:var(--txt1);font-family:'Figtree',sans-serif;font-size:13px;}
-.fchip{display:flex;align-items:center;gap:5px;background:var(--teal-bg);color:var(--teal-txt);font-size:12px;font-weight:500;padding:3px 10px;border-radius:10px;border:0.5px solid #00838F;}
-.pbanner{display:none;background:var(--amber-bg);border:0.5px solid var(--amber);border-radius:8px;padding:10px 16px;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--amber-txt);}
-table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
+.fchip{display:flex;align-items:center;gap:5px;background:var(--ui-info-bg);color:var(--ui-info);font-size:12px;font-weight:500;padding:3px 10px;border-radius:10px;border:0.5px solid color-mix(in oklab, var(--ui-info) 60%, white);}
+.pbanner{display:none;background:var(--ui-warn-bg);border:0.5px solid color-mix(in oklab, var(--ui-warn) 68%, white);border-radius:8px;padding:10px 16px;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:color-mix(in oklab, var(--ui-warn) 68%, black);}
+.pbanner-actions{margin-left:auto;display:flex;gap:6px;}
+.review-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:110;align-items:center;justify-content:center;padding:16px;}
+.review-overlay.open{display:flex;}
+.review-modal{width:min(640px,100%);max-height:90dvh;overflow:auto;background:var(--bg1);border-radius:12px;border:0.5px solid var(--border1);padding:20px;box-shadow:0 24px 36px rgba(0,0,0,.18);}
+.review-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;}
+.review-title{font-size:17px;font-weight:600;color:var(--txt1);}
+.review-sub{font-size:12px;color:var(--txt3);margin-top:3px;}
+.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px;}
+.review-card{border:0.5px solid var(--border1);border-radius:9px;padding:9px 10px;background:var(--bg2);}
+.review-label{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--txt3);margin-bottom:3px;font-weight:600;}
+.review-value{font-size:13px;color:var(--txt1);font-weight:500;overflow-wrap:anywhere;}
+.review-req{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.review-req-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:0.5px solid var(--border1);border-radius:8px;padding:8px 10px;background:var(--bg1);}
+.review-req-name{font-size:12px;color:var(--txt1);font-weight:500;}
+.review-req-value{font-size:12px;color:var(--txt2);}
+.review-actions{display:flex;justify-content:flex-end;gap:8px;}
+table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;}
 .gt th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--border1);}
 .gt td{padding:9px 10px;font-size:13px;border-bottom:0.5px solid var(--border1);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt1);}
 .gt tr:hover td{background:var(--bg2);}
@@ -186,22 +230,24 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 .ib:hover{background:var(--bg2);border-color:var(--border2);}
 .ib:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
 .ib:disabled,.ib[aria-disabled="true"]{opacity:.5;cursor:not-allowed;pointer-events:none;}
-.ib.ib-primary{background:var(--teal-bg);border-color:var(--teal);color:var(--teal-txt);font-weight:500;}
-.ib.ib-primary:hover{background:#00a5b3;border-color:#00a5b3;}
+.ib.ib-primary{background:var(--ui-success-bg);border-color:var(--ui-success);color:color-mix(in oklab, var(--ui-success) 62%, black);font-weight:500;}
+.ib.ib-primary:hover{background:color-mix(in oklab, var(--ui-success-bg) 35%, var(--ui-success));border-color:var(--ui-success);}
 .ib.ib-secondary{background:transparent;border:1px solid var(--border2);color:var(--txt2);}
 .ib.ib-secondary:hover{background:var(--bg2);border-color:var(--border2);}
-.ib.dng{border-color:var(--danger-border);color:var(--danger-txt);}
-.ib.dng:hover{background:#fff1f1;border-color:var(--danger-border);}
-.ib.apr{border-color:#0F6E56;color:#0F6E56;background:#f0fdf7;font-weight:500;}
-.ib.apr:hover{background:#e8fbf4;border-color:#0F6E56;}
+.ib.dng{border-color:color-mix(in oklab, var(--ui-danger) 45%, white);color:var(--ui-danger);}
+.ib.dng:hover{background:var(--ui-danger-bg);border-color:var(--ui-danger);}
+.ib.apr{border-color:var(--ui-success);color:color-mix(in oklab, var(--ui-success) 62%, black);background:var(--ui-success-bg);font-weight:500;}
+.ib.apr:hover{background:color-mix(in oklab, var(--ui-success-bg) 35%, var(--ui-success));border-color:var(--ui-success);}
 .ib[data-loading="true"]::before{content:'';display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-radius:50%;border-top-color:currentColor;animation:spin .6s linear infinite;margin-right:4px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-.atbl{width:100%;border-collapse:collapse;table-layout:fixed;}
+.atbl{width:100%;border-collapse:collapse;table-layout:fixed;min-width:760px;}
 .atbl th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 12px;border-bottom:0.5px solid var(--border1);}
 .atbl td{padding:10px 12px;font-size:13px;border-bottom:0.5px solid var(--border1);color:var(--txt1);vertical-align:middle;}
 .atbl tr:hover td{background:var(--bg2);}
 .role-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;}
+.table-scroll{overflow-x:auto;overflow-y:hidden;border-radius:10px;border:0.5px solid var(--border1);}
+.table-scroll > table{border-left:none;border-right:none;}
 
 /* Confirmation Modal */
 .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:100;animation:fadeIn .2s ease-out;}
@@ -216,41 +262,91 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 .modal-actions .btn-cancel{background:var(--bg2);color:var(--txt1);border-color:var(--border1);}
 .modal-actions .btn-cancel:hover{background:var(--bg3);border-color:var(--border2);}
 .modal-actions .btn-confirm{background:var(--danger-bg);color:var(--danger-txt);border-color:var(--danger-border);}
-.modal-actions .btn-confirm:hover{background:#f06a6a;border-color:#f06a6a;}
-.modal-warning{background:#fff1f1;border:1px solid var(--danger-border);border-radius:8px;padding:12px;margin-bottom:16px;color:var(--danger-txt);font-size:13px;display:flex;gap:8px;}
+.modal-actions .btn-confirm:hover{background:var(--color-btn-primary-destructive-hover,#f06a6a);border-color:var(--color-btn-primary-destructive-hover,#f06a6a);}
+.modal-warning{background:var(--ui-danger-bg);border:1px solid var(--danger-border);border-radius:8px;padding:12px;margin-bottom:16px;color:var(--danger-txt);font-size:13px;display:flex;gap:8px;}
 .modal-warning i{font-size:16px;flex-shrink:0;margin-top:2px;}
-.rb-net{background:var(--teal-bg);color:var(--teal-txt);}
+.rb-net{background:var(--ui-success-bg);color:color-mix(in oklab, var(--ui-success) 62%, black);}
 .rb-sec{background:var(--blue-bg);color:var(--blue-txt);}
 .rb-sup{background:var(--pu-bg);color:var(--pu-txt);}
 
 .stabs{display:flex;border-bottom:0.5px solid var(--border1);margin-bottom:20px;}
 .stab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .stab:hover{color:var(--txt1);}
-.stab.on{color:#00838F;border-bottom-color:#00838F;}
+.stab.on{color:var(--ui-accent-ink);border-bottom-color:var(--ui-accent);}
 .stp{display:none;}
 .stp.on{display:block;}
 .int-card{background:var(--bg1);border:0.5px solid var(--border1);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
 .int-ic{width:36px;height:36px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--txt2);flex-shrink:0;}
 .tog-sm{width:36px;height:20px;border-radius:10px;display:flex;align-items:center;padding:2px;cursor:pointer;transition:background .2s;flex-shrink:0;}
-.tog-sm.on{background:#00838F;justify-content:flex-end;}
+.tog-sm.on{background:var(--ui-accent);justify-content:flex-end;}
 .tog-sm.off{background:var(--bg3);justify-content:flex-start;}
 .tog-sm-th{width:16px;height:16px;border-radius:50%;background:#fff;}
 .theme-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
 .theme-item{border:0.5px solid var(--border1);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:500;color:var(--txt2);background:var(--bg1);cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
-.theme-item:hover{border-color:#00838F;color:#00838F;}
-.theme-item.sel{border-color:#00838F;background:var(--teal-bg);color:#00838F;}
+.theme-item:hover{border-color:var(--ui-accent);color:var(--ui-accent-ink);}
+.theme-item.sel{border-color:var(--ui-accent);background:var(--ui-accent-bg);color:var(--ui-accent-ink);}
 .theme-item.add{border-style:dashed;}
 .us-card{background:var(--bg2);border-radius:12px;padding:20px;margin-bottom:16px;}
-.us-av{width:56px;height:56px;border-radius:50%;background:var(--teal-bg);color:#00838F;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.us-av{width:56px;height:56px;border-radius:50%;background:var(--ui-accent-bg);color:var(--ui-accent-ink);font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
 .ni,.tbsub,.fh,.rd,.fl,.gt td,.atbl td{overflow-wrap:anywhere;}
 
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
 }
+
+@media (max-width:1180px){
+  .cp{min-height:calc(100dvh - 24px);max-height:none;border-radius:10px;}
+  .sb{width:180px;min-width:180px;}
+  .content{padding:16px;}
+  .topbar{padding:12px 16px;}
+  .sgrid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .igrid{grid-template-columns:1fr;}
+  .fgrid{grid-template-columns:1fr;}
+  .cust-grid{grid-template-columns:1fr;}
+  .gl-tb > .sf{min-width:180px;}
+}
+
+@media (max-width:860px){
+  body{padding:8px !important;}
+  .cp{flex-direction:column;min-height:calc(100dvh - 16px);max-height:none;}
+  .sb{width:100%;min-width:100%;padding:10px 0;}
+  .nb{margin-top:8px;}
+  .main{overflow:visible;}
+  .sgrid{grid-template-columns:1fr;}
+  .topbar .tbtl{font-size:15px;}
+  .tbsub{font-size:11px;}
+  .review-grid{grid-template-columns:1fr;}
+}
+
+@media (max-width:700px){
+  .cp{flex-direction:row;}
+  .sb{width:74px;min-width:74px;padding:8px 0;border-bottom:none;border-right:0.5px solid var(--border1);}
+  .sb-head{padding:0 8px 8px;justify-content:center;}
+  .logo{font-size:0;padding:0;gap:0;}
+  .logo .logo-ic{width:30px;height:30px;font-size:16px;}
+  .nav-collapse-btn{display:none;}
+  .nl{display:none;}
+  .sb > .ni{margin:2px 6px;min-height:36px;justify-content:center;padding:0 8px;font-size:0;border-radius:10px;}
+  .sb > .ni i{font-size:16px;margin:0;}
+  .sb > .ni .bdg{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 5px;font-size:10px;}
+  .nb{margin-top:6px;padding:10px 6px 0;gap:6px;}
+  .tog-row,.nb .ni{margin:0;min-height:34px;justify-content:center;padding:0 6px;font-size:0;border-radius:10px;}
+  .tog-row i,.nb .ni i{font-size:16px;margin:0;}
+  .tog-row .tog-tr{display:none;}
+  .avr{padding:8px 6px;justify-content:center;}
+  .avr > div:not(.av),.avr > i{display:none;}
+  .av{margin:0;}
+  .topbar{padding:10px 12px;gap:8px;}
+  .tba{width:100%;justify-content:flex-start;}
+  .btn{height:32px;padding:0 10px;font-size:12px;}
+  .content{padding:12px;}
+  .gl-tb{gap:6px;}
+  .gl-tb > .sf{min-width:0;flex:1;}
+}
 </style>
 
 <div class="cp light" id="cpRoot">
-<h2 style="position:absolute;left:-9999px">Captive Portal Admin Console — full navigation prototype</h2>
+<h2 style="position:absolute;left:-9999px">Captive Portal Admin Console: full navigation prototype</h2>
 
 <nav class="sb">
   <div class="sb-head">
@@ -260,7 +356,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
   <div class="nl">Main</div>
   <div class="ni on" onclick="nav('dashboard',this)" tabindex="0"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
   <div class="ni" onclick="nav('guestnet',this)" tabindex="0"><i class="ti ti-wifi"></i>Guest networks</div>
-  <div class="ni" onclick="nav('guestlist',this)" tabindex="0"><i class="ti ti-users"></i>Guest list<span class="bdg bdg-w">3</span></div>
+  <div class="ni" onclick="nav('guestlist',this)" tabindex="0"><i class="ti ti-users"></i>Guest list<span class="bdg bdg-w" id="nav-pending-badge">3</span></div>
   <div class="nl">Manage</div>
   <div class="ni" onclick="nav('admins',this)" tabindex="0"><i class="ti ti-shield"></i>Administrators</div>
   <div class="ni" onclick="nav('settings',this)" tabindex="0"><i class="ti ti-settings"></i>Settings</div>
@@ -275,15 +371,15 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 
 <!-- DASHBOARD -->
 <div id="pg-dashboard" class="pg on">
-  <div class="topbar"><div><div class="tbtl">Dashboard</div><div class="tbsub">Friday, June 5, 2026 · All networks</div></div><div class="tba"><button class="btn"><i class="ti ti-refresh"></i>Refresh</button><button class="btn btnp" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Dashboard</div><div class="tbsub">Friday, June 5, 2026 · All networks</div></div><div class="tba"><button class="btn"><i class="ti ti-refresh"></i>Refresh</button><button class="btn btnp" onclick="nav('guestnet',getNavItem(1))"><i class="ti ti-plus"></i>Add network</button></div></div>
   <div class="content">
     <div class="sgrid">
       <div class="sc"><div class="slbl">Active guests</div><div class="sval">47</div><div class="ssub"><span class="odot"></span>Connected now</div></div>
       <div class="sc"><div class="slbl">Active networks</div><div class="sval">4</div><div class="ssub"><span class="odot"></span>All operational</div></div>
-      <div class="sc"><div class="slbl">Pending approval</div><div class="sval" style="color:#BA7517">3</div><div class="ssub"><span class="adot"></span>Need review</div></div>
+      <div class="sc"><div class="slbl">Pending approval</div><div class="sval" id="dash-pending-count" style="color:var(--ui-warn)">3</div><div class="ssub"><span class="adot"></span><span id="dash-pending-copy">Need review</span></div></div>
       <div class="sc"><div class="slbl">Today's logins</div><div class="sval">118</div><div class="ssub" style="color:var(--txt3)">+12 from yesterday</div></div>
     </div>
-    <div class="sh"><div class="stl">Active guest networks</div><button class="btn" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">View all</button></div>
+    <div class="sh"><div class="stl">Active guest networks</div><button class="btn" onclick="nav('guestnet',getNavItem(1))">View all</button></div>
     <div class="nlist">
       <div class="nc"><div class="nic"><i class="ti ti-building"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-Lobby</div></div><span class="pill pill-a">Active</span><span style="font-size:12px;color:var(--txt2);margin-left:8px;display:flex;align-items:center;gap:3px;"><i class="ti ti-users" style="font-size:12px"></i>23</span></div>
       <div class="nc"><div class="nic"><i class="ti ti-briefcase"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">CorpGuest-ConfCtr</div></div><span class="pill pill-a">Active</span><span style="font-size:12px;color:var(--txt2);margin-left:8px;display:flex;align-items:center;gap:3px;"><i class="ti ti-users" style="font-size:12px"></i>14</span></div>
@@ -292,8 +388,8 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
     </div>
     <div class="sh" style="margin-top:4px"><div class="stl">Recent activity</div></div>
     <div class="feed">
-      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#00838F;margin-right:6px;vertical-align:middle"></span><strong>Priya Sharma</strong> connected to <em>Lobby guest</em></div><div style="font-size:11px;color:var(--txt3)">2 min ago</div></div>
-      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#BA7517;margin-right:6px;vertical-align:middle"></span><strong>Daniel Wu</strong> <span style="color:var(--amber-txt);font-weight:500">requesting access</span> — <em>Conference center</em></div><div style="font-size:11px;color:var(--txt3)">5 min ago</div></div>
+      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ui-success);margin-right:6px;vertical-align:middle"></span><strong>Priya Sharma</strong> connected to <em>Lobby guest</em></div><div style="font-size:11px;color:var(--txt3)">2 min ago</div></div>
+      <div class="frow"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ui-warn);margin-right:6px;vertical-align:middle"></span><strong>Daniel Wu</strong> <span style="color:color-mix(in oklab, var(--ui-warn) 68%, black);font-weight:500">requested access to</span> <em>Conference center</em></div><div style="font-size:11px;color:var(--txt3)">5 min ago</div></div>
       <div class="frow" style="border:none"><div><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--border2);margin-right:6px;vertical-align:middle"></span><strong>Lisa Park</strong> disconnected from <em>Café area</em></div><div style="font-size:11px;color:var(--txt3)">18 min ago</div></div>
     </div>
   </div>
@@ -301,29 +397,29 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 
 <!-- GUEST NETWORKS INDEX -->
 <div id="pg-guestnet" class="pg">
-  <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
   <div class="content">
     <div class="gn-controls"><div class="view-toggle" role="group" aria-label="Network view mode"><button class="btn on" id="gn-view-card" type="button" onclick="setGuestNetView('card')" aria-pressed="true"><i class="ti ti-layout-grid"></i>Card</button><button class="btn" id="gn-view-list" type="button" onclick="setGuestNetView('list')" aria-pressed="false"><i class="ti ti-list"></i>List</button></div></div>
     <div class="ngrid" id="guestnet-grid">
       <div class="ncard" onclick="openNetDetail('lobby')">
-        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-building"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Lobby</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>23 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>8h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Self-register</span></div>
-        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('lobby')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('lobby')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-building"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Lobby</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>23 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>8h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Self-registration</span></div>
+        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('lobby')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('lobby')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
       <div class="ncard" onclick="openNetDetail('conf')">
-        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-briefcase"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-ConfCtr</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>14 connected</span><span style="font-size:12px;color:var(--amber-txt);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#BA7517"></span>3 pending</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Sponsor</span></div>
-        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('conf')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('conf')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-briefcase"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Conference center</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-ConfCtr</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>14 connected</span><span style="font-size:12px;color:color-mix(in oklab, var(--ui-warn) 68%, black);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-warn)"></span>3 pending</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-shield-check" style="font-size:12px"></i>Sponsor</span></div>
+        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('conf')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('conf')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
       <div class="ncard" onclick="openNetDetail('cafe')">
-        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-coffee"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Café area</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Cafe</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00838F;margin-right:4px"></span>Active</span></div>
+        <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-coffee"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Café area</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Cafe</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>10 connected</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-clock" style="font-size:12px"></i>4h session</span><span style="font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px"><i class="ti ti-door-enter" style="font-size:12px"></i>Open access</span></div>
-        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('cafe')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('cafe')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('cafe')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('cafe')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
       <div class="ncard" onclick="openNetDetail('roof')" style="opacity:.65">
         <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px;background:var(--bg3);color:var(--txt3)"><i class="ti ti-map-pin"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Rooftop terrace</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Roof</div></div><span class="pill pill-off">Inactive</span></div>
         <div style="display:flex;gap:8px"><span style="font-size:12px;color:var(--txt3);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>0 connected</span></div>
-        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('roof')"><i class="ti ti-settings"></i>Configure</button><button class="cab" onclick="event.stopPropagation();openNetGuests('roof')"><i class="ti ti-users"></i>View guests</button><button class="cab" onclick="event.stopPropagation()"><i class="ti ti-dots"></i></button></div>
+        <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('roof')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('roof')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
     </div>
   </div>
@@ -331,7 +427,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 
 <!-- NETWORK DETAIL -->
 <div id="pg-netdetail" class="pg">
-  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="nd-bc" style="color:var(--txt1);font-weight:500"></span></div><div class="tbtl" id="nd-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btno" onclick="openNetGuests(currentNet)"><i class="ti ti-users"></i>View guests</button><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',getNavItem(1))">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="nd-bc" style="color:var(--txt1);font-weight:500"></span></div><div class="tbtl" id="nd-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btno" onclick="openNetGuests(currentNet)"><i class="ti ti-users"></i>View guests</button><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
   <div class="content">
     <div class="igrid">
       <div class="sc"><div class="slbl">Connected guests</div><div class="sval" id="nd-guests"></div><div class="ssub" id="nd-pend"></div></div>
@@ -344,61 +440,59 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
         <div class="fg"><label class="fl">Nickname</label><input class="fin" type="text" id="nd-nick"/><div class="fh">Display name in the console.</div></div>
         <div class="fg"><label class="fl">Session expiry</label><select class="fin"><option>4 hours</option><option selected>8 hours</option><option>24 hours</option></select></div>
         <div class="fg"><label class="fl">Bandwidth limit</label><input class="fin" type="text" value="20 Mbps"/></div>
-        <div class="fg"><label class="fl">VLAN / segment</label><input class="fin" type="text" value="VLAN 40"/></div>
+        <div class="fg"><label class="fl">VLAN segment</label><input class="fin" type="text" value="VLAN 40"/></div>
         <div class="fg"><label class="fl">Network status</label><select class="fin"><option>Active</option><option>Inactive</option></select></div>
       </div>
     </div>
     <div id="dtp-access" class="dtp">
       <div style="margin-bottom:10px"><label class="fl">How do guests get access?</label></div>
-      <label class="ropt sel"><input type="radio" name="acc" checked/><div><div class="rt">Self-register — Sponsor approval</div><div class="rd">Guests register; an admin must approve before they connect.</div></div></label>
-      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-register — No verification</div><div class="rd">Guests tap "Connect" and are immediately granted access.</div></div></label>
-      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only — Username &amp; password</div><div class="rd">Admin creates credentials; guests cannot self-register.</div></div></label>
+      <label class="ropt sel"><input type="radio" name="acc" checked/><div><div class="rt">Self-registration: Sponsor approval</div><div class="rd">Guests sign up first, then an admin approves access.</div></div></label>
+      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-registration: Instant access</div><div class="rd">Guests tap "Connect" and get access immediately.</div></div></label>
+      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only: Username and password</div><div class="rd">Admins create credentials and guests cannot self-register.</div></div></label>
     </div>
     <div id="dtp-customization" class="dtp">
       <div class="cust-grid">
         <div class="fg"><label class="fl">Theme</label><select class="fin" id="nd-theme" onchange="onThemeChange()"></select><div class="fh">Select from existing themes. Manage styles in <span class="bcl" onclick="goToThemeSettings()">Settings > Themes</span>.</div></div>
       </div>
-      <div class="pvbox" id="nd-pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin" id="nd-pvcard"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px" id="nd-pvdesc">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button id="nd-pvbtn-primary" style="background:#fff;color:#00838F;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button><button id="nd-pvbtn-secondary" style="background:#d6eef0;color:#005962;border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:6px;border:none;cursor:pointer">Learn more</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
+      <div class="pvbox" id="nd-pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin" id="nd-pvcard"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px" id="nd-pvdesc">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button id="nd-pvbtn-primary" style="background:var(--ui-on-accent);color:var(--ui-accent-ink);border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
     </div>
   </div>
 </div>
 
 <!-- GUEST LIST (global) -->
 <div id="pg-guestlist" class="pg">
-  <div class="topbar"><div><div class="tbtl">Guest list</div><div class="tbsub">47 connected · 3 pending approval</div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Guest list</div><div class="tbsub" id="gl-subtitle">0 connected · 0 pending approval</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
   <div class="content">
-    <div style="background:var(--amber-bg);border:0.5px solid var(--amber);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--amber-txt)">
-      <i class="ti ti-clock" style="font-size:18px"></i><div><strong>3 guests</strong> are waiting for sponsor approval</div>
-      <button style="margin-left:auto;background:#BA7517;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;cursor:pointer">Review</button>
+    <div id="gl-pending-banner" style="background:var(--ui-warn-bg);border:0.5px solid color-mix(in oklab, var(--ui-warn) 68%, white);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--ui-warn-ink)">
+      <i class="ti ti-clock" style="font-size:18px"></i><div id="gl-pending-copy"></div>
+      <div class="pbanner-actions">
+        <button class="ib ib-primary" type="button" aria-label="Approve all pending guests" onclick="approveAllPendingGuests()"><i class="ti ti-check"></i><span>Approve all</span></button>
+        <button class="ib dng" type="button" aria-label="Deny all pending guests" onclick="denyAllPendingGuests()"><i class="ti ti-x"></i><span>Deny all</span></button>
+      </div>
     </div>
     <div class="gl-tb">
-      <div class="sw"><i class="ti ti-search"></i><input type="text" placeholder="Search guests…"/></div>
-      <select class="sf"><option>All networks</option><option>Lobby guest</option><option>Conference center</option><option>Café area</option></select>
-      <select class="sf"><option>All statuses</option><option>Connected</option><option>Pending</option><option>Disconnected</option></select>
+      <div class="sw"><i class="ti ti-search"></i><input id="gl-search" type="text" placeholder="Search guests…"/></div>
+      <select id="gl-network-filter" class="sf"><option value="all">All networks</option><option value="lobby">Lobby guest</option><option value="conf">Conference center</option><option value="cafe">Café area</option></select>
+      <select id="gl-status-filter" class="sf"><option value="all">All statuses</option><option value="online">Connected</option><option value="pending">Pending</option><option value="offline">Offline</option><option value="denied">Denied</option></select>
     </div>
-    <table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead>
-    <tbody>
-      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#E6F6F7;color:#006e79">PS</div><div><div style="font-weight:500;font-size:13px">Priya Sharma</div><div style="font-size:11px;color:var(--txt3)">priya@acme.co</div></div></div></td><td style="color:var(--txt2)">Lobby guest</td><td><span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span></td><td style="color:var(--txt2)">2m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Self-reg</span></td><td style="color:var(--txt3);font-size:12px">7h 58m</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div></td></tr>
-      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#FAEEDA;color:#854F0B">DW</div><div><div style="font-weight:500;font-size:13px">Daniel Wu</div><div style="font-size:11px;color:var(--txt3)">d.wu@partner.io</div></div></div></td><td style="color:var(--txt2)">Conference</td><td><span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#BA7517;display:inline-block"></span>Pending</span></td><td style="color:var(--txt3)">—</td><td><span style="font-size:11px;background:var(--amber-bg);color:var(--amber-txt);padding:2px 7px;border-radius:8px">Sponsor req.</span></td><td style="color:var(--txt3);font-size:12px">—</td><td><div style="display:flex;gap:4px"><button class="ib apr"><i class="ti ti-check"></i></button><button class="ib dng"><i class="ti ti-x"></i></button></div></td></tr>
-      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#E6F1FB;color:#185FA5">SR</div><div><div style="font-weight:500;font-size:13px">Sofia Reyes</div><div style="font-size:11px;color:var(--txt3)">sofia@vendor.com</div></div></div></td><td style="color:var(--txt2)">Lobby guest</td><td><span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span></td><td style="color:var(--txt2)">1h 22m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Jordan M.</span></td><td style="color:var(--txt3);font-size:12px">6h 38m</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div></td></tr>
-      <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#EEEDFE;color:#534AB7">MB</div><div><div style="font-weight:500;font-size:13px">Marcus Bell</div><div style="font-size:11px;color:var(--txt3)">m.bell@consult.net</div></div></div></td><td style="color:var(--txt2)">Café area</td><td><span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--bg2);color:var(--txt3)">Offline</span></td><td style="color:var(--txt3)">42m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Self-reg</span></td><td style="color:var(--txt3);font-size:12px">Expired</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
-    </tbody></table>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span>Showing 4 of 47 guests</span><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-chevron-left"></i></button><button class="ib" style="background:var(--bg2)">1</button><button class="ib">2</button><button class="ib">3</button><button class="ib"><i class="ti ti-chevron-right"></i></button></div></div>
+    <div class="table-scroll"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead>
+    <tbody id="gl-tbody"></tbody></table></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="gl-count"></span></div>
   </div>
 </div>
 
 <!-- NET GUEST LIST (filtered) -->
 <div id="pg-netguests" class="pg">
-  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="ng-bc" class="bcl" onclick="openNetDetail(currentNet)"></span><i class="ti ti-chevron-right" style="font-size:11px"></i><span style="color:var(--txt1);font-weight:500">Guests</span></div><div class="tbtl" id="ng-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn"><i class="ti ti-download"></i>Export</button><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
+  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',getNavItem(1))">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="ng-bc" class="bcl" onclick="openNetDetail(currentNet)"></span><i class="ti ti-chevron-right" style="font-size:11px"></i><span style="color:var(--txt1);font-weight:500">Guests</span></div><div class="tbtl" id="ng-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btnp"><i class="ti ti-user-plus"></i>Invite guest</button></div></div>
   <div class="content">
     <div class="gl-tb">
       <div class="sw"><i class="ti ti-search"></i><input type="text" placeholder="Search guests on this network…"/></div>
-      <div class="fchip"><i class="ti ti-wifi"></i><span id="ng-chip"></span><i class="ti ti-x" onclick="nav('guestnet',document.querySelectorAll('.ni')[1])" style="cursor:pointer"></i></div>
+      <div class="fchip"><i class="ti ti-wifi"></i><span id="ng-chip"></span><i class="ti ti-x" onclick="nav('guestnet',getNavItem(1))" style="cursor:pointer"></i></div>
       <select class="sf"><option>All statuses</option><option>Connected</option><option>Pending</option></select>
     </div>
-    <div class="pbanner" id="ng-banner"><i class="ti ti-clock" style="font-size:18px"></i><div id="ng-btext"></div><button style="margin-left:auto;background:#BA7517;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;cursor:pointer">Review</button></div>
-    <div id="ng-empty" style="display:none;text-align:center;padding:48px 0;color:var(--txt3)"><i class="ti ti-users-off" style="font-size:32px;display:block;margin-bottom:10px"></i><div style="font-size:14px;font-weight:500;color:var(--txt2);margin-bottom:4px">No guests on this network</div><div style="font-size:12px">Network is inactive or has no recorded guests.</div></div>
-    <div id="ng-wrap"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:165px">Guest</th><th style="width:85px">Status</th><th style="width:75px">Duration</th><th style="width:110px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead><tbody id="ng-tbody"></tbody></table><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="ng-count"></span></div></div>
+    <div class="pbanner" id="ng-banner"><i class="ti ti-clock" style="font-size:18px"></i><div id="ng-btext"></div></div>
+    <div id="ng-empty" style="display:none;text-align:center;padding:48px 0;color:var(--txt3)"><i class="ti ti-users-off" style="font-size:32px;display:block;margin-bottom:10px"></i><div style="font-size:14px;font-weight:500;color:var(--txt2);margin-bottom:4px">No guests are currently connected</div><div style="font-size:12px">This network is inactive or has no recent guest sessions.</div></div>
+    <div id="ng-wrap"><div class="table-scroll"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:165px">Guest</th><th style="width:85px">Status</th><th style="width:75px">Duration</th><th style="width:110px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead><tbody id="ng-tbody"></tbody></table></div><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="ng-count"></span></div></div>
   </div>
 </div>
 
@@ -407,7 +501,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
   <div class="topbar"><div><div class="tbtl">Administrators</div><div class="tbsub">5 users across 4 networks</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-user-plus"></i>Add administrator</button></div></div>
   <div class="content">
     <div style="margin-bottom:16px;padding:12px 16px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--txt2);display:flex;gap:8px;align-items:flex-start"><i class="ti ti-info-circle" style="font-size:16px;flex-shrink:0;margin-top:1px;color:var(--txt3)"></i><div>Primary admins manage all networks. Secondary users (e.g. receptionists) can only view or manage guests on their assigned networks.</div></div>
-    <table class="atbl">
+    <div class="table-scroll"><table class="atbl">
       <thead><tr><th style="width:200px">Name</th><th style="width:170px">Email</th><th style="width:100px">Role</th><th>Networks</th><th style="width:80px">Actions</th></tr></thead>
       <tbody>
         <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px">JM</div><div><div style="font-weight:500;font-size:13px">Jordan M.</div><div style="font-size:11px;color:var(--txt3)">You</div></div></div></td><td style="font-size:12px;color:var(--txt2)">jordan@corp.com</td><td><span class="role-badge rb-net">Net Admin</span></td><td style="font-size:12px;color:var(--txt2)">All networks</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button></div></td></tr>
@@ -416,13 +510,32 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
         <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--pink-bg);color:var(--pink-txt)">AM</div><div style="font-size:13px;font-weight:500">Alex M.</div></div></td><td style="font-size:12px;color:var(--txt2)">alex@corp.com</td><td><span class="role-badge rb-sec">Guest Mgr</span></td><td style="font-size:12px;color:var(--txt2)">Conference center</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
         <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--green-bg);color:var(--green-txt)">TN</div><div style="font-size:13px;font-weight:500">Taylor N.</div></div></td><td style="font-size:12px;color:var(--txt2)">taylor@corp.com</td><td><span class="role-badge rb-sup">Read-only</span></td><td style="font-size:12px;color:var(--txt2)">All networks</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-edit"></i></button><button class="ib dng"><i class="ti ti-trash"></i></button></div></td></tr>
       </tbody>
-    </table>
+    </table></div>
+  </div>
+</div>
+
+<div class="review-overlay" id="review-modal">
+  <div class="review-modal" role="dialog" aria-modal="true" aria-labelledby="review-title">
+    <div class="review-head">
+      <div>
+        <div class="review-title" id="review-title">Guest review</div>
+        <div class="review-sub" id="review-sub"></div>
+      </div>
+      <button class="ib" type="button" aria-label="Close guest review" onclick="closeGuestReview()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="review-grid" id="review-grid"></div>
+    <div class="review-req" id="review-req"></div>
+    <div class="review-actions">
+      <button class="btn" type="button" onclick="closeGuestReview()">Close</button>
+      <button class="btn" id="review-deny" type="button"><i class="ti ti-x"></i>Deny</button>
+      <button class="btn btnp" id="review-approve" type="button"><i class="ti ti-check"></i>Approve</button>
+    </div>
   </div>
 </div>
 
 <!-- SETTINGS -->
 <div id="pg-settings" class="pg">
-  <div class="topbar"><div><div class="tbtl">Settings</div><div class="tbsub">Integrations, RADIUS, themes</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="topbar"><div><div class="tbtl">Settings</div><div class="tbsub">Integrations, RADIUS, and themes</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
   <div class="content">
     <div class="stabs"><div class="stab on" onclick="stab('integrations',this)">Integrations</div><div class="stab" onclick="stab('radius',this)">RADIUS</div><div class="stab" onclick="stab('themes',this)">Themes</div></div>
     <div id="stp-integrations" class="stp on">
@@ -438,7 +551,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
         <div class="fg"><label class="fl">Shared secret</label><input class="fin" type="password" value="••••••••••"/></div>
         <div class="fg"><label class="fl">Timeout (seconds)</label><input class="fin" type="text" value="5"/></div>
         <div class="fg"><label class="fl">Accounting port</label><input class="fin" type="text" value="1813"/></div>
-        <div class="fg"><label class="fl">Auth protocol</label><select class="fin"><option selected>PAP</option><option>CHAP</option><option>MS-CHAPv2</option></select></div>
+        <div class="fg"><label class="fl">Authentication protocol</label><select class="fin"><option selected>PAP</option><option>CHAP</option><option>MS-CHAPv2</option></select></div>
       </div>
     </div>
     <div id="stp-themes" class="stp">
@@ -459,7 +572,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
           <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="st-description" rows="2" maxlength="280" placeholder="Please register to access the guest network."></textarea></div>
         </div>
         <div class="cust-actions">
-          <button class="btn" type="button" id="st-delete-theme" style="color:var(--danger-txt);border-color:var(--danger-border)"><i class="ti ti-trash"></i>Delete theme</button>
+          <button class="btn" type="button" id="st-delete-theme" style="color:var(--danger-txt);border-color:var(--danger-border)"><i class="ti ti-trash"></i>Delete selected theme</button>
           <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center" id="st-delete-theme-note">Only GuestPass admins can delete user-created themes.</div>
         </div>
       </div>
@@ -519,10 +632,10 @@ const defaultThemeDescription='Please register to access the guest network.';
 const builtInThemes=new Set(['Corporate Blue','Minimal Light','Dark Mode','ABC']);
 
 const nets={
-  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-register',status:'Active',theme:'Corporate Blue'},
+  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-registration',status:'Active',theme:'Corporate Blue'},
   conf:{name:'Conference center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active',theme:'Corporate Blue'},
   cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue'},
-  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-register',status:'Inactive',theme:'Corporate Blue'}
+  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-registration',status:'Inactive',theme:'Corporate Blue'}
 };
 const themeConfigs={
   'Corporate Blue': { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription },
@@ -595,19 +708,22 @@ function readableColor(hex){
 
 function syncNetworkThemeSelect(){
   const select=document.getElementById('nd-theme');
+  if(!select) return;
   const selected=nets[currentNet].theme||'Corporate Blue';
   select.innerHTML=Object.keys(themeConfigs).map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
-  select.value=selected;
+  select.value=themeConfigs[selected] ? selected : defaultThemeName;
 }
 
 function applyCustomizationPreview(){
   const net=nets[currentNet];
+  if(!net) return;
   const cfg=themeConfigs[net.theme||'Corporate Blue']||themeConfigs['Corporate Blue'];
   const pvBox=document.getElementById('nd-pvbox');
   const pvCard=document.getElementById('nd-pvcard');
   const pvDesc=document.getElementById('nd-pvdesc');
   const pvPrimary=document.getElementById('nd-pvbtn-primary');
   const pvSecondary=document.getElementById('nd-pvbtn-secondary');
+  if(!pvBox || !pvCard || !pvDesc || !pvPrimary) return;
 
   pvBox.style.backgroundColor=cfg.backgroundColor;
   pvBox.style.backgroundImage=cfg.backgroundImage ? `linear-gradient(rgba(0,0,0,.16), rgba(0,0,0,.16)), url('${cfg.backgroundImage}')` : 'none';
@@ -623,31 +739,74 @@ function applyCustomizationPreview(){
 
   pvPrimary.style.backgroundColor=cfg.primaryButton;
   pvPrimary.style.color=readableColor(cfg.primaryButton);
-  pvSecondary.style.backgroundColor=cfg.secondaryButton;
-  pvSecondary.style.color=readableColor(cfg.secondaryButton);
+  if(pvSecondary){
+    pvSecondary.style.backgroundColor=cfg.secondaryButton;
+    pvSecondary.style.color=readableColor(cfg.secondaryButton);
+  }
 }
 
 function onThemeChange(){
-  nets[currentNet].theme=document.getElementById('nd-theme').value;
+  const selected=document.getElementById('nd-theme')?.value;
+  if(!nets[currentNet]) return;
+  nets[currentNet].theme=themeConfigs[selected] ? selected : defaultThemeName;
   applyCustomizationPreview();
 }
 
 function updateThemeFromInputs(){
   const theme=themeConfigs[currentThemeEditor];
-  theme.backgroundColor=document.getElementById('st-bg-color').value;
-  theme.backgroundImage=document.getElementById('st-bg-url').value.trim();
-  theme.fontFamily=document.getElementById('st-font-family').value;
-  theme.fontColor=document.getElementById('st-font-color').value;
-  theme.primaryButton=document.getElementById('st-btn-primary').value;
-  theme.secondaryButton=document.getElementById('st-btn-secondary').value;
-  theme.cardPlacement=document.getElementById('st-card-placement').value;
-  theme.description=document.getElementById('st-description').value;
+  if(!theme) return;
+
+  const bgColor=document.getElementById('st-bg-color');
+  const bgUrl=document.getElementById('st-bg-url');
+  const fontFamily=document.getElementById('st-font-family');
+  const fontColor=document.getElementById('st-font-color');
+  const btnPrimary=document.getElementById('st-btn-primary');
+  const btnSecondary=document.getElementById('st-btn-secondary');
+  const cardPlacement=document.getElementById('st-card-placement');
+  const description=document.getElementById('st-description');
+  if(!bgColor || !bgUrl || !fontFamily || !fontColor || !btnPrimary || !btnSecondary || !cardPlacement || !description) return;
+
+  const parsedUrl=bgUrl.value.trim();
+  const safeImageUrl=(() => {
+    if(!parsedUrl) return '';
+    if(parsedUrl.startsWith('data:image/')) return parsedUrl;
+    try{
+      const url=new URL(parsedUrl);
+      if(url.protocol==='http:' || url.protocol==='https:') return url.toString();
+    }catch(_error){}
+    return '';
+  })();
+
+  theme.backgroundColor=bgColor.value;
+  theme.backgroundImage=safeImageUrl;
+  theme.fontFamily=fontFamily.value;
+  theme.fontColor=fontColor.value;
+  theme.primaryButton=btnPrimary.value;
+  theme.secondaryButton=btnSecondary.value;
+  theme.cardPlacement=cardPlacement.value;
+  theme.description=description.value;
+
+  if(parsedUrl && !safeImageUrl){
+    bgUrl.setAttribute('aria-invalid','true');
+  }else{
+    bgUrl.removeAttribute('aria-invalid');
+  }
   applyCustomizationPreview();
 }
 
 function onSettingsBackgroundFileChange(evt){
   const file=evt.target.files && evt.target.files[0];
   if(!file) return;
+  if(!file.type.startsWith('image/')){
+    window.alert('Please choose an image file.');
+    evt.target.value='';
+    return;
+  }
+  if(file.size > 2 * 1024 * 1024){
+    window.alert('Image must be 2 MB or smaller.');
+    evt.target.value='';
+    return;
+  }
   const reader=new FileReader();
   reader.onload=(e)=>{
     themeConfigs[currentThemeEditor].backgroundImage=String(e.target.result||'');
@@ -660,18 +819,30 @@ function onSettingsBackgroundFileChange(evt){
 
 function syncThemeEditorInputs(){
   const theme=themeConfigs[currentThemeEditor];
-  document.getElementById('st-theme-select').value=currentThemeEditor;
-  document.getElementById('st-bg-color').value=theme.backgroundColor;
-  document.getElementById('st-bg-url').value=theme.backgroundImage||'';
-  document.getElementById('st-font-family').value=theme.fontFamily;
-  document.getElementById('st-font-color').value=theme.fontColor;
-  document.getElementById('st-btn-primary').value=theme.primaryButton;
-  document.getElementById('st-btn-secondary').value=theme.secondaryButton;
-  document.getElementById('st-card-placement').value=theme.cardPlacement;
-  document.getElementById('st-description').value=theme.description;
+  if(!theme) return;
+  const themeSelect=document.getElementById('st-theme-select');
+  const bgColor=document.getElementById('st-bg-color');
+  const bgUrl=document.getElementById('st-bg-url');
+  const fontFamily=document.getElementById('st-font-family');
+  const fontColor=document.getElementById('st-font-color');
+  const btnPrimary=document.getElementById('st-btn-primary');
+  const btnSecondary=document.getElementById('st-btn-secondary');
+  const cardPlacement=document.getElementById('st-card-placement');
+  const description=document.getElementById('st-description');
+  const deleteButton=document.getElementById('st-delete-theme');
+  if(!themeSelect || !bgColor || !bgUrl || !fontFamily || !fontColor || !btnPrimary || !btnSecondary || !cardPlacement || !description || !deleteButton) return;
+
+  themeSelect.value=currentThemeEditor;
+  bgColor.value=theme.backgroundColor;
+  bgUrl.value=theme.backgroundImage||'';
+  fontFamily.value=theme.fontFamily;
+  fontColor.value=theme.fontColor;
+  btnPrimary.value=theme.primaryButton;
+  btnSecondary.value=theme.secondaryButton;
+  cardPlacement.value=theme.cardPlacement;
+  description.value=theme.description;
   document.querySelectorAll('.theme-item[data-theme]').forEach((item)=>item.classList.toggle('sel',item.dataset.theme===currentThemeEditor));
 
-  const deleteButton=document.getElementById('st-delete-theme');
   const isBuiltIn=builtInThemes.has(currentThemeEditor);
   const canDelete=isGuestPassAdmin() && !isBuiltIn;
   deleteButton.disabled=!canDelete;
@@ -680,6 +851,7 @@ function syncThemeEditorInputs(){
 
 function renderThemeList(){
   const list=document.getElementById('st-theme-list');
+  if(!list) return;
   const items=Object.keys(themeConfigs).map((themeName)=>`<button type="button" class="theme-item${themeName===currentThemeEditor?' sel':''}" data-theme="${themeName}">${themeName}</button>`).join('');
   const addItem='<button type="button" class="theme-item add" id="st-theme-add">+ New theme</button>';
   list.innerHTML=items + addItem;
@@ -691,7 +863,9 @@ function renderThemeList(){
     });
   });
 
-  document.getElementById('st-theme-add').addEventListener('click',()=>{
+  const addButton=document.getElementById('st-theme-add');
+  if(!addButton) return;
+  addButton.addEventListener('click',()=>{
     const requested=window.prompt('Enter a name for the new theme:');
     if(!requested) return;
     const name=requested.trim();
@@ -753,7 +927,10 @@ function deleteCurrentTheme(){
 
 function syncThemeSelects(){
   const themeNames=Object.keys(themeConfigs);
-  document.getElementById('st-theme-select').innerHTML=themeNames.map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
+  const themeSelect=document.getElementById('st-theme-select');
+  if(themeSelect){
+    themeSelect.innerHTML=themeNames.map((theme)=>`<option value="${theme}">${theme}</option>`).join('');
+  }
   syncNetworkThemeSelect();
   renderThemeList();
   syncThemeEditorInputs();
@@ -762,46 +939,268 @@ function syncThemeSelects(){
 function bindThemeInputs(){
   ['st-bg-color','st-bg-url','st-font-family','st-font-color','st-btn-primary','st-btn-secondary','st-card-placement','st-description'].forEach((id)=>{
     const el=document.getElementById(id);
+    if(!el) return;
     el.addEventListener('input',updateThemeFromInputs);
     el.addEventListener('change',updateThemeFromInputs);
   });
-  document.getElementById('st-bg-file').addEventListener('change',onSettingsBackgroundFileChange);
-  document.getElementById('st-theme-select').addEventListener('change',(e)=>{
+  const bgFile=document.getElementById('st-bg-file');
+  if(bgFile) bgFile.addEventListener('change',onSettingsBackgroundFileChange);
+  const themeSelect=document.getElementById('st-theme-select');
+  if(themeSelect) themeSelect.addEventListener('change',(e)=>{
     currentThemeEditor=e.target.value;
     syncThemeEditorInputs();
   });
-  document.getElementById('st-delete-theme').addEventListener('click',deleteCurrentTheme);
+  const deleteButton=document.getElementById('st-delete-theme');
+  if(deleteButton) deleteButton.addEventListener('click',deleteCurrentTheme);
 }
 
 function goToThemeSettings(){
-  nav('settings',document.querySelectorAll('.ni')[4]);
+  const navItems=domRefs.navItems.length ? domRefs.navItems : [...document.querySelectorAll('.ni')];
+  const settingsNav=navItems.find((node)=>node.textContent.includes('Settings'));
+  nav('settings',settingsNav || null);
   const themeTab=document.querySelector('.stab[onclick*="themes"]');
   if(themeTab) stab('themes',themeTab);
 }
 
 const gdata={
   lobby:[
-    {i:'PS',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Priya Sharma',email:'priya@acme.co',status:'online',dur:'2m',ver:'Self-reg',exp:'7h 58m'},
-    {i:'SR',bg:'#E6F1FB',fg:'#185FA5',dBg:'#0c2240',dFg:'#85B7EB',name:'Sofia Reyes',email:'sofia@vendor.com',status:'online',dur:'1h 22m',ver:'Jordan M.',exp:'6h 38m'},
-    {i:'TK',bg:'#EEEDFE',fg:'#534AB7',dBg:'#1e1b3a',dFg:'#AFA9EC',name:'Tom Keller',email:'t.keller@guest.org',status:'online',dur:'3h 5m',ver:'Self-reg',exp:'4h 55m'},
+    {id:'lobby-priya',i:'PS',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Priya Sharma',email:'priya@acme.co',status:'online',dur:'2m',ver:'Self sign-up',exp:'7h 58m',requestedAt:'9:08 AM',req:{termsAccepted:true,emailValidated:true,source:'Self-registration'}},
+    {id:'lobby-sofia',i:'SR',bg:'#E6F1FB',fg:'#185FA5',dBg:'#0c2240',dFg:'#85B7EB',name:'Sofia Reyes',email:'sofia@vendor.com',status:'online',dur:'1h 22m',ver:'Jordan M.',exp:'6h 38m',requestedAt:'8:11 AM',req:{termsAccepted:true,emailValidated:true,source:'Reception desk'}},
+    {id:'lobby-tom',i:'TK',bg:'#EEEDFE',fg:'#534AB7',dBg:'#1e1b3a',dFg:'#AFA9EC',name:'Tom Keller',email:'t.keller@guest.org',status:'online',dur:'3h 5m',ver:'Self sign-up',exp:'4h 55m',requestedAt:'7:02 AM',req:{termsAccepted:true,emailValidated:true,source:'Self-registration'}},
   ],
   conf:[
-    {i:'DW',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Daniel Wu',email:'d.wu@partner.io',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
-    {i:'AL',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Anna Lee',email:'a.lee@partner.io',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
-    {i:'RG',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Raj Gupta',email:'raj@vendor.in',status:'pending',dur:'—',ver:'Sponsor req.',exp:'—'},
-    {i:'MB',bg:'#EAF3DE',fg:'#3B6D11',dBg:'#1a2910',dFg:'#97C459',name:'Mike Barnes',email:'m.barnes@corp.com',status:'online',dur:'55m',ver:'Jordan M.',exp:'7h 5m'},
+    {id:'conf-daniel',i:'DW',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Daniel Wu',email:'d.wu@partner.io',status:'pending',dur:'N/A',ver:'Sponsor approval',exp:'N/A',requestedAt:'9:17 AM',req:{emailValidated:true,termsAccepted:true,sponsor:'Jordan M.',meeting:'Q3 Steering Review'}},
+    {id:'conf-anna',i:'AL',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Anna Lee',email:'a.lee@partner.io',status:'pending',dur:'N/A',ver:'Sponsor approval',exp:'N/A',requestedAt:'9:20 AM',req:{emailValidated:true,termsAccepted:true,sponsor:'Robin L.',meeting:'APAC Marketing Sync'}},
+    {id:'conf-raj',i:'RG',bg:'#FAEEDA',fg:'#854F0B',dBg:'#2e1f08',dFg:'#EF9F27',name:'Raj Gupta',email:'raj@vendor.in',status:'pending',dur:'N/A',ver:'Sponsor approval',exp:'N/A',requestedAt:'9:26 AM',req:{emailValidated:false,termsAccepted:true,sponsor:'Pending assignment',meeting:'Vendor demo'}},
+    {id:'conf-mike',i:'MB',bg:'#EAF3DE',fg:'#3B6D11',dBg:'#1a2910',dFg:'#97C459',name:'Mike Barnes',email:'m.barnes@corp.com',status:'online',dur:'55m',ver:'Jordan M.',exp:'7h 5m',requestedAt:'8:05 AM',req:{emailValidated:true,termsAccepted:true,sponsor:'Jordan M.',meeting:'Internal workshop'}},
   ],
   cafe:[
-    {i:'LP',bg:'#FBEAF0',fg:'#993556',dBg:'#2a1120',dFg:'#ED93B1',name:'Lisa Park',email:'lisa@startup.io',status:'online',dur:'18m',ver:'Self-reg',exp:'3h 42m'},
-    {i:'CJ',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Chris Jordan',email:'c.j@design.co',status:'online',dur:'1h 10m',ver:'Self-reg',exp:'2h 50m'},
+    {id:'cafe-lisa',i:'LP',bg:'#FBEAF0',fg:'#993556',dBg:'#2a1120',dFg:'#ED93B1',name:'Lisa Park',email:'lisa@startup.io',status:'online',dur:'18m',ver:'Self sign-up',exp:'3h 42m',requestedAt:'9:02 AM',req:{termsAccepted:true,emailValidated:true}},
+    {id:'cafe-chris',i:'CJ',bg:'#E6F6F7',fg:'#006e79',dBg:'#0a3035',dFg:'#5dcaa5',name:'Chris Jordan',email:'c.j@design.co',status:'online',dur:'1h 10m',ver:'Self sign-up',exp:'2h 50m',requestedAt:'7:54 AM',req:{termsAccepted:true,emailValidated:true}},
   ],
   roof:[]
 };
 
+const networkRequirements={
+  lobby:[
+    {key:'emailValidated',label:'Valid email',type:'boolean'},
+    {key:'termsAccepted',label:'Terms accepted',type:'boolean'},
+    {key:'source',label:'Registration source',type:'text'}
+  ],
+  conf:[
+    {key:'emailValidated',label:'Valid email',type:'boolean'},
+    {key:'termsAccepted',label:'Terms accepted',type:'boolean'},
+    {key:'sponsor',label:'Sponsor',type:'text'},
+    {key:'meeting',label:'Visit reason',type:'text'}
+  ],
+  cafe:[
+    {key:'termsAccepted',label:'Terms accepted',type:'boolean'},
+    {key:'emailValidated',label:'Valid email',type:'boolean'}
+  ],
+  roof:[
+    {key:'termsAccepted',label:'Terms accepted',type:'boolean'}
+  ]
+};
+
+const domRefs={
+  pages:[],
+  navItems:[],
+  navPendingBadge:null,
+  dashPendingCount:null,
+  dashPendingCopy:null,
+  glSubtitle:null,
+  glPendingBanner:null,
+  glPendingCopy:null,
+  glSearch:null,
+  glNetworkFilter:null,
+  glStatusFilter:null,
+  glCount:null,
+  glTbody:null,
+  ngBanner:null,
+  ngBannerText:null,
+  ngEmpty:null,
+  ngWrap:null,
+  ngCount:null,
+  ngTableBody:null,
+};
+
+const guestRowsCache=new Map();
+const guestFilters={search:'',network:'all',status:'all'};
+let currentReviewGuest=null;
+
+function initDomRefs(){
+  domRefs.pages=[...document.querySelectorAll('.pg')];
+  domRefs.navItems=[...document.querySelectorAll('.ni')];
+  domRefs.navPendingBadge=document.getElementById('nav-pending-badge');
+  domRefs.dashPendingCount=document.getElementById('dash-pending-count');
+  domRefs.dashPendingCopy=document.getElementById('dash-pending-copy');
+  domRefs.glSubtitle=document.getElementById('gl-subtitle');
+  domRefs.glPendingBanner=document.getElementById('gl-pending-banner');
+  domRefs.glPendingCopy=document.getElementById('gl-pending-copy');
+  domRefs.glSearch=document.getElementById('gl-search');
+  domRefs.glNetworkFilter=document.getElementById('gl-network-filter');
+  domRefs.glStatusFilter=document.getElementById('gl-status-filter');
+  domRefs.glCount=document.getElementById('gl-count');
+  domRefs.glTbody=document.getElementById('gl-tbody');
+  domRefs.ngBanner=document.getElementById('ng-banner');
+  domRefs.ngBannerText=document.getElementById('ng-btext');
+  domRefs.ngEmpty=document.getElementById('ng-empty');
+  domRefs.ngWrap=document.getElementById('ng-wrap');
+  domRefs.ngCount=document.getElementById('ng-count');
+  domRefs.ngTableBody=document.getElementById('ng-tbody');
+}
+
+function getNavItem(index){
+  return domRefs.navItems[index] || document.querySelectorAll('.ni')[index] || null;
+}
+
+function getStatusBadge(status){
+  if(status==='online'){
+    return '<span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:var(--ui-success);display:inline-block"></span>Online</span>';
+  }
+  if(status==='pending'){
+    return '<span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:var(--ui-warn);display:inline-block"></span>Pending</span>';
+  }
+  if(status==='denied'){
+    return '<span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--danger-bg);color:var(--danger-txt)">Denied</span>';
+  }
+  return '<span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--bg2);color:var(--txt3)">Offline</span>';
+}
+
+function getGuestActions(networkKey,guest){
+  const netName=escapeHtml(nets[networkKey]?.name||'Network');
+  if(guest.status==='pending'){
+    return `<div class="action-buttons"><button class="ib ib-secondary" type="button" data-action="review" data-network="${networkKey}" data-guest-id="${guest.id}" aria-label="Review ${escapeHtml(guest.name)} request on ${netName}"><i class="ti ti-eye"></i><span>Review</span></button><button class="ib ib-primary" type="button" data-action="approve" data-network="${networkKey}" data-guest-id="${guest.id}" aria-label="Approve ${escapeHtml(guest.name)}"><i class="ti ti-check"></i><span>Approve</span></button><button class="ib dng" type="button" data-action="deny" data-network="${networkKey}" data-guest-id="${guest.id}" aria-label="Deny ${escapeHtml(guest.name)}"><i class="ti ti-x"></i><span>Deny</span></button></div>`;
+  }
+  return `<div class="action-buttons"><button class="ib ib-secondary" type="button" data-action="review" data-network="${networkKey}" data-guest-id="${guest.id}" aria-label="View guest details for ${escapeHtml(guest.name)}"><i class="ti ti-eye"></i><span>View</span></button><button class="ib dng" type="button" data-action="disconnect" data-network="${networkKey}" data-guest-id="${guest.id}" aria-label="Disconnect ${escapeHtml(guest.name)}"><i class="ti ti-wifi-off"></i><span>Disconnect</span></button></div>`;
+}
+
+function getGuestRecords(){
+  const records=[];
+  Object.entries(gdata).forEach(([networkKey,guests])=>{
+    guests.forEach((guest)=>records.push({networkKey,network:nets[networkKey],guest}));
+  });
+  return records;
+}
+
+function syncNetworkStatsFromGuests(){
+  Object.keys(nets).forEach((networkKey)=>{
+    const guests=gdata[networkKey]||[];
+    nets[networkKey].guests=guests.filter((guest)=>guest.status==='online').length;
+    nets[networkKey].pending=guests.filter((guest)=>guest.status==='pending').length;
+  });
+}
+
+function getRequirementSummary(networkKey,guest){
+  const profile=networkRequirements[networkKey]||[];
+  return profile.map((item)=>{
+    const raw=guest.req?.[item.key];
+    if(item.type==='boolean'){
+      const ok=raw===true;
+      return {
+        label:item.label,
+        display:ok?'Ready':'Needs review',
+        cls:ok?'ok':'warn',
+        reviewValue:ok?'Confirmed':'Missing or not validated'
+      };
+    }
+    const text=(raw==null || raw==='')?'Not provided':String(raw);
+    return {
+      label:item.label,
+      display:text,
+      cls:text==='Not provided'?'warn':'ok',
+      reviewValue:text
+    };
+  });
+}
+
+function findGuest(networkKey,guestId){
+  const guests=gdata[networkKey]||[];
+  return guests.find((guest)=>guest.id===guestId) || null;
+}
+
+function renderGuestSummary(){
+  const records=getGuestRecords();
+  const connected=records.filter((record)=>record.guest.status==='online').length;
+  const pending=records.filter((record)=>record.guest.status==='pending').length;
+  if(domRefs.navPendingBadge){
+    domRefs.navPendingBadge.textContent=String(pending);
+    domRefs.navPendingBadge.style.display=pending>0?'inline-flex':'none';
+  }
+  if(domRefs.dashPendingCount){
+    domRefs.dashPendingCount.textContent=String(pending);
+  }
+  if(domRefs.dashPendingCopy){
+    domRefs.dashPendingCopy.textContent=pending>0?'Need review':'No requests';
+  }
+  if(domRefs.glSubtitle){
+    domRefs.glSubtitle.textContent=`${connected} connected · ${pending} pending approval`;
+  }
+  if(domRefs.glPendingBanner && domRefs.glPendingCopy){
+    domRefs.glPendingBanner.style.display=pending>0?'flex':'none';
+    domRefs.glPendingCopy.innerHTML=`<strong>${pending} guest${pending!==1?'s':''}</strong> are waiting for approval`;
+  }
+}
+
+function getFilteredGlobalRecords(){
+  const searchTerm=guestFilters.search.trim().toLowerCase();
+  const statusOrder={pending:0,online:1,offline:2,denied:3};
+  const filtered=getGuestRecords().filter(({networkKey,network,guest})=>{
+    if(guestFilters.network!=='all' && guestFilters.network!==networkKey) return false;
+    if(guestFilters.status!=='all' && guest.status!==guestFilters.status) return false;
+    if(!searchTerm) return true;
+    const haystack=[guest.name,guest.email,network.name,guest.ver].join(' ').toLowerCase();
+    return haystack.includes(searchTerm);
+  });
+
+  return filtered.sort((a,b)=>{
+    const aRank=statusOrder[a.guest.status] ?? 99;
+    const bRank=statusOrder[b.guest.status] ?? 99;
+    if(aRank!==bRank) return aRank-bRank;
+    return a.guest.name.localeCompare(b.guest.name);
+  });
+}
+
+function renderGlobalGuestTable(){
+  if(!domRefs.glTbody || !domRefs.glCount) return;
+  const records=getFilteredGlobalRecords();
+  if(!records.length){
+    domRefs.glTbody.innerHTML='<tr><td colspan="8" style="padding:20px;color:var(--txt3);text-align:center">No guests match this filter.</td></tr>';
+    domRefs.glCount.textContent='Showing 0 guests';
+    return;
+  }
+
+  domRefs.glTbody.innerHTML=records.map(({networkKey,network,guest})=>{
+    const verifiedBg=guest.ver==='Sponsor approval'?'var(--ui-warn-bg)':'var(--bg2)';
+    const verifiedColor=guest.ver==='Sponsor approval'?'var(--ui-warn-ink)':'var(--txt2)';
+    const statusBadge=getStatusBadge(guest.status);
+    return `<tr data-network="${networkKey}" data-guest-id="${guest.id}"><td><input type="checkbox" aria-label="Select ${escapeHtml(guest.name)}"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${isDark?guest.dBg:guest.bg};color:${isDark?guest.dFg:guest.fg}">${escapeHtml(guest.i)}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escapeHtml(guest.name)}</div><div style="font-size:11px;color:var(--txt3)">${escapeHtml(guest.email)}</div></div></div></td><td style="color:var(--txt2)">${escapeHtml(network.name)}</td><td>${statusBadge}</td><td style="color:var(--txt2)">${escapeHtml(guest.dur)}</td><td><span style="font-size:11px;background:${verifiedBg};color:${verifiedColor};padding:2px 7px;border-radius:8px">${escapeHtml(guest.ver)}</span></td><td style="color:var(--txt3);font-size:12px">${escapeHtml(guest.exp)}</td><td>${getGuestActions(networkKey,guest)}</td></tr>`;
+  }).join('');
+
+  domRefs.glCount.textContent=`Showing ${records.length} guest${records.length!==1?'s':''}`;
+}
+
+function refreshGuestViews(){
+  syncNetworkStatsFromGuests();
+  guestRowsCache.clear();
+  renderGuestSummary();
+  renderGlobalGuestTable();
+  if(document.getElementById('pg-netguests')?.classList.contains('on')){
+    renderNetGuests(currentNet);
+  }
+  if(document.getElementById('pg-netdetail')?.classList.contains('on')){
+    openNetDetail(currentNet);
+  }
+}
+
 function nav(pageId, el) {
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.getElementById('pg-'+pageId).classList.add('on');
+  const targetPage=document.getElementById('pg-'+pageId);
+  if(!targetPage) return;
+  const pages=domRefs.pages.length ? domRefs.pages : [...document.querySelectorAll('.pg')];
+  const navItems=domRefs.navItems.length ? domRefs.navItems : [...document.querySelectorAll('.ni')];
+  pages.forEach((page)=>page.classList.remove('on'));
+  navItems.forEach((item)=>item.classList.remove('on'));
+  targetPage.classList.add('on');
   if(el) el.classList.add('on');
 }
 
@@ -820,74 +1219,79 @@ function setGuestNetView(mode){
 }
 
 function openNetDetail(k){
+  if(!nets[k]) return;
   currentNet=k;
   const n=nets[k];
   document.getElementById('nd-bc').textContent=n.name;
   document.getElementById('nd-title').textContent=n.name;
   document.getElementById('nd-nick').value=n.name;
   document.getElementById('nd-guests').textContent=n.guests;
-  document.getElementById('nd-pend').innerHTML=n.pending>0?`<span style="color:#BA7517">${n.pending} pending</span>`:'No pending';
+  document.getElementById('nd-pend').innerHTML=n.pending>0?`<span style="color:var(--ui-warn)">${n.pending} pending</span>`:'No pending approvals';
   document.getElementById('nd-exp').textContent=n.expiry;
   document.getElementById('nd-acc').textContent=n.access;
   const sv=document.getElementById('nd-st');
   sv.textContent=n.status;
-  sv.style.color=n.status==='Active'?'#00838F':'var(--txt3)';
+  sv.style.color=n.status==='Active'?'var(--ui-success)':'var(--txt3)';
   document.getElementById('nd-ssid').textContent=n.ssid;
-  document.getElementById('nd-pvlbl').textContent='Preview — '+n.name;
+  document.getElementById('nd-pvlbl').textContent='Preview: '+n.name;
   document.getElementById('nd-pvname').textContent='Welcome to '+n.name;
-  document.getElementById('nd-pvssid').textContent='Guests see this on connecting to '+n.ssid;
+  document.getElementById('nd-pvssid').textContent='Guests see this when connecting to '+n.ssid;
   syncNetworkThemeSelect();
   applyCustomizationPreview();
   document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('on',i===0));
   document.querySelectorAll('.dtp').forEach((p,i)=>p.classList.toggle('on',i===0));
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.getElementById('pg-netdetail').classList.add('on');
-  document.querySelectorAll('.ni')[1].classList.add('on');
+  nav('netdetail',getNavItem(1));
 }
 
 function openNetGuests(k){
+  if(!nets[k]) return;
   currentNet=k;
   const n=nets[k];
   document.getElementById('ng-bc').textContent=n.name;
-  document.getElementById('ng-title').textContent=n.name+' — guests';
+  document.getElementById('ng-title').textContent='Guests on '+n.name;
   document.getElementById('ng-chip').textContent=n.name;
   renderNetGuests(k);
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  document.getElementById('pg-netguests').classList.add('on');
-  document.querySelectorAll('.ni')[1].classList.add('on');
+  nav('netguests',getNavItem(1));
 }
 
 function renderNetGuests(k){
   const guests=gdata[k]||[];
   const pending=guests.filter(g=>g.status==='pending');
-  const banner=document.getElementById('ng-banner');
-  if(pending.length>0){banner.style.display='flex';document.getElementById('ng-btext').innerHTML=`<strong>${pending.length} guest${pending.length!==1?'s':''}</strong> waiting for approval`;}
-  else{banner.style.display='none';}
-  const empty=document.getElementById('ng-empty');
-  const wrap=document.getElementById('ng-wrap');
+  const banner=domRefs.ngBanner || document.getElementById('ng-banner');
+  const bannerText=domRefs.ngBannerText || document.getElementById('ng-btext');
+  if(pending.length>0){
+    banner.style.display='flex';
+    bannerText.innerHTML=`<strong>${pending.length} guest${pending.length!==1?'s':''}</strong> waiting for approval`;
+  } else {
+    banner.style.display='none';
+  }
+  const empty=domRefs.ngEmpty || document.getElementById('ng-empty');
+  const wrap=domRefs.ngWrap || document.getElementById('ng-wrap');
   if(!guests.length){empty.style.display='block';wrap.style.display='none';return;}
   empty.style.display='none';wrap.style.display='block';
-  document.getElementById('ng-count').textContent=`Showing ${guests.length} guest${guests.length!==1?'s':''} on ${nets[k].name}`;
-  document.getElementById('ng-tbody').innerHTML=guests.map(g=>{
+  const countNode=domRefs.ngCount || document.getElementById('ng-count');
+  countNode.textContent=`Showing ${guests.length} guest${guests.length!==1?'s':''} on ${nets[k].name}`;
+
+  const cacheKey=`${k}:${isDark?'dark':'light'}`;
+  if(!guestRowsCache.has(cacheKey)){
+    const rowsHtml=guests.map(g=>{
     const avBg=isDark?g.dBg:g.bg, avFg=isDark?g.dFg:g.fg;
-    const sp=g.status==='online'
-      ?`<span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span>`
-      :`<span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#BA7517;display:inline-block"></span>Pending</span>`;
-    const vBg=g.ver==='Sponsor req.'?'var(--amber-bg)':'var(--bg2)';
-    const vC=g.ver==='Sponsor req.'?'var(--amber-txt)':'var(--txt2)';
-    const acts=g.status==='pending'
-      ?`<div class="action-buttons"><button class="ib ib-primary apr" type="button" aria-label="Approve guest"><i class="ti ti-check"></i><span>Approve</span></button><button class="ib dng" type="button" aria-label="Reject guest"><i class="ti ti-x"></i><span>Reject</span></button></div>`
-      :`<div class="action-buttons"><button class="ib ib-secondary" type="button" aria-label="View guest details"><i class="ti ti-eye"></i><span>View</span></button><button class="ib dng" type="button" aria-label="Disconnect guest"><i class="ti ti-wifi-off"></i><span>Disconnect</span></button></div>`;
+    const sp=getStatusBadge(g.status);
+    const vBg=g.ver==='Sponsor approval'?'var(--ui-warn-bg)':'var(--bg2)';
+    const vC=g.ver==='Sponsor approval'?'var(--ui-warn-ink)':'var(--txt2)';
+    const acts=getGuestActions(k,g);
     const escInitial=escapeHtml(g.i);
     const escName=escapeHtml(g.name);
     const escEmail=escapeHtml(g.email);
     const escDur=escapeHtml(g.dur);
     const escVer=escapeHtml(g.ver);
     const escExp=escapeHtml(g.exp);
-    return`<tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${escInitial}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escName}</div><div style="font-size:11px;color:var(--txt3)">${escEmail}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${escDur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${escVer}</span></td><td style="color:var(--txt3);font-size:12px">${escExp}</td><td>${acts}</td></tr>`;
-  }).join('');
+    return`<tr data-network="${k}" data-guest-id="${g.id}"><td><input type="checkbox" aria-label="Select ${escName}"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${escInitial}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escName}</div><div style="font-size:11px;color:var(--txt3)">${escEmail}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${escDur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${escVer}</span></td><td style="color:var(--txt3);font-size:12px">${escExp}</td><td>${acts}</td></tr>`;
+    }).join('');
+    guestRowsCache.set(cacheKey,rowsHtml);
+  }
+  const tbody=domRefs.ngTableBody || document.getElementById('ng-tbody');
+  tbody.innerHTML=guestRowsCache.get(cacheKey);
 }
 
 function dtab(id,el){
@@ -925,8 +1329,7 @@ function applyDark(){
   const usDm=document.getElementById('us-dm');
   usDm.classList.toggle('on',isDark);
   usDm.classList.toggle('off',!isDark);
-  const curPg=document.querySelector('.pg.on');
-  if(curPg&&curPg.id==='pg-netguests') renderNetGuests(currentNet);
+  refreshGuestViews();
 }
 
 function toggleNavCollapse(){
@@ -948,15 +1351,19 @@ document.querySelectorAll('.ropt').forEach(opt=>{
   });
 });
 
+initDomRefs();
 syncThemeSelects();
 bindThemeInputs();
 setGuestNetView(guestNetView);
 hardenInteractiveControls();
 bindToggleAriaSync();
 syncToggleAria();
+bindGuestFilters();
+refreshGuestViews();
 
 // Confirmation modal system
 let pendingAction = null;
+let lastFocusedElement = null;
 const confirmModal = document.createElement('div');
 confirmModal.className = 'modal-overlay';
 confirmModal.id = 'confirm-modal';
@@ -987,6 +1394,7 @@ function showConfirmation(title, message, warning, onConfirm) {
     warningEl.style.display = 'none';
   }
   pendingAction = onConfirm;
+  lastFocusedElement = document.activeElement;
   confirmModal.classList.add('open');
   document.getElementById('confirm-btn').focus();
   document.body.style.overflow = 'hidden';
@@ -996,6 +1404,9 @@ function closeConfirmModal() {
   confirmModal.classList.remove('open');
   pendingAction = null;
   document.body.style.overflow = '';
+  if(lastFocusedElement && typeof lastFocusedElement.focus==='function'){
+    lastFocusedElement.focus();
+  }
 }
 
 function executeConfirmedAction() {
@@ -1010,76 +1421,177 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && confirmModal.classList.contains('open')) {
     closeConfirmModal();
   }
+  if (e.key === 'Escape' && document.getElementById('review-modal')?.classList.contains('open')) {
+    closeGuestReview();
+  }
 });
 
-// Handle action button clicks with confirmation for destructive actions
-function setupActionButtons() {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('button.ib');
-    if (!btn) return;
-    
-    const guestRow = btn.closest('tr');
-    if (!guestRow) return;
-    
-    const guestCell = guestRow.querySelector('td:nth-child(2)');
-    const guestName = guestCell ? guestCell.textContent.split('\\n')[0].trim() : 'guest';
-    const isDestructive = btn.classList.contains('dng');
-    const isApprove = btn.classList.contains('apr');
-    
-    if (isDestructive) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const statusCell = guestRow.querySelector('td:nth-child(3)');
-      const isPending = statusCell && statusCell.textContent.includes('Pending');
-      
-      if (isPending) {
-        // Reject pending guest
-        showConfirmation(
-          'Reject guest request?',
-          `${guestName} will not be able to access this network.`,
-          'This cannot be undone.',
-          () => {
-            showActionFeedback(btn, 'Rejecting...', true);
-            setTimeout(() => showActionFeedback(btn, 'Rejected', false), 800);
-          }
-        );
-      } else {
-        // Disconnect online guest
-        showConfirmation(
-          'Disconnect guest?',
-          `${guestName} will be immediately disconnected from this network.`,
-          'This action cannot be undone.',
-          () => {
-            showActionFeedback(btn, 'Disconnecting...', true);
-            setTimeout(() => showActionFeedback(btn, 'Disconnected', false), 800);
-          }
-        );
-      }
-    } else if (isApprove) {
-      // Approve action - no confirmation needed, just feedback
-      showActionFeedback(btn, 'Approving...', true);
-      setTimeout(() => showActionFeedback(btn, 'Approved!', false), 800);
-    }
-  }, true);
+function applyGuestState(guest,networkKey,nextStatus){
+  if(nextStatus==='online'){
+    guest.status='online';
+    guest.ver='Reception approval';
+    guest.dur='0m';
+    guest.exp=nets[networkKey]?.expiry || '8h';
+  }else if(nextStatus==='denied'){
+    guest.status='denied';
+    guest.ver='Reception denial';
+    guest.dur='N/A';
+    guest.exp='Denied';
+  }else if(nextStatus==='offline'){
+    guest.status='offline';
+    guest.ver='Disconnected';
+    guest.dur='N/A';
+    guest.exp='Ended';
+  }
 }
 
-function showActionFeedback(btn, text, isLoading) {
-  const originalHTML = btn.innerHTML;
-  if (isLoading) {
-    btn.setAttribute('data-loading', 'true');
-    btn.disabled = true;
-    btn.textContent = text;
-  } else {
-    btn.setAttribute('data-loading', 'false');
-    btn.disabled = true;
-    btn.textContent = text;
-    setTimeout(() => {
-      btn.innerHTML = originalHTML;
-      btn.removeAttribute('data-loading');
-      btn.disabled = false;
-    }, 1000);
-  }
+function setGuestState(networkKey,guestId,nextStatus){
+  const guest=findGuest(networkKey,guestId);
+  if(!guest) return;
+  applyGuestState(guest,networkKey,nextStatus);
+  refreshGuestViews();
+}
+
+function getAllPendingGuests(){
+  return getGuestRecords().filter(({guest})=>guest.status==='pending');
+}
+
+function approveAllPendingGuests(){
+  const pendingGuests=getAllPendingGuests();
+  if(!pendingGuests.length) return;
+  pendingGuests.forEach(({networkKey,guest})=>applyGuestState(guest,networkKey,'online'));
+  closeGuestReview();
+  refreshGuestViews();
+}
+
+function denyAllPendingGuests(){
+  const pendingGuests=getAllPendingGuests();
+  if(!pendingGuests.length) return;
+  showConfirmation(
+    'Deny all pending requests?',
+    `${pendingGuests.length} pending guest request${pendingGuests.length!==1?'s':''} will be denied.`,
+    'Guests will need to submit a new request for access.',
+    ()=>{
+      pendingGuests.forEach(({networkKey,guest})=>applyGuestState(guest,networkKey,'denied'));
+      closeGuestReview();
+      refreshGuestViews();
+    }
+  );
+}
+
+function closeGuestReview(){
+  const modal=document.getElementById('review-modal');
+  if(!modal) return;
+  modal.classList.remove('open');
+  currentReviewGuest=null;
+  document.body.style.overflow='';
+}
+
+function openGuestReview(networkKey,guestId){
+  const guest=findGuest(networkKey,guestId);
+  const modal=document.getElementById('review-modal');
+  if(!guest || !modal) return;
+  currentReviewGuest={networkKey,guestId};
+
+  const reqRows=getRequirementSummary(networkKey,guest);
+  const reviewSub=document.getElementById('review-sub');
+  const reviewGrid=document.getElementById('review-grid');
+  const reviewReq=document.getElementById('review-req');
+  const approveBtn=document.getElementById('review-approve');
+  const denyBtn=document.getElementById('review-deny');
+  if(!reviewSub || !reviewGrid || !reviewReq || !approveBtn || !denyBtn) return;
+
+  reviewSub.textContent=`${nets[networkKey]?.name || 'Network'} · requested ${guest.requestedAt || 'recently'}`;
+  reviewGrid.innerHTML=[
+    ['Guest',guest.name],
+    ['Email',guest.email],
+    ['Access method',nets[networkKey]?.access || 'Custom'],
+    ['Current status',guest.status.charAt(0).toUpperCase()+guest.status.slice(1)]
+  ].map(([label,value])=>`<div class="review-card"><div class="review-label">${escapeHtml(label)}</div><div class="review-value">${escapeHtml(value)}</div></div>`).join('');
+
+  reviewReq.innerHTML=reqRows.map((row)=>`<div class="review-req-item"><div class="review-req-name">${escapeHtml(row.label)}</div><div class="review-req-value">${escapeHtml(row.reviewValue)}</div></div>`).join('');
+
+  const pending=guest.status==='pending';
+  approveBtn.disabled=!pending;
+  denyBtn.disabled=!pending;
+
+  approveBtn.onclick=()=>{
+    setGuestState(networkKey,guestId,'online');
+    closeGuestReview();
+  };
+  denyBtn.onclick=()=>{
+    showConfirmation(
+      'Deny guest request?',
+      `${guest.name} will not be allowed onto ${nets[networkKey]?.name || 'this network'}.`,
+      'The requester must submit a new request to regain access.',
+      ()=>{
+        setGuestState(networkKey,guestId,'denied');
+        closeGuestReview();
+      }
+    );
+  };
+
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+document.getElementById('review-modal')?.addEventListener('click',(event)=>{
+  if(event.target.id==='review-modal') closeGuestReview();
+});
+
+function bindGuestFilters(){
+  const applyFilters=()=>{
+    guestFilters.search=domRefs.glSearch?.value || '';
+    guestFilters.network=domRefs.glNetworkFilter?.value || 'all';
+    guestFilters.status=domRefs.glStatusFilter?.value || 'all';
+    renderGlobalGuestTable();
+  };
+
+  domRefs.glSearch?.addEventListener('input',applyFilters);
+  domRefs.glNetworkFilter?.addEventListener('change',applyFilters);
+  domRefs.glStatusFilter?.addEventListener('change',applyFilters);
+}
+
+function setupActionButtons() {
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('button[data-action]');
+    if(!btn) return;
+
+    const action=btn.dataset.action;
+    const networkKey=btn.dataset.network;
+    const guestId=btn.dataset.guestId;
+    const guest=findGuest(networkKey,guestId);
+    if(!guest) return;
+
+    if(action==='review'){
+      openGuestReview(networkKey,guestId);
+      return;
+    }
+
+    if(action==='approve'){
+      setGuestState(networkKey,guestId,'online');
+      return;
+    }
+
+    if(action==='deny'){
+      showConfirmation(
+        'Deny guest request?',
+        `${guest.name} will not be allowed to access ${nets[networkKey]?.name || 'this network'}.`,
+        'This request will be marked as denied.',
+        ()=>setGuestState(networkKey,guestId,'denied')
+      );
+      return;
+    }
+
+    if(action==='disconnect'){
+      showConfirmation(
+        'Disconnect guest?',
+        `${guest.name} will be disconnected immediately.`,
+        'They can request access again after disconnection.',
+        ()=>setGuestState(networkKey,guestId,'offline')
+      );
+    }
+  },true);
 }
 
 setupActionButtons();
