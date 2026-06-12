@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./color-tokens.css" />
   <link rel="stylesheet" href="./text-style-tokens.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.1/dist/tabler-icons.min.css" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 </head>
 <body style="margin:0;padding:24px;background:#f2f3f5;">
 
@@ -16,7 +17,7 @@
 .cp{font-family:'Figtree',sans-serif;font-size:14px;display:flex;height:680px;border:0.5px solid var(--border1,#e0deda);border-radius:12px;overflow:hidden;}
 .cp.light{background:var(--bg1);color:var(--txt1);}
 .cp.dark{background:var(--bg1);color:var(--txt1);}
-.sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;transition:width .18s,min-width .18s;}
+.sb{width:200px;min-width:200px;background:var(--bg2);border-right:0.5px solid var(--border1);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;}
 .sb-head{display:flex;align-items:center;justify-content:space-between;padding:0 12px 16px;gap:8px;}
 .logo{padding:0 4px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;color:#00838F;margin-bottom:0;white-space:nowrap;overflow:hidden;}
 .logo-ic{width:28px;height:28px;background:#00838F;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;}
@@ -166,7 +167,7 @@
 .cust-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 .cust-grid .fg{margin-bottom:0;}
 .cust-box{background:var(--bg2);border:0.5px solid var(--border1);border-radius:10px;padding:12px;margin-bottom:14px;}
-.cust-box h4{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;}
+.cust-box h3,.cust-box h4{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;}
 .cust-actions{display:flex;gap:8px;margin-top:8px;}
 
 .gl-tb{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
@@ -181,17 +182,43 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 .gt td{padding:9px 10px;font-size:13px;border-bottom:0.5px solid var(--border1);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt1);}
 .gt tr:hover td{background:var(--bg2);}
 .gav{width:26px;height:26px;border-radius:50%;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;}
-.ib{background:none;border:0.5px solid var(--border1);border-radius:6px;padding:4px 6px;font-size:14px;color:var(--txt2);cursor:pointer;display:flex;align-items:center;}
-.ib:hover{background:var(--bg2);}
-.ib.dng:hover{background:var(--danger-bg);color:var(--danger-txt);border-color:var(--danger-border);}
-.ib.apr{border-color:#0F6E56;color:#0F6E56;}
-.ib.apr:hover{background:var(--green-bg);}
+.ib{background:none;border:0.5px solid var(--border1);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--txt2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;min-height:32px;}
+.ib:hover{background:var(--bg2);border-color:var(--border2);}
+.ib:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.ib:disabled,.ib[aria-disabled="true"]{opacity:.5;cursor:not-allowed;pointer-events:none;}
+.ib.ib-primary{background:var(--teal-bg);border-color:var(--teal);color:var(--teal-txt);font-weight:500;}
+.ib.ib-primary:hover{background:#00a5b3;border-color:#00a5b3;}
+.ib.ib-secondary{background:transparent;border:1px solid var(--border2);color:var(--txt2);}
+.ib.ib-secondary:hover{background:var(--bg2);border-color:var(--border2);}
+.ib.dng{border-color:var(--danger-border);color:var(--danger-txt);}
+.ib.dng:hover{background:#fff1f1;border-color:var(--danger-border);}
+.ib.apr{border-color:#0F6E56;color:#0F6E56;background:#f0fdf7;font-weight:500;}
+.ib.apr:hover{background:#e8fbf4;border-color:#0F6E56;}
+.ib[data-loading="true"]::before{content:'';display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-radius:50%;border-top-color:currentColor;animation:spin .6s linear infinite;margin-right:4px;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
 .atbl{width:100%;border-collapse:collapse;table-layout:fixed;}
 .atbl th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);text-align:left;padding:8px 12px;border-bottom:0.5px solid var(--border1);}
 .atbl td{padding:10px 12px;font-size:13px;border-bottom:0.5px solid var(--border1);color:var(--txt1);vertical-align:middle;}
 .atbl tr:hover td{background:var(--bg2);}
 .role-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;}
+
+/* Confirmation Modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:100;animation:fadeIn .2s ease-out;}
+.modal-overlay.open{display:flex;align-items:center;justify-content:center;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal{background:var(--bg1);border-radius:12px;box-shadow:0 20px 25px -5px rgba(0,0,0,.1);padding:32px;max-width:400px;animation:slideIn .2s ease-out;}
+@keyframes slideIn{from{transform:scale(.95);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--txt1);}
+.modal p{font-size:14px;color:var(--txt2);margin-bottom:20px;line-height:1.5;}
+.modal-actions{display:flex;gap:12px;justify-content:flex-end;}
+.modal-actions button{padding:8px 16px;border-radius:8px;border:1px solid transparent;font-size:13px;font-weight:500;cursor:pointer;transition:all .12s;}
+.modal-actions .btn-cancel{background:var(--bg2);color:var(--txt1);border-color:var(--border1);}
+.modal-actions .btn-cancel:hover{background:var(--bg3);border-color:var(--border2);}
+.modal-actions .btn-confirm{background:var(--danger-bg);color:var(--danger-txt);border-color:var(--danger-border);}
+.modal-actions .btn-confirm:hover{background:#f06a6a;border-color:#f06a6a;}
+.modal-warning{background:#fff1f1;border:1px solid var(--danger-border);border-radius:8px;padding:12px;margin-bottom:16px;color:var(--danger-txt);font-size:13px;display:flex;gap:8px;}
+.modal-warning i{font-size:16px;flex-shrink:0;margin-top:2px;}
 .rb-net{background:var(--teal-bg);color:var(--teal-txt);}
 .rb-sec{background:var(--blue-bg);color:var(--blue-txt);}
 .rb-sup{background:var(--pu-bg);color:var(--pu-txt);}
@@ -215,6 +242,11 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
 .theme-item.add{border-style:dashed;}
 .us-card{background:var(--bg2);border-radius:12px;padding:20px;margin-bottom:16px;}
 .us-av{width:56px;height:56px;border-radius:50%;background:var(--teal-bg);color:#00838F;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.ni,.tbsub,.fh,.rd,.fl,.gt td,.atbl td{overflow-wrap:anywhere;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+}
 </style>
 
 <div class="cp light" id="cpRoot">
@@ -344,7 +376,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
       <select class="sf"><option>All networks</option><option>Lobby guest</option><option>Conference center</option><option>Café area</option></select>
       <select class="sf"><option>All statuses</option><option>Connected</option><option>Pending</option><option>Disconnected</option></select>
     </div>
-    <table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:75px">Actions</th></tr></thead>
+    <table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:160px">Guest</th><th style="width:110px">Network</th><th style="width:80px">Status</th><th style="width:75px">Duration</th><th style="width:105px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead>
     <tbody>
       <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#E6F6F7;color:#006e79">PS</div><div><div style="font-weight:500;font-size:13px">Priya Sharma</div><div style="font-size:11px;color:var(--txt3)">priya@acme.co</div></div></div></td><td style="color:var(--txt2)">Lobby guest</td><td><span class="pill pill-a" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#00838F;display:inline-block"></span>Online</span></td><td style="color:var(--txt2)">2m</td><td><span style="font-size:11px;background:var(--bg2);color:var(--txt2);padding:2px 7px;border-radius:8px">Self-reg</span></td><td style="color:var(--txt3);font-size:12px">7h 58m</td><td><div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div></td></tr>
       <tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:#FAEEDA;color:#854F0B">DW</div><div><div style="font-weight:500;font-size:13px">Daniel Wu</div><div style="font-size:11px;color:var(--txt3)">d.wu@partner.io</div></div></div></td><td style="color:var(--txt2)">Conference</td><td><span class="pill pill-p" style="display:inline-flex;align-items:center;gap:3px"><span style="width:6px;height:6px;border-radius:50%;background:#BA7517;display:inline-block"></span>Pending</span></td><td style="color:var(--txt3)">—</td><td><span style="font-size:11px;background:var(--amber-bg);color:var(--amber-txt);padding:2px 7px;border-radius:8px">Sponsor req.</span></td><td style="color:var(--txt3);font-size:12px">—</td><td><div style="display:flex;gap:4px"><button class="ib apr"><i class="ti ti-check"></i></button><button class="ib dng"><i class="ti ti-x"></i></button></div></td></tr>
@@ -366,7 +398,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
     </div>
     <div class="pbanner" id="ng-banner"><i class="ti ti-clock" style="font-size:18px"></i><div id="ng-btext"></div><button style="margin-left:auto;background:#BA7517;color:#fff;border:none;border-radius:8px;padding:5px 12px;font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;cursor:pointer">Review</button></div>
     <div id="ng-empty" style="display:none;text-align:center;padding:48px 0;color:var(--txt3)"><i class="ti ti-users-off" style="font-size:32px;display:block;margin-bottom:10px"></i><div style="font-size:14px;font-weight:500;color:var(--txt2);margin-bottom:4px">No guests on this network</div><div style="font-size:12px">Network is inactive or has no recorded guests.</div></div>
-    <div id="ng-wrap"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:165px">Guest</th><th style="width:85px">Status</th><th style="width:75px">Duration</th><th style="width:110px">Verified by</th><th style="width:80px">Expires</th><th style="width:75px">Actions</th></tr></thead><tbody id="ng-tbody"></tbody></table><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="ng-count"></span></div></div>
+    <div id="ng-wrap"><table class="gt"><thead><tr><th style="width:32px"><input type="checkbox"/></th><th style="width:165px">Guest</th><th style="width:85px">Status</th><th style="width:75px">Duration</th><th style="width:110px">Verified by</th><th style="width:80px">Expires</th><th style="width:160px">Actions</th></tr></thead><tbody id="ng-tbody"></tbody></table><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:12px;color:var(--txt3)"><span id="ng-count"></span></div></div>
   </div>
 </div>
 
@@ -413,18 +445,18 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
       <div style="margin-bottom:16px;font-size:13px;font-weight:600;color:var(--txt1)">Landing page themes</div>
       <div class="theme-list" id="st-theme-list"></div>
       <div class="cust-box" style="margin-top:14px;">
-        <h4>Theme Editor</h4>
+        <h3>Theme Editor</h3>
         <div class="cust-grid">
           <div class="fg"><label class="fl">Theme</label><select class="fin" id="st-theme-select"></select></div>
           <div class="fg"><label class="fl">Background color</label><input class="fin" type="color" id="st-bg-color" value="#00838F"/></div>
-          <div class="fg"><label class="fl">Background image URL</label><input class="fin" type="text" id="st-bg-url" placeholder="https://..."/></div>
+          <div class="fg"><label class="fl">Background image URL</label><input class="fin" type="url" id="st-bg-url" placeholder="https://..." maxlength="2048" inputmode="url"/></div>
           <div class="fg"><label class="fl">Upload background</label><input class="fin" type="file" id="st-bg-file" accept="image/*"/></div>
           <div class="fg"><label class="fl">Font family</label><select class="fin" id="st-font-family"><option value="Figtree, sans-serif">Figtree</option><option value="'Open Sans', sans-serif">Open Sans</option><option value="Georgia, serif">Georgia</option><option value="'Courier New', monospace">Courier New</option></select></div>
           <div class="fg"><label class="fl">Font color</label><input class="fin" type="color" id="st-font-color" value="#ffffff"/></div>
           <div class="fg"><label class="fl">Primary button color</label><input class="fin" type="color" id="st-btn-primary" value="#ffffff"/></div>
           <div class="fg"><label class="fl">Secondary button color</label><input class="fin" type="color" id="st-btn-secondary" value="#d6eef0"/></div>
           <div class="fg"><label class="fl">Login card placement</label><select class="fin" id="st-card-placement"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
-          <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="st-description" rows="2" placeholder="Please register to access the guest network."></textarea></div>
+          <div class="fg" style="grid-column:1/-1"><label class="fl">Page description</label><textarea class="fin" id="st-description" rows="2" maxlength="280" placeholder="Please register to access the guest network."></textarea></div>
         </div>
         <div class="cust-actions">
           <button class="btn" type="button" id="st-delete-theme" style="color:var(--danger-txt);border-color:var(--danger-border)"><i class="ti ti-trash"></i>Delete theme</button>
@@ -446,9 +478,9 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;}
         <button class="btn" style="margin-left:auto"><i class="ti ti-camera"></i>Change photo</button>
       </div>
       <div class="fgrid">
-        <div class="fg"><label class="fl">First name</label><input class="fin" type="text" value="Jordan"/></div>
-        <div class="fg"><label class="fl">Last name</label><input class="fin" type="text" value="Monroe"/></div>
-        <div class="fg" style="grid-column:1/-1"><label class="fl">Email</label><input class="fin" type="text" value="jordan@corp.com"/></div>
+        <div class="fg"><label class="fl">First name</label><input class="fin" type="text" maxlength="80" autocomplete="given-name" value="Jordan"/></div>
+        <div class="fg"><label class="fl">Last name</label><input class="fin" type="text" maxlength="80" autocomplete="family-name" value="Monroe"/></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">Email</label><input class="fin" type="email" maxlength="254" inputmode="email" autocomplete="email" value="jordan@corp.com"/></div>
       </div>
     </div>
     <div style="background:var(--bg2);border-radius:12px;padding:16px 20px">
@@ -501,6 +533,54 @@ const themeConfigs={
 
 function isGuestPassAdmin(){
   return currentUserRole==='Net Admin';
+}
+
+function escapeHtml(value){
+  return String(value ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
+}
+
+function hardenInteractiveControls(){
+  const pressables=document.querySelectorAll('[onclick]:not(button):not(a):not(input):not(select):not(textarea)');
+  pressables.forEach((node)=>{
+    if(!node.hasAttribute('tabindex')) node.setAttribute('tabindex','0');
+    if(!node.hasAttribute('role')) node.setAttribute('role','button');
+    if(node.dataset.hardenKeyBound==='1') return;
+    node.dataset.hardenKeyBound='1';
+    node.addEventListener('keydown',(event)=>{
+      if(event.key==='Enter' || event.key===' '){
+        event.preventDefault();
+        node.click();
+      }
+    });
+  });
+}
+
+function syncToggleAria(){
+  const darkModeToggle=document.getElementById('dmBtn');
+  if(darkModeToggle){
+    darkModeToggle.setAttribute('role','switch');
+    darkModeToggle.setAttribute('aria-checked',String(isDark));
+  }
+
+  document.querySelectorAll('.tog-sm').forEach((toggle)=>{
+    const on=toggle.classList.contains('on');
+    toggle.setAttribute('role','switch');
+    toggle.setAttribute('tabindex','0');
+    toggle.setAttribute('aria-checked',String(on));
+  });
+}
+
+function bindToggleAriaSync(){
+  document.querySelectorAll('.tog-sm').forEach((toggle)=>{
+    if(toggle.dataset.hardenClickBound==='1') return;
+    toggle.dataset.hardenClickBound='1';
+    toggle.addEventListener('click',()=>requestAnimationFrame(syncToggleAria));
+  });
 }
 
 function readableColor(hex){
@@ -615,7 +695,18 @@ function renderThemeList(){
     const requested=window.prompt('Enter a name for the new theme:');
     if(!requested) return;
     const name=requested.trim();
-    if(!name) return;
+    if(!name){
+      window.alert('Theme name cannot be empty.');
+      return;
+    }
+    if(name.length>48){
+      window.alert('Theme name must be 48 characters or fewer.');
+      return;
+    }
+    if(!/^[\p{L}\p{N} _.-]+$/u.test(name)){
+      window.alert('Theme name can include letters, numbers, spaces, dots, dashes, and underscores only.');
+      return;
+    }
     if(themeConfigs[name]){
       window.alert('A theme with that name already exists.');
       return;
@@ -743,7 +834,7 @@ function openNetDetail(k){
   sv.style.color=n.status==='Active'?'#00838F':'var(--txt3)';
   document.getElementById('nd-ssid').textContent=n.ssid;
   document.getElementById('nd-pvlbl').textContent='Preview — '+n.name;
-  document.getElementById('nd-pvname').innerHTML='Welcome to<br>'+n.name;
+  document.getElementById('nd-pvname').textContent='Welcome to '+n.name;
   document.getElementById('nd-pvssid').textContent='Guests see this on connecting to '+n.ssid;
   syncNetworkThemeSelect();
   applyCustomizationPreview();
@@ -787,9 +878,15 @@ function renderNetGuests(k){
     const vBg=g.ver==='Sponsor req.'?'var(--amber-bg)':'var(--bg2)';
     const vC=g.ver==='Sponsor req.'?'var(--amber-txt)':'var(--txt2)';
     const acts=g.status==='pending'
-      ?`<div style="display:flex;gap:4px"><button class="ib apr"><i class="ti ti-check"></i></button><button class="ib dng"><i class="ti ti-x"></i></button></div>`
-      :`<div style="display:flex;gap:4px"><button class="ib"><i class="ti ti-eye"></i></button><button class="ib dng"><i class="ti ti-wifi-off"></i></button></div>`;
-    return`<tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${g.i}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${g.name}</div><div style="font-size:11px;color:var(--txt3)">${g.email}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${g.dur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${g.ver}</span></td><td style="color:var(--txt3);font-size:12px">${g.exp}</td><td>${acts}</td></tr>`;
+      ?`<div class="action-buttons"><button class="ib ib-primary apr" type="button" aria-label="Approve guest"><i class="ti ti-check"></i><span>Approve</span></button><button class="ib dng" type="button" aria-label="Reject guest"><i class="ti ti-x"></i><span>Reject</span></button></div>`
+      :`<div class="action-buttons"><button class="ib ib-secondary" type="button" aria-label="View guest details"><i class="ti ti-eye"></i><span>View</span></button><button class="ib dng" type="button" aria-label="Disconnect guest"><i class="ti ti-wifi-off"></i><span>Disconnect</span></button></div>`;
+    const escInitial=escapeHtml(g.i);
+    const escName=escapeHtml(g.name);
+    const escEmail=escapeHtml(g.email);
+    const escDur=escapeHtml(g.dur);
+    const escVer=escapeHtml(g.ver);
+    const escExp=escapeHtml(g.exp);
+    return`<tr><td><input type="checkbox"/></td><td><div style="display:flex;align-items:center"><div class="gav" style="background:${avBg};color:${avFg}">${escInitial}</div><div><div style="font-weight:500;font-size:13px;color:var(--txt1)">${escName}</div><div style="font-size:11px;color:var(--txt3)">${escEmail}</div></div></div></td><td>${sp}</td><td style="color:var(--txt2)">${escDur}</td><td><span style="font-size:11px;background:${vBg};color:${vC};padding:2px 7px;border-radius:8px">${escVer}</span></td><td style="color:var(--txt3);font-size:12px">${escExp}</td><td>${acts}</td></tr>`;
   }).join('');
 }
 
@@ -824,7 +921,7 @@ function applyDark(){
   const tr=document.getElementById('ttr');
   tr.classList.toggle('on',isDark);
   tr.classList.toggle('off',!isDark);
-  document.getElementById('dmBtn').setAttribute('aria-pressed',String(isDark));
+  document.getElementById('dmBtn').setAttribute('aria-checked',String(isDark));
   const usDm=document.getElementById('us-dm');
   usDm.classList.toggle('on',isDark);
   usDm.classList.toggle('off',!isDark);
@@ -854,6 +951,139 @@ document.querySelectorAll('.ropt').forEach(opt=>{
 syncThemeSelects();
 bindThemeInputs();
 setGuestNetView(guestNetView);
+hardenInteractiveControls();
+bindToggleAriaSync();
+syncToggleAria();
+
+// Confirmation modal system
+let pendingAction = null;
+const confirmModal = document.createElement('div');
+confirmModal.className = 'modal-overlay';
+confirmModal.id = 'confirm-modal';
+confirmModal.innerHTML = `
+  <div class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-warning" id="modal-warning" style="display:none;">
+      <i class="ti ti-alert-triangle"></i>
+      <div id="modal-warning-text"></div>
+    </div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-message"></p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeConfirmModal()">Cancel</button>
+      <button class="btn-confirm" id="confirm-btn" onclick="executeConfirmedAction()">Confirm</button>
+    </div>
+  </div>
+`;
+document.body.appendChild(confirmModal);
+
+function showConfirmation(title, message, warning, onConfirm) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-message').textContent = message;
+  const warningEl = document.getElementById('modal-warning');
+  if (warning) {
+    document.getElementById('modal-warning-text').textContent = warning;
+    warningEl.style.display = 'flex';
+  } else {
+    warningEl.style.display = 'none';
+  }
+  pendingAction = onConfirm;
+  confirmModal.classList.add('open');
+  document.getElementById('confirm-btn').focus();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeConfirmModal() {
+  confirmModal.classList.remove('open');
+  pendingAction = null;
+  document.body.style.overflow = '';
+}
+
+function executeConfirmedAction() {
+  if (pendingAction) {
+    closeConfirmModal();
+    pendingAction();
+  }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && confirmModal.classList.contains('open')) {
+    closeConfirmModal();
+  }
+});
+
+// Handle action button clicks with confirmation for destructive actions
+function setupActionButtons() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button.ib');
+    if (!btn) return;
+    
+    const guestRow = btn.closest('tr');
+    if (!guestRow) return;
+    
+    const guestCell = guestRow.querySelector('td:nth-child(2)');
+    const guestName = guestCell ? guestCell.textContent.split('\\n')[0].trim() : 'guest';
+    const isDestructive = btn.classList.contains('dng');
+    const isApprove = btn.classList.contains('apr');
+    
+    if (isDestructive) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const statusCell = guestRow.querySelector('td:nth-child(3)');
+      const isPending = statusCell && statusCell.textContent.includes('Pending');
+      
+      if (isPending) {
+        // Reject pending guest
+        showConfirmation(
+          'Reject guest request?',
+          `${guestName} will not be able to access this network.`,
+          'This cannot be undone.',
+          () => {
+            showActionFeedback(btn, 'Rejecting...', true);
+            setTimeout(() => showActionFeedback(btn, 'Rejected', false), 800);
+          }
+        );
+      } else {
+        // Disconnect online guest
+        showConfirmation(
+          'Disconnect guest?',
+          `${guestName} will be immediately disconnected from this network.`,
+          'This action cannot be undone.',
+          () => {
+            showActionFeedback(btn, 'Disconnecting...', true);
+            setTimeout(() => showActionFeedback(btn, 'Disconnected', false), 800);
+          }
+        );
+      }
+    } else if (isApprove) {
+      // Approve action - no confirmation needed, just feedback
+      showActionFeedback(btn, 'Approving...', true);
+      setTimeout(() => showActionFeedback(btn, 'Approved!', false), 800);
+    }
+  }, true);
+}
+
+function showActionFeedback(btn, text, isLoading) {
+  const originalHTML = btn.innerHTML;
+  if (isLoading) {
+    btn.setAttribute('data-loading', 'true');
+    btn.disabled = true;
+    btn.textContent = text;
+  } else {
+    btn.setAttribute('data-loading', 'false');
+    btn.disabled = true;
+    btn.textContent = text;
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.removeAttribute('data-loading');
+      btn.disabled = false;
+    }, 1000);
+  }
+}
+
+setupActionButtons();
+
 </script>
 </body>
 </html>
