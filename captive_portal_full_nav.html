@@ -628,6 +628,10 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
       <div class="cust-grid">
         <div class="fg"><label class="fl">Theme</label><select class="fin" id="nd-theme" onchange="onThemeChange()"></select><div class="fh">Select from existing themes. Manage styles in <span class="bcl" onclick="goToThemeSettings()">Settings > Themes</span>.</div></div>
       </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <button class="btn btnp" type="button" id="nd-customization-save" onclick="saveCustomizationSettings()" disabled><i class="ti ti-device-floppy"></i>Save customization</button>
+        <span id="nd-customization-status" style="font-size:12px;color:var(--txt3)">No unsaved customization changes</span>
+      </div>
       <div class="pvbox" id="nd-pvbox"><div style="font-size:11px;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em" id="nd-pvlbl"></div><div class="pvin" id="nd-pvcard"><div style="font-size:15px;font-weight:600;margin-bottom:4px" id="nd-pvname"></div><div style="font-size:11px;opacity:.85;margin-bottom:12px" id="nd-pvdesc">Please register to access the guest network.</div><div class="pvf">Full name</div><div class="pvf">Email address</div><button id="nd-pvbtn-primary" style="background:var(--ui-on-accent);color:var(--ui-accent-ink);border-radius:6px;padding:8px;font-size:13px;font-weight:600;width:100%;margin-top:4px;border:none;cursor:pointer">Request access</button></div><div style="font-size:11px;opacity:.7;margin-top:10px" id="nd-pvssid"></div></div>
     </div>
   </div>
@@ -829,6 +833,7 @@ const nets={
   cafe:{name:'Café area',urlSlug:'cafe-area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue',wallGardenIp:'192.168.1.102',nasDevice:'Cisco',dynamicTimeout:'4h',qrEnabled:true},
   roof:{name:'Rooftop terrace',urlSlug:'rooftop-terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-registration',status:'Inactive',theme:'Corporate Blue',wallGardenIp:'192.168.1.103',nasDevice:'Other',dynamicTimeout:null,qrEnabled:false}
 };
+Object.values(nets).forEach((net)=>{net.savedTheme=net.theme;});
 const themeConfigs={
   'Corporate Blue': { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription },
   'Minimal Light': { backgroundColor:'#f2f2ef', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#2f2f2c', primaryButton:'#00838F', secondaryButton:'#d7e5e7', cardPlacement:'center', description:defaultThemeDescription },
@@ -941,7 +946,27 @@ function onThemeChange(){
   const selected=document.getElementById('nd-theme')?.value;
   if(!nets[currentNet]) return;
   nets[currentNet].theme=themeConfigs[selected] ? selected : defaultThemeName;
+  syncCustomizationSaveState();
   applyCustomizationPreview();
+}
+
+function syncCustomizationSaveState(){
+  const net=nets[currentNet];
+  const saveBtn=document.getElementById('nd-customization-save');
+  const status=document.getElementById('nd-customization-status');
+  if(!net || !saveBtn || !status) return;
+  const hasPending=(net.theme||defaultThemeName)!==(net.savedTheme||defaultThemeName);
+  saveBtn.disabled=!hasPending;
+  status.textContent=hasPending?'Unsaved customization changes':'No unsaved customization changes';
+  status.style.color=hasPending?'var(--ui-warn-ink)':'var(--txt3)';
+}
+
+function saveCustomizationSettings(){
+  const net=nets[currentNet];
+  if(!net) return;
+  net.savedTheme=net.theme||defaultThemeName;
+  syncCustomizationSaveState();
+  showToast('Customization saved successfully!','success');
 }
 
 function updateThemeFromInputs(){
@@ -1517,6 +1542,7 @@ function openNetDetail(k){
   document.getElementById('nd-pvname').textContent='Welcome to '+n.name;
   document.getElementById('nd-pvssid').textContent='Guests see this when connecting to '+n.ssid;
   syncNetworkThemeSelect();
+  syncCustomizationSaveState();
   applyCustomizationPreview();
   document.querySelectorAll('.dtab').forEach((t,i)=>t.classList.toggle('on',i===0));
   document.querySelectorAll('.dtp').forEach((p,i)=>p.classList.toggle('on',i===0));
@@ -1737,6 +1763,7 @@ function dtab(id,el){
   document.querySelectorAll('.dtp').forEach(p=>p.classList.remove('on'));
   el.classList.add('on');
   document.getElementById('dtp-'+id).classList.add('on');
+  if(id==='customization') syncCustomizationSaveState();
 }
 
 function stab(id,el){
