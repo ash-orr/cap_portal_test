@@ -140,7 +140,7 @@ body{background:var(--ui-canvas);}
 .btn-tertiary:hover{background:var(--color-btn-tertiary-hover-bg,#edf2f6);}
 
 /* Destructive modifiers */
-.btn-destructive{background:var(--color-btn-primary-destructive-default,#e54a4a);border-color:var(--color-btn-primary-destructive-default,#e54a4a);color:var(--ui-on-accent);}
+.btn-destructive{background:var(--color-btn-primary-destructive-default,#e54a4a);border-color:var(--color-btn-primary-destructive-default,#e54a4a);color:#fff;}
 .btn-destructive:hover{background:var(--color-btn-primary-destructive-hover,#f06a6a);border-color:var(--color-btn-primary-destructive-hover,#f06a6a);}
 .btn-secondary.btn-destructive{background:var(--color-btn-secondary-destructive-bg,#fff);border-color:var(--color-btn-secondary-destructive-border,#e54a4a);color:var(--color-btn-secondary-destructive-text,#e54a4a);}
 .btn-secondary.btn-destructive:hover{background:var(--color-btn-secondary-destructive-hover,#fff1f1);}
@@ -158,7 +158,7 @@ body{background:var(--ui-canvas);}
 .btn.btn-tertiary.btn-destructive:disabled{background:transparent;border-color:var(--color-btn-disabled-border,#d1d4d8);color:var(--color-btn-disabled-text,#a8acb1);}
 
 /* Legacy aliases used by existing markup */
-.btnp{background:var(--color-btn-primary-default,#0f1420);border-color:var(--color-btn-primary-default,#0f1420);color:var(--ui-on-accent);}
+.btnp{background:#0f1420;border-color:#0f1420;color:#fff;}
 .btnp:hover{background:#2a3148;border-color:#2a3148;}
 .cp.dark .btnp{background:var(--color-btn-primary-default);border-color:var(--color-btn-primary-default);}
 .cp.dark .btnp:hover{background:var(--color-btn-primary-hover);border-color:var(--color-btn-primary-hover);}
@@ -190,6 +190,7 @@ body{background:var(--ui-canvas);}
 .feed{border:0.5px solid var(--border1);border-radius:10px;overflow:hidden;}
 .frow{display:grid;grid-template-columns:1fr auto;padding:10px 14px;border-bottom:0.5px solid var(--border1);font-size:13px;align-items:center;}
 .frow:last-child{border-bottom:none;}
+.frow:nth-child(even){background:var(--bg2);}
 
 .ngrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
 .ngrid.list-mode{grid-template-columns:1fr;}
@@ -222,6 +223,9 @@ body{background:var(--ui-canvas);}
 .fl{font-size:12px;font-weight:600;color:var(--txt2);}
 .fh{font-size:11px;color:var(--txt3);}
 .fin{padding:7px var(--space-4);border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg1);color:var(--txt1);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-size:var(--text-size-13,13px);}
+.fin.error{border-color:var(--ui-danger);background:color-mix(in oklab, var(--ui-danger-bg) 40%, var(--bg1));}
+.form-error{font-size:12px;color:var(--ui-danger);margin-top:3px;display:flex;align-items:center;gap:4px;}
+.form-error::before{content:'⚠';}
 .ropt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:0.5px solid var(--border1);border-radius:8px;cursor:pointer;margin-bottom:6px;background:var(--bg1);}
 .ropt:hover{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
 .ropt.sel{border-color:var(--ui-accent);background:var(--ui-accent-bg);}
@@ -286,6 +290,7 @@ body{background:var(--ui-canvas);}
 table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;}
 .gt th{font-size:var(--text-table-header-size,var(--text-size-11));font-weight:var(--text-table-header-weight,var(--text-weight-semibold));text-transform:uppercase;letter-spacing:var(--text-table-header-tracking,var(--text-tracking-wide));color:var(--txt2);text-align:left;padding:var(--space-3) var(--space-4);border-bottom:0.5px solid var(--border1);position:sticky;top:0;background:var(--bg1);z-index:2;}
 .gt td{padding:9px var(--space-4);font-size:var(--text-body-size,var(--text-size-13));border-bottom:0.5px solid var(--border1);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt1);}
+.gt tr:nth-child(even) td{background:color-mix(in oklab, var(--bg2) 55%, transparent);}
 .gt tr:hover td{background:var(--bg2);}
 .gt tr.status-pending td{background:color-mix(in oklab, var(--ui-warn-bg) 58%, var(--bg1));}
 .gt tr.status-denied td{background:color-mix(in oklab, var(--ui-danger-bg) 42%, var(--bg1));}
@@ -329,6 +334,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .modal{background:var(--bg1);border-radius:var(--radius-lg);box-shadow:var(--shadow-modal);padding:32px;max-width:400px;animation:slideIn .2s ease-out;}
 @keyframes slideIn{from{transform:scale(.95);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes toastSlideIn{from{transform:translateX(400px);opacity:0;}to{transform:translateX(0);opacity:1;}}
 .modal h3{font-size:var(--text-size-16,16px);font-weight:var(--text-weight-semibold,600);margin-bottom:var(--space-3);color:var(--txt1);}
 .modal p{font-size:var(--text-size-14,14px);color:var(--txt2);margin-bottom:var(--space-8);line-height:1.5;}
 .modal-actions{display:flex;gap:var(--space-5);justify-content:flex-end;}
@@ -504,7 +510,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
 
 <!-- NETWORK DETAIL -->
 <div id="pg-netdetail" class="pg">
-  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',getNavItem(1))">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="nd-bc" style="color:var(--txt1);font-weight:500"></span></div><div class="tbtl" id="nd-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btno" onclick="openNetGuests(currentNet)"><i class="ti ti-users"></i>View guests</button><button class="btn btnp"><i class="ti ti-device-floppy"></i>Save changes</button></div></div>
+  <div class="topbar"><div><div class="bcrumb"><span class="bcl" onclick="nav('guestnet',getNavItem(1))">Guest networks</span><i class="ti ti-chevron-right" style="font-size:11px"></i><span id="nd-bc" style="color:var(--txt1);font-weight:500"></span></div><div class="tbtl" id="nd-title" style="margin-top:2px"></div></div><div class="tba"><button class="btn btno" onclick="openNetGuests(currentNet)"><i class="ti ti-users"></i>View guests</button></div></div>
   <div class="content">
     <div class="igrid">
       <div class="sc"><div class="slbl">Connected guests</div><div class="sval" id="nd-guests"></div><div class="ssub" id="nd-pend"></div></div>
@@ -513,12 +519,101 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
     </div>
     <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('access',this)">Access method</div><div class="dtab" onclick="dtab('customization',this)">Customization</div></div>
     <div id="dtp-settings" class="dtp on">
-      <div class="fgrid">
-        <div class="fg"><label class="fl">Nickname</label><input class="fin" type="text" id="nd-nick"/><div class="fh">Display name in the console.</div></div>
-        <div class="fg"><label class="fl">Session expiry</label><select class="fin"><option>4 hours</option><option selected>8 hours</option><option>24 hours</option></select></div>
-        <div class="fg"><label class="fl">Bandwidth limit</label><input class="fin" type="text" value="20 Mbps"/></div>
-        <div class="fg"><label class="fl">VLAN segment</label><input class="fin" type="text" value="VLAN 40"/></div>
-        <div class="fg"><label class="fl">Network status</label><select class="fin"><option>Active</option><option>Inactive</option></select></div>
+      <div class="cust-box">
+        <h3>Network Configuration</h3>
+        <div class="fgrid">
+          <div class="fg">
+            <label class="fl">Network name <span style="color:var(--ui-danger)">*</span></label>
+            <input class="fin" type="text" id="nd-net-name" placeholder="e.g., Lobby Guest" onchange="onNetworkNameChange()" oninput="onNetworkNameChange()"/>
+            <div id="nd-net-name-error" class="form-error" style="display:none"></div>
+            <div class="fh">This will be used in the guest access URL.</div>
+          </div>
+          <div class="fg">
+            <label class="fl">QR Code</label>
+            <label class="ropt" style="background:none;border:none;padding:0;margin:0;cursor:auto;">
+              <input type="checkbox" id="nd-qr-enabled" onchange="onQrToggle()" style="margin:0;cursor:pointer;accent-color:var(--ui-accent)"/>
+              <div style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-left:8px">
+                <span style="font-size:13px;color:var(--txt1);font-weight:500">Enable QR code for guests</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:10px">
+          <label class="fl">Access URL</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1;padding:7px var(--space-4);border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2);color:var(--txt2);font-size:13px;font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+              <span id="nd-url-base">https://guestpass.yourorg.com/</span><span id="nd-url-slug" style="color:var(--txt1);font-weight:500"></span>
+            </div>
+            <button class="ib" type="button" id="nd-copy-url" onclick="copyUrlToClipboard()" title="Copy URL to clipboard">
+              <i class="ti ti-copy"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cust-box">
+        <h3>Network Settings</h3>
+        <div class="fgrid">
+          <div class="fg">
+            <label class="fl">Walled garden IP</label>
+            <div style="position:relative;display:flex;align-items:center">
+              <input class="fin" type="text" id="nd-wall-garden-ip" readonly style="background:var(--bg3);color:var(--txt3)"/>
+              <i class="ti ti-info-circle" style="position:absolute;right:10px;color:var(--txt3);cursor:help;font-size:16px" title="This IP is auto-generated and cannot be changed. Use it in your SSID device configuration."></i>
+            </div>
+            <div class="fh">Auto-generated. Configure in your SSID device.</div>
+          </div>
+          <div class="fg">
+            <label class="fl">NAS Device <span style="color:var(--ui-danger)">*</span></label>
+            <select class="fin" id="nd-nas-device" onchange="onNasDeviceChange()">
+              <option value="other">Other</option>
+              <option value="cisco">Cisco</option>
+              <option value="aruba">Aruba</option>
+              <option value="ruckus">Ruckus</option>
+              <option value="ubiquiti">Ubiquiti</option>
+            </select>
+            <div class="fh">Select your network device. Some devices support dynamic session timeout.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cust-box">
+        <h3>Session Management</h3>
+        <div class="fgrid">
+          <div class="fg" id="nd-session-expiry-box">
+            <label class="fl">Session expiry</label>
+            <select class="fin" id="nd-session-expiry">
+              <option value="4h">4 hours</option>
+              <option value="8h" selected>8 hours</option>
+              <option value="24h">24 hours</option>
+            </select>
+            <div class="fh">Manual session timeout. Ignored if dynamic timeout is enabled.</div>
+          </div>
+          <div class="fg" id="nd-dynamic-timeout-box" style="display:none">
+            <label class="fl">Dynamic session timeout</label>
+            <select class="fin" id="nd-dynamic-timeout">
+              <option value="1h">1 hour</option>
+              <option value="2h">2 hours</option>
+              <option value="4h">4 hours</option>
+              <option value="8h" selected>8 hours</option>
+              <option value="24h">24 hours</option>
+            </select>
+            <div class="fh">Supported by this device. Guest must re-verify after this duration.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cust-box">
+        <h3>Other Settings</h3>
+        <div class="fgrid">
+          <div class="fg"><label class="fl">Bandwidth limit</label><input class="fin" type="text" id="nd-bandwidth" value="20 Mbps"/></div>
+          <div class="fg"><label class="fl">VLAN segment</label><input class="fin" type="text" id="nd-vlan" value="VLAN 40"/></div>
+          <div class="fg"><label class="fl">Network status</label><select class="fin" id="nd-status"><option>Active</option><option>Inactive</option></select></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btnp" type="button" onclick="saveNetworkSettings()"><i class="ti ti-device-floppy"></i>Save changes</button>
+        <button class="btn btno" type="button" onclick="discardNetworkChanges()"><i class="ti ti-x"></i>Discard</button>
       </div>
     </div>
     <div id="dtp-access" class="dtp">
@@ -727,10 +822,10 @@ const defaultThemeDescription='Please register to access the guest network.';
 const builtInThemes=new Set(['Corporate Blue','Minimal Light','Dark Mode','ABC']);
 
 const nets={
-  lobby:{name:'Lobby guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-registration',status:'Active',theme:'Corporate Blue'},
-  conf:{name:'Conference center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active',theme:'Corporate Blue'},
-  cafe:{name:'Café area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue'},
-  roof:{name:'Rooftop terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-registration',status:'Inactive',theme:'Corporate Blue'}
+  lobby:{name:'Lobby guest',urlSlug:'lobby-guest',ssid:'CorpGuest-Lobby',guests:23,pending:0,expiry:'8h',access:'Self-registration',status:'Active',theme:'Corporate Blue',wallGardenIp:'192.168.1.100',nasDevice:'Cisco',dynamicTimeout:'8h',qrEnabled:false},
+  conf:{name:'Conference center',urlSlug:'conference-center',ssid:'CorpGuest-ConfCtr',guests:14,pending:3,expiry:'8h',access:'Sponsor approval',status:'Active',theme:'Corporate Blue',wallGardenIp:'192.168.1.101',nasDevice:'Other',dynamicTimeout:null,qrEnabled:false},
+  cafe:{name:'Café area',urlSlug:'cafe-area',ssid:'CorpGuest-Cafe',guests:10,pending:0,expiry:'4h',access:'Open access',status:'Active',theme:'Corporate Blue',wallGardenIp:'192.168.1.102',nasDevice:'Cisco',dynamicTimeout:'4h',qrEnabled:true},
+  roof:{name:'Rooftop terrace',urlSlug:'rooftop-terrace',ssid:'CorpGuest-Roof',guests:0,pending:0,expiry:'8h',access:'Self-registration',status:'Inactive',theme:'Corporate Blue',wallGardenIp:'192.168.1.103',nasDevice:'Other',dynamicTimeout:null,qrEnabled:false}
 };
 const themeConfigs={
   'Corporate Blue': { backgroundColor:'#00838F', backgroundImage:'', fontFamily:'Figtree, sans-serif', fontColor:'#ffffff', primaryButton:'#ffffff', secondaryButton:'#d6eef0', cardPlacement:'center', description:defaultThemeDescription },
@@ -1391,7 +1486,23 @@ function openNetDetail(k){
   const n=nets[k];
   document.getElementById('nd-bc').textContent=n.name;
   document.getElementById('nd-title').textContent=n.name;
-  document.getElementById('nd-nick').value=n.name;
+  
+  // Network configuration form
+  document.getElementById('nd-net-name').value=n.name;
+  document.getElementById('nd-url-slug').textContent=n.urlSlug;
+  document.getElementById('nd-wall-garden-ip').value=n.wallGardenIp;
+  document.getElementById('nd-nas-device').value=n.nasDevice.toLowerCase();
+  document.getElementById('nd-session-expiry').value=n.expiry;
+  document.getElementById('nd-dynamic-timeout').value=n.dynamicTimeout||'8h';
+  document.getElementById('nd-bandwidth').value='20 Mbps';
+  document.getElementById('nd-vlan').value='VLAN 40';
+  document.getElementById('nd-status').value=n.status;
+  document.getElementById('nd-qr-enabled').checked=n.qrEnabled;
+  
+  // Show/hide dynamic timeout based on NAS device
+  updateTimeoutVisibility();
+  
+  // Display stats
   document.getElementById('nd-guests').textContent=n.guests;
   document.getElementById('nd-pend').innerHTML=n.pending>0?`<span style="color:var(--ui-warn)">${n.pending} pending</span>`:'No pending approvals';
   document.getElementById('nd-exp').textContent=n.expiry;
@@ -1419,6 +1530,164 @@ function openNetGuests(k){
   document.getElementById('ng-chip').textContent=n.name;
   renderNetGuests(k);
   nav('netguests',getNavItem(1));
+}
+
+// Network Configuration Functions
+function generateUrlSlug(name){
+  return name.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-');
+}
+
+function onNetworkNameChange(){
+  const nameInput=document.getElementById('nd-net-name');
+  const slug=generateUrlSlug(nameInput.value);
+  document.getElementById('nd-url-slug').textContent=slug;
+  
+  // Validate network name
+  const errorDiv=document.getElementById('nd-net-name-error');
+  if(!nameInput.value.trim()){
+    nameInput.classList.add('error');
+    errorDiv.textContent='Network name is required';
+    errorDiv.style.display='block';
+  } else if(!/^[a-zA-Z0-9\s\-_]+$/.test(nameInput.value)){
+    nameInput.classList.add('error');
+    errorDiv.textContent='Only letters, numbers, hyphens, and underscores allowed';
+    errorDiv.style.display='block';
+  } else {
+    // Check for duplicates (simulated)
+    const isDuplicate=Object.keys(nets).some(k=>k!==currentNet && nets[k].name.toLowerCase()===nameInput.value.toLowerCase());
+    if(isDuplicate){
+      nameInput.classList.add('error');
+      errorDiv.textContent='This network name is already in use';
+      errorDiv.style.display='block';
+    } else {
+      nameInput.classList.remove('error');
+      errorDiv.style.display='none';
+    }
+  }
+}
+
+function onQrToggle(){
+  const qrEnabled=document.getElementById('nd-qr-enabled').checked;
+  // QR toggle state is now managed by checkbox
+}
+
+function onNasDeviceChange(){
+  updateTimeoutVisibility();
+}
+
+function updateTimeoutVisibility(){
+  const nasDevice=document.getElementById('nd-nas-device').value;
+  const supportsTimeout=['cisco','aruba','ruckus','ubiquiti'].includes(nasDevice);
+  
+  const expiryBox=document.getElementById('nd-session-expiry-box');
+  const timeoutBox=document.getElementById('nd-dynamic-timeout-box');
+  
+  if(supportsTimeout){
+    expiryBox.style.display='none';
+    timeoutBox.style.display='block';
+  } else {
+    expiryBox.style.display='block';
+    timeoutBox.style.display='none';
+  }
+}
+
+function copyUrlToClipboard(){
+  const base=document.getElementById('nd-url-base').textContent;
+  const slug=document.getElementById('nd-url-slug').textContent;
+  const fullUrl=base+slug;
+  
+  navigator.clipboard.writeText(fullUrl).then(()=>{
+    showToast('URL copied to clipboard!','success');
+    const btn=document.getElementById('nd-copy-url');
+    const originalIcon=btn.innerHTML;
+    btn.innerHTML='<i class="ti ti-check"></i>';
+    setTimeout(()=>{btn.innerHTML=originalIcon;},2000);
+  }).catch(()=>{
+    showToast('Failed to copy URL','error');
+  });
+}
+
+function saveNetworkSettings(){
+  const nameInput=document.getElementById('nd-net-name');
+  const nasDevice=document.getElementById('nd-nas-device');
+  
+  // Validate required fields
+  if(!nameInput.value.trim()){
+    showToast('Network name is required','error');
+    nameInput.classList.add('error');
+    return;
+  }
+  
+  if(!nasDevice.value){
+    showToast('NAS device is required','error');
+    nasDevice.classList.add('error');
+    return;
+  }
+  
+  // Check for validation errors
+  if(nameInput.classList.contains('error')){
+    showToast('Please fix validation errors','error');
+    return;
+  }
+  
+  // Update network data
+  const n=nets[currentNet];
+  n.name=nameInput.value;
+  n.urlSlug=generateUrlSlug(nameInput.value);
+  n.nasDevice=nasDevice.options[nasDevice.selectedIndex].text;
+  n.qrEnabled=document.getElementById('nd-qr-enabled').checked;
+  n.bandwidth=document.getElementById('nd-bandwidth').value;
+  n.vlan=document.getElementById('nd-vlan').value;
+  n.status=document.getElementById('nd-status').value;
+  
+  const timeoutSupported=['cisco','aruba','ruckus','ubiquiti'].includes(nasDevice.value);
+  if(timeoutSupported){
+    n.dynamicTimeout=document.getElementById('nd-dynamic-timeout').value;
+    n.expiry=n.dynamicTimeout;
+  } else {
+    n.dynamicTimeout=null;
+    n.expiry=document.getElementById('nd-session-expiry').value;
+  }
+  
+  showToast('Network settings saved successfully!','success');
+  
+  // Refresh the display
+  setTimeout(()=>{
+    openNetDetail(currentNet);
+  },1500);
+}
+
+function discardNetworkChanges(){
+  if(confirm('Discard unsaved changes? This action cannot be undone.')){
+    openNetDetail(currentNet);
+    showToast('Changes discarded','info');
+  }
+}
+
+function showToast(message,type='info'){
+  const existing=document.querySelector('.toast-container');
+  if(existing) existing.remove();
+  
+  const toast=document.createElement('div');
+  toast.className='toast-container';
+  toast.style.cssText=`
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:${type==='success'?'var(--ui-success)':type==='error'?'var(--ui-danger)':'var(--ui-info)'};
+    color:white;
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:500;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    z-index:1000;
+    animation:toastSlideIn 0.3s ease-out;
+  `;
+  toast.textContent=message;
+  document.body.appendChild(toast);
+  
+  setTimeout(()=>toast.remove(),3000);
 }
 
 function renderNetGuests(k){
