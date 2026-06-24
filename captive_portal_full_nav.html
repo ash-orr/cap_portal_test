@@ -517,7 +517,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
       <div class="sc"><div class="slbl">Session expiry</div><div class="sval" id="nd-exp"></div><div class="ssub" id="nd-acc"></div></div>
       <div class="sc"><div class="slbl">Status</div><div class="sval" id="nd-st"></div><div class="ssub" id="nd-ssid" style="font-size:11px;color:var(--txt3)"></div></div>
     </div>
-    <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('access',this)">Access method</div><div class="dtab" onclick="dtab('customization',this)">Customization</div></div>
+    <div class="dtabs"><div class="dtab on" onclick="dtab('settings',this)">Settings</div><div class="dtab" onclick="dtab('customization',this)">Customization</div></div>
     <div id="dtp-settings" class="dtp on">
       <div class="cust-box">
         <h3>Network Configuration</h3>
@@ -611,16 +611,18 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
         </div>
       </div>
 
+      <div class="cust-box">
+        <h3>Guest Access Method</h3>
+        <div style="margin-bottom:10px"><label class="fl">How do guests get access?</label></div>
+        <label class="ropt sel"><input type="radio" name="acc" checked/><div><div class="rt">Self-registration: Sponsor approval</div><div class="rd">Guests sign up first, then an admin approves access.</div></div></label>
+        <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-registration: Instant access</div><div class="rd">Guests tap "Connect" and get access immediately.</div></div></label>
+        <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only: Username and password</div><div class="rd">Admins create credentials and guests cannot self-register.</div></div></label>
+      </div>
+
       <div style="display:flex;gap:10px;margin-top:20px">
         <button class="btn btnp" type="button" onclick="saveNetworkSettings()"><i class="ti ti-device-floppy"></i>Save changes</button>
         <button class="btn btno" type="button" onclick="discardNetworkChanges()"><i class="ti ti-x"></i>Discard</button>
       </div>
-    </div>
-    <div id="dtp-access" class="dtp">
-      <div style="margin-bottom:10px"><label class="fl">How do guests get access?</label></div>
-      <label class="ropt sel"><input type="radio" name="acc" checked/><div><div class="rt">Self-registration: Sponsor approval</div><div class="rd">Guests sign up first, then an admin approves access.</div></div></label>
-      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Self-registration: Instant access</div><div class="rd">Guests tap "Connect" and get access immediately.</div></div></label>
-      <label class="ropt"><input type="radio" name="acc"/><div><div class="rt">Invite only: Username and password</div><div class="rd">Admins create credentials and guests cannot self-register.</div></div></label>
     </div>
     <div id="dtp-customization" class="dtp">
       <div class="cust-grid">
