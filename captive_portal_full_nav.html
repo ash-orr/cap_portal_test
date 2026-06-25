@@ -124,7 +124,7 @@ body{background:var(--ui-canvas);}
 .view-toggle{display:inline-flex;align-items:center;gap:var(--space-1);padding:3px;border:0.5px solid var(--border1);border-radius:var(--radius-md);background:var(--bg2);}
 .view-toggle .btn{padding:5px var(--space-3);font-size:var(--text-size-12,12px);line-height:1.1;border-radius:7px;}
 .view-toggle .btn.on{background:var(--bg1);border-color:var(--border1);color:var(--txt1);}
-.gn-controls{display:none;}
+.gn-controls{display:flex;justify-content:flex-end;margin-bottom:12px;}
 .btn{padding:var(--space-2);border-radius:var(--radius-sm);border:1px solid transparent;background:transparent;color:var(--text-btn, var(--txt1));font-size:var(--text-button-size,var(--text-size-13));line-height:var(--text-button-line-height,1.2);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-button-weight,var(--text-weight-medium));cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s,opacity .12s;}
 
 /* Default button style: Tertiary */
@@ -202,6 +202,8 @@ body{background:var(--ui-canvas);}
 .ngrid.list-mode .ncard .cab{flex:0 0 auto;min-width:94px;}
 .ngrid.list-mode .ncard .cab:last-child{min-width:52px;}
 @media (max-width:1280px){.ngrid.list-mode .ncard{grid-template-columns:1fr;}}
+.gn-table{display:none;}
+.gn-table.on{display:block;}
 .ncfoot{border-top:0.5px solid var(--border1);padding-top:10px;display:flex;gap:8px;}
 .cab{flex:1;padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm);border:0.5px solid var(--color-btn-secondary-border,#1f2432);background:var(--color-btn-secondary-bg,#fff);color:var(--color-btn-secondary-text,#0f1420);font-size:var(--text-size-12,12px);font-family:var(--text-font-family-primary,'Figtree',sans-serif);font-weight:var(--text-weight-medium,500);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .12s,border-color .12s,color .12s;}
 .cab:hover{background:var(--color-btn-secondary-hover,#eef2f6);color:var(--txt1);}
@@ -485,7 +487,7 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
 <div id="pg-guestnet" class="pg">
   <div class="topbar"><div><div class="tbtl">Guest networks</div><div class="tbsub">4 networks · 3 active</div></div><div class="tba"><button class="btn btnp"><i class="ti ti-plus"></i>Add network</button></div></div>
   <div class="content">
-    <div class="gn-controls"><div class="view-toggle" role="group" aria-label="Network view mode"><button class="btn on" id="gn-view-card" type="button" onclick="setGuestNetView('card')" aria-pressed="true"><i class="ti ti-layout-grid"></i>Card</button><button class="btn" id="gn-view-list" type="button" onclick="setGuestNetView('list')" aria-pressed="false"><i class="ti ti-list"></i>List</button></div></div>
+    <div class="gn-controls"><div class="view-toggle" role="group" aria-label="Network view mode"><button class="btn on" id="gn-view-card" type="button" onclick="setGuestNetView('card')" aria-pressed="true"><i class="ti ti-layout-grid"></i>Card</button><button class="btn" id="gn-view-table" type="button" onclick="setGuestNetView('table')" aria-pressed="false"><i class="ti ti-table"></i>Table</button></div></div>
     <div class="ngrid" id="guestnet-grid">
       <div class="ncard" onclick="openNetDetail('lobby')">
         <div style="display:flex;align-items:flex-start;gap:12px"><div class="nic" style="width:38px;height:38px;font-size:20px"><i class="ti ti-building"></i></div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--txt1)">Lobby guest</div><div style="font-size:11px;color:var(--txt3)">SSID: CorpGuest-Lobby</div></div><span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span></div>
@@ -507,6 +509,9 @@ table.gt{width:100%;border-collapse:collapse;table-layout:fixed;min-width:860px;
         <div style="display:flex;gap:8px"><span style="font-size:12px;color:var(--txt3);display:flex;align-items:center;gap:4px"><i class="ti ti-users" style="font-size:12px"></i>0 connected</span></div>
         <div class="ncfoot"><button class="cab" onclick="event.stopPropagation();openNetDetail('roof')"><i class="ti ti-settings"></i>Settings</button><button class="cab" onclick="event.stopPropagation();openNetGuests('roof')"><i class="ti ti-users"></i>View guests</button></div>
       </div>
+    </div>
+    <div class="gn-table" id="guestnet-table-wrap">
+      <div class="table-scroll"><table class="gt" id="guestnet-table"><thead><tr><th style="width:180px">Network</th><th style="width:170px">SSID</th><th style="width:110px">Status</th><th style="width:120px">Guests</th><th style="width:120px">Session expiry</th><th style="width:150px">Access method</th><th style="width:170px">Actions</th></tr></thead><tbody id="guestnet-table-body"></tbody></table></div>
     </div>
   </div>
 </div>
@@ -1497,17 +1502,49 @@ function nav(pageId, el) {
 }
 
 function setGuestNetView(mode){
-  guestNetView=mode==='list' ? 'list' : 'card';
+  guestNetView=mode==='table' ? 'table' : 'card';
   const grid=document.getElementById('guestnet-grid');
+  const tableWrap=document.getElementById('guestnet-table-wrap');
   const cardBtn=document.getElementById('gn-view-card');
-  const listBtn=document.getElementById('gn-view-list');
-  if(!grid || !cardBtn || !listBtn) return;
+  const tableBtn=document.getElementById('gn-view-table');
+  if(!grid || !tableWrap || !cardBtn || !tableBtn) return;
 
-  grid.classList.toggle('list-mode',guestNetView==='list');
+  if(guestNetView==='table') renderGuestNetTable();
+
+  grid.style.display=guestNetView==='card'?'grid':'none';
+  tableWrap.classList.toggle('on',guestNetView==='table');
   cardBtn.classList.toggle('on',guestNetView==='card');
-  listBtn.classList.toggle('on',guestNetView==='list');
+  tableBtn.classList.toggle('on',guestNetView==='table');
   cardBtn.setAttribute('aria-pressed',String(guestNetView==='card'));
-  listBtn.setAttribute('aria-pressed',String(guestNetView==='list'));
+  tableBtn.setAttribute('aria-pressed',String(guestNetView==='table'));
+}
+
+function renderGuestNetTable(){
+  const tbody=document.getElementById('guestnet-table-body');
+  if(!tbody) return;
+  const networkOrder=['lobby','conf','cafe','roof'];
+  tbody.innerHTML=networkOrder.map((key)=>{
+    const net=nets[key];
+    if(!net) return '';
+    const statusBadge=net.status==='Active'
+      ? '<span class="pill pill-a"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-success);margin-right:4px"></span>Active</span>'
+      : '<span class="pill pill-off">Inactive</span>';
+    const guestsLabel=`${net.guests} connected`;
+    return `<tr>
+      <td style="font-weight:500">${escapeHtml(net.name)}</td>
+      <td>${escapeHtml(net.ssid)}</td>
+      <td>${statusBadge}</td>
+      <td>${escapeHtml(guestsLabel)}</td>
+      <td>${escapeHtml(net.expiry)}</td>
+      <td>${escapeHtml(net.access)}</td>
+      <td>
+        <div class="action-buttons">
+          <button class="ib" type="button" onclick="openNetDetail('${key}')"><i class="ti ti-settings"></i><span>Settings</span></button>
+          <button class="ib" type="button" onclick="openNetGuests('${key}')"><i class="ti ti-users"></i><span>Guests</span></button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
 }
 
 function openNetDetail(k){
@@ -1824,6 +1861,7 @@ document.querySelectorAll('.ropt').forEach(opt=>{
 initDomRefs();
 syncThemeSelects();
 bindThemeInputs();
+renderGuestNetTable();
 setGuestNetView(guestNetView);
 hardenInteractiveControls();
 bindToggleAriaSync();
